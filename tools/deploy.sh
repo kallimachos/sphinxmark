@@ -13,13 +13,15 @@ if [ "$TRAVIS_REPO_SLUG" == "kallimachos/sphinx-watermark" ] && \
     git config --global user.name "travis-ci"
     git clone --quiet \
         --branch=gh-pages \
-        https://$GH_TOKEN@github.com/kallimachos/sphinx-watermark gh-pages > /dev/null
+        https://$GH_TOKEN@github.com/kallimachos/sphinx-watermark \
+        gh-pages > /dev/null
 
     cd gh-pages
     find * -not -name ".*" -delete
     cp -rv $HOME/html/* ./
     git add -A .
-    git commit -m "Latest doc on successful travis build #$TRAVIS_BUILD_NUMBER auto-pushed to gh-pages"
+    git commit -m "Latest doc on successful travis build $TRAVIS_BUILD_NUMBER \
+                   auto-pushed to gh-pages"
     git push -fq origin gh-pages > /dev/null
 
     if test `tput -T $TERM colors` -lt 256; then
