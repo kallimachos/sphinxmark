@@ -1,0 +1,13 @@
+bashate
+doc8
+flake8
+isort
+pep8-naming
+pep257
+pyenchant
+pytest
+pytest-cov
+sphinx
+sphinxcontrib-spelling
+sphinx-prompt
+sphinx_rtd_theme

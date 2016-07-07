@@ -1,0 +1,7 @@
+*.pyc
+.cache/
+.tox/
+__pycache__/
+MANIFEST
+.coverage
+_build/
