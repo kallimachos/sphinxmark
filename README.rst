@@ -11,4 +11,5 @@ sphinx-watermark
 .. image:: http://img.shields.io/badge/license-GPL-blue.svg?style=flat
    :target: http://opensource.org/licenses/GPL-3.0
 
-Template files for new Python projects.
+sphinx-watermark is an extension for Sphinx that enables watermarks for
+HTML output.

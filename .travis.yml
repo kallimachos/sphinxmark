@@ -6,4 +6,4 @@ addons:
   apt:
     packages:
     - enchant
-# after_success: ./tools/deploy.sh
+after_success: ./tools/deploy.sh
