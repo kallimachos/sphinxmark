@@ -66,7 +66,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'New Project'
+project = 'sphinx-watermark'
 copyright = '2016, Brian Moss'
 author = 'Brian Moss'
 

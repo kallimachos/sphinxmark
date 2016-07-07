@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$TRAVIS_REPO_SLUG" == "kallimachos/template" ] && \
+if [ "$TRAVIS_REPO_SLUG" == "kallimachos/sphinx-watermark" ] && \
     [ "$TRAVIS_PULL_REQUEST" == "false" ] && \
     [ "$TRAVIS_BRANCH" == "master" ]; then
 
@@ -13,7 +13,7 @@ if [ "$TRAVIS_REPO_SLUG" == "kallimachos/template" ] && \
     git config --global user.name "travis-ci"
     git clone --quiet \
         --branch=gh-pages \
-        https://$GH_TOKEN@github.com/kallimachos/template gh-pages > /dev/null
+        https://$GH_TOKEN@github.com/kallimachos/sphinx-watermark gh-pages > /dev/null
 
     cd gh-pages
     find * -not -name ".*" -delete
@@ -23,10 +23,10 @@ if [ "$TRAVIS_REPO_SLUG" == "kallimachos/template" ] && \
     git push -fq origin gh-pages > /dev/null
 
     if test `tput -T $TERM colors` -lt 256; then
-        echo "Docs published to http://kallimachos.github.io/template"
+        echo "Docs published to http://kallimachos.github.io/sphinx-watermark"
     else
         tput -T $TERM setaf 2
-        echo "Docs published to http://kallimachos.github.io/template"
+        echo "Docs published to http://kallimachos.github.io/sphinx-watermark"
         tput -T $TERM sgr0
     fi
 

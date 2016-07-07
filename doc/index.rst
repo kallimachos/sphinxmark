@@ -1,8 +1,9 @@
-=====================
-Project Documentation
-=====================
+================
+sphinx-watermark
+================
 
-Project documentation goes here.
+sphinx-watermark is an extension for Sphinx that enables watermarks for
+HTML output.
 
 *Last updated:* |today|
 
