@@ -46,6 +46,7 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.viewcode',
     'sphinx-prompt',
+    'watermark',
 ]
 
 if spelling is not None:

@@ -52,3 +52,15 @@ Sphinx.add_stylesheet(filename)[source]
    HTML static path, or a full URI with scheme.
 
 Perhaps I can just use the ``.. raw::`` directive to pass some CSS through.
+
+
+Execution
+~~~~~~~~~
+
+- Module needs to be pip installable.
+- Read config info from conf.py
+  - watermark_enable: True|False
+  - watermark_image: <path/to/image>
+- Create watermark.css in static path specified in conf.py with image file
+  specified in conf.py
+-

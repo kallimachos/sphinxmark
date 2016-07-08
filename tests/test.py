@@ -2,12 +2,10 @@
 # coding: utf-8
 """Example test file."""
 
-import watermark
 
-
-def test_temp():
-    """Test temp."""
-    assert watermark.temp() is True
+def test():
+    """Test placeholder."""
+    assert True is True
 
 
 if __name__ == '__main__':
