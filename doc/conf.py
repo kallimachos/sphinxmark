@@ -228,5 +228,6 @@ htmlhelp_basename = 'doc'
 
 
 def setup(app):
+    """Add stylesheets."""
     app.add_stylesheet('wraptables.css')
     app.add_stylesheet('watermark.css')

@@ -5,9 +5,9 @@
 import watermark
 
 
-def test_watermark():
-    """Test watermark."""
-    assert True is True
+def test_temp():
+    """Test temp."""
+    assert watermark.temp() is True
 
 
 if __name__ == '__main__':
