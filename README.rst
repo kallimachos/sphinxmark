@@ -18,6 +18,20 @@ HTML output.
 Spec
 ~~~~
 
+Initial
+-------
+Import extension in conf.py, which then provides config options for
+specifying an image file to use as a watermark for the whole document.
+
+The extension provides a template css file that inserts the specified image
+as the watermark to any area defined as ``div.body``.
+
+The extension runs the ``Sphinx.add_stylesheet`` function to add the watermark
+stylesheet.
+
+
+Future
+------
 .. code::
 
    .. watermark:: Mitaka  # this would work on that page only
@@ -25,7 +39,7 @@ Spec
 This can be added the propend section of conf.py so it affects the whole
 document
 
-Should accept image file or text
+Should accept image file or text.
 
 
 Useful modules
