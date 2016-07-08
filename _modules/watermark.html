@@ -46,35 +46,23 @@
 <span class="c1"># coding: utf-8</span>
 <span class="sd">&quot;&quot;&quot;A Sphinx extension that enables watermarks for HTML output.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">docutils</span> <span class="kn">import</span> <span class="n">nodes</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
 
-<div class="viewcode-block" id="Watermark"><a class="viewcode-back" href="../index.html#watermark.Watermark">[docs]</a><span class="k">class</span> <span class="nc">Watermark</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">General</span><span class="p">,</span> <span class="n">nodes</span><span class="o">.</span><span class="n">Element</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Watermark class.&quot;&quot;&quot;</span>
-
-    <span class="k">pass</span></div>
-
-
-<div class="viewcode-block" id="visit_watermark_node"><a class="viewcode-back" href="../index.html#watermark.visit_watermark_node">[docs]</a><span class="k">def</span> <span class="nf">visit_watermark_node</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Visit watermark node.&quot;&quot;&quot;</span>
-    <span class="k">pass</span></div>
+<div class="viewcode-block" id="watermark"><a class="viewcode-back" href="../index.html#watermark.watermark">[docs]</a><span class="k">def</span> <span class="nf">watermark</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add watermark.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s1">&#39;html&#39;</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">outdir</span><span class="p">,</span> <span class="s1">&#39;myawesomefile&#39;</span><span class="p">)</span>
+        <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
-<span class="c1"># def setup(app):</span>
-<span class="c1">#     app.add_config_value(&#39;enable_watermarks&#39;, False, &#39;html&#39;)</span>
-<span class="c1">#</span>
-<span class="c1">#     app.add_node(watermark, html=(visit_todo_node, depart_todo_node))</span>
-<span class="c1">#</span>
-<span class="c1">#     app.add_directive(&#39;watermark&#39;, WatermarkDirective)</span>
-<span class="c1">#     app.connect(&#39;doctree-resolved&#39;, process_watermark_nodes)</span>
-<span class="c1">#     app.connect(&#39;env-purge-doc&#39;, purge_watermarks)</span>
-<span class="c1">#</span>
-<span class="c1">#     return {&#39;version&#39;: &#39;0.1&#39;}   # identifies the version of our extension</span>
+<div class="viewcode-block" id="setup"><a class="viewcode-back" href="../index.html#watermark.setup">[docs]</a><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Setup for Sphinx ext.&quot;&quot;&quot;</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;watermark_enable&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;watermark_image&#39;</span><span class="p">,</span> <span class="s1">&#39;watermark-draft.png&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;env-updated&#39;</span><span class="p">,</span> <span class="n">watermark</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;0.1&#39;</span><span class="p">}</span></div>
 
-
-<div class="viewcode-block" id="temp"><a class="viewcode-back" href="../index.html#watermark.temp">[docs]</a><span class="k">def</span> <span class="nf">temp</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Temp to make testing happy.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">True</span></div>
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="k">pass</span>
