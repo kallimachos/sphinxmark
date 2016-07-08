@@ -1,4 +1,5 @@
 bashate
+bottle
 doc8
 flake8
 isort
