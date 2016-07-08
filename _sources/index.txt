@@ -10,5 +10,5 @@ HTML output.
 Code listing
 ~~~~~~~~~~~~
 
-.. automodule:: source
+.. automodule:: watermark
    :members:

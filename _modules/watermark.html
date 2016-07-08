@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>watermark &mdash; sphinx-watermark  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/wraptables.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/watermark.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="sphinx-watermark  documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for watermark</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/bin/python3</span>
+<span class="c1"># coding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;A Sphinx extension that enables watermarks for HTML output.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">docutils</span> <span class="kn">import</span> <span class="n">nodes</span>
+
+
+<div class="viewcode-block" id="Watermark"><a class="viewcode-back" href="../index.html#watermark.Watermark">[docs]</a><span class="k">class</span> <span class="nc">Watermark</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">General</span><span class="p">,</span> <span class="n">nodes</span><span class="o">.</span><span class="n">Element</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Watermark class.&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="visit_watermark_node"><a class="viewcode-back" href="../index.html#watermark.visit_watermark_node">[docs]</a><span class="k">def</span> <span class="nf">visit_watermark_node</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Visit watermark node.&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<span class="c1"># def setup(app):</span>
+<span class="c1">#     app.add_config_value(&#39;enable_watermarks&#39;, False, &#39;html&#39;)</span>
+<span class="c1">#</span>
+<span class="c1">#     app.add_node(watermark, html=(visit_todo_node, depart_todo_node))</span>
+<span class="c1">#</span>
+<span class="c1">#     app.add_directive(&#39;watermark&#39;, WatermarkDirective)</span>
+<span class="c1">#     app.connect(&#39;doctree-resolved&#39;, process_watermark_nodes)</span>
+<span class="c1">#     app.connect(&#39;env-purge-doc&#39;, purge_watermarks)</span>
+<span class="c1">#</span>
+<span class="c1">#     return {&#39;version&#39;: &#39;0.1&#39;}   # identifies the version of our extension</span>
+
+
+<div class="viewcode-block" id="temp"><a class="viewcode-back" href="../index.html#watermark.temp">[docs]</a><span class="k">def</span> <span class="nf">temp</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Temp to make testing happy.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">True</span></div>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Brian Moss.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
