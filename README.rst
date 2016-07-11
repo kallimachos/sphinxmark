@@ -15,52 +15,77 @@ sphinx-watermark is an extension for Sphinx that enables watermarks for
 HTML output.
 
 
-Spec
-~~~~
+Usage
+~~~~~
 
-Initial
--------
-Import extension in conf.py, which then provides config options for
-specifying an image file to use as a watermark for the whole document.
+#. Install sphinx-watermark:
 
-The extension provides a template css file that inserts the specified image
-as the watermark to any area defined as ``div.body``.
+   .. code::
 
-The extension runs the ``Sphinx.add_stylesheet`` function to add the watermark
-stylesheet.
+      $ pip install watermark
+
+#. Open ``conf.py`` and import watermark:
+
+   .. code::
+
+      import watermark
+
+#. Add watermark to the list of extensions in ``conf.py``:
+
+   .. code::
+
+      extensions = [
+         'sphinx.ext.autodoc',
+         'sphinx.ext.doctest',
+         'watermark',
+      ]
+
+#. Specify a static directory in ``conf.py`` for your watermark files. If the
+   path does not exist, the watermark extension creates the directory and
+   populates it with ``watermark.css`` and ``watermark-draft.png``:
+
+   .. code::
+
+      html_static_path = ['_static']
+
+   .. note::
+
+      ``watermark.css`` is recreated on each Sphinx run. Edits to this file
+      are not retained.
+
+#. Configure watermark in ``conf.py`` as required:
+
+   .. code::
+
+      watermark_enable = True
+      watermark_image = 'default'
+      watermark_debug = False
+
+#. Put images in your static directory and edit ``watermark_image``
+   to use custom watermarks.
 
 
-Future
-------
+.. important::
+
+   The extension provides a template css file that uses the specified image
+   as the watermark for any area defined as ``div.body``. Watermark will not
+   work with themes that do not place body content in ``div.body``. For this
+   reason, watermark does not work with ``sphinx_rtd_theme``.
+
+
+Future enhancements
+-------------------
 .. code::
 
    .. watermark:: Mitaka  # this would work on that page only
 
-This can be added the propend section of conf.py so it affects the whole
-document
-
-Should accept image file or text.
+Watermark should accept image file or text.
 
 
-Useful modules
-~~~~~~~~~~~~~~
-
-Sphinx.add_stylesheet(filename)[source]
-
-   Add filename to the list of CSS files that the default HTML template will
-   include. Like for add_javascript(), the filename must be relative to the
-   HTML static path, or a full URI with scheme.
-
-Perhaps I can just use the ``.. raw::`` directive to pass some CSS through.
-
-
-Execution
-~~~~~~~~~
-
-- Module needs to be pip installable.
-- Read config info from conf.py
-  - watermark_enable: True|False
-  - watermark_image: <path/to/image>
-- Create watermark.css in static path specified in conf.py with image file
-  specified in conf.py
--
+To-do
+~~~~~
+- make module pip installable
+- add tests
+- improve warnings, errors, and exception capture
+- make extension work with all themes (or at least all included Sphinx themes
+  and ``sphinx_rtd_theme``)

@@ -162,7 +162,7 @@ html_theme = 'alabaster'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-# html_static_path = ['_static']
+html_static_path = ['_static']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -228,11 +228,6 @@ html_theme = 'alabaster'
 htmlhelp_basename = 'doc'
 
 # watermark options
-watermark_enable = True  # enable watermarks
-# path to watermark image, relative to conf.py. Defaults to a DRAFT image.
-# watermark_image = 'watermark-draft.png'
-
-
-def setup(app):
-    """Add stylesheets."""
-    app.add_stylesheet('wraptables.css')
+watermark_enable = True
+watermark_image = 'default'
+watermark_debug = False
