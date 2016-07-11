@@ -14,6 +14,8 @@ sphinx-watermark
 sphinx-watermark is an extension for Sphinx that enables watermarks for
 HTML output.
 
+Full documentation: https://kallimachos.github.io/sphinx-watermark/
+
 
 Usage
 ~~~~~
