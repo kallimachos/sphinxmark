@@ -10,7 +10,6 @@
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/wraptables.css" type="text/css" />
     <link rel="stylesheet" href="_static/watermark.css" type="text/css" />
     
     <script type="text/javascript">
@@ -44,10 +43,76 @@
 <h1>sphinx-watermark<a class="headerlink" href="#sphinx-watermark" title="Permalink to this headline">¶</a></h1>
 <p>sphinx-watermark is an extension for Sphinx that enables watermarks for
 HTML output.</p>
-<p><em>Last updated:</em> Jul 08, 2016</p>
+<p><em>Last updated:</em> Jul 11, 2016</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Install sphinx-watermark:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span>$ pip install watermark
+</pre></div>
+</div>
+</li>
+<li><p class="first">Open <code class="docutils literal"><span class="pre">conf.py</span></code> and import watermark:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">watermark</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add watermark to the list of extensions in <code class="docutils literal"><span class="pre">conf.py</span></code>:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="s1">&#39;sphinx.ext.autodoc&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;sphinx.ext.doctest&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;watermark&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Specify a static directory in <code class="docutils literal"><span class="pre">conf.py</span></code> for your watermark files. If the
+path does not exist, the watermark extension creates the directory and
+populates it with <code class="docutils literal"><span class="pre">watermark.css</span></code> and <code class="docutils literal"><span class="pre">watermark-draft.png</span></code>:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_static&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">watermark.css</span></code> is recreated on each Sphinx run. Edits to this file
+are not retained.</p>
+</div>
+</li>
+<li><p class="first">Configure watermark in <code class="docutils literal"><span class="pre">conf.py</span></code> as required:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">watermark_enable</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">watermark_image</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
+<span class="n">watermark_debug</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Put images in your static directory and edit <code class="docutils literal"><span class="pre">watermark_image</span></code>
+to use custom watermarks.</p>
+</li>
+</ol>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">The extension provides a template css file that uses the specified image
+as the watermark for any area defined as <code class="docutils literal"><span class="pre">div.body</span></code>. Watermark will not
+work with themes that do not place body content in <code class="docutils literal"><span class="pre">div.body</span></code>. For this
+reason, watermark does not work with <code class="docutils literal"><span class="pre">sphinx_rtd_theme</span></code>.</p>
+</div>
+</div>
 <div class="section" id="module-watermark">
-<span id="code-listing"></span><h2>Code listing<a class="headerlink" href="#module-watermark" title="Permalink to this headline">¶</a></h2>
+<span id="source-code"></span><h2>Source code<a class="headerlink" href="#module-watermark" title="Permalink to this headline">¶</a></h2>
 <p>A Sphinx extension that enables watermarks for HTML output.</p>
+<dl class="docutils">
+<dt>Options:</dt>
+<dd><p class="first">watermark_enable = True|False (default=False)</p>
+<p>watermark_image = &#8216;default&#8217; (image file; default=watermark-draft.png)</p>
+<p class="last">watermark_debug = True|False (default=False)</p>
+</dd>
+</dl>
+<dl class="function">
+<dt id="watermark.setstatic">
+<code class="descclassname">watermark.</code><code class="descname">setstatic</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/watermark.html#setstatic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#watermark.setstatic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the static path, and create static directory if required.</p>
+</dd></dl>
+
 <dl class="function">
 <dt id="watermark.setup">
 <code class="descclassname">watermark.</code><code class="descname">setup</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/watermark.html#setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#watermark.setup" title="Permalink to this definition">¶</a></dt>
@@ -72,7 +137,8 @@ HTML output.</p>
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">sphinx-watermark</a><ul>
-<li><a class="reference internal" href="#module-watermark">Code listing</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#module-watermark">Source code</a></li>
 </ul>
 </li>
 </ul>
