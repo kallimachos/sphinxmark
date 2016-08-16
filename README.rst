@@ -17,8 +17,8 @@ HTML output.
 Full documentation: https://kallimachos.github.io/sphinxmark/
 
 
-Proposed Usage (note this module is not yet pip installable)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Proposed Usage (note this module cannot yet be installed with pip)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Install sphinxmark:
 
