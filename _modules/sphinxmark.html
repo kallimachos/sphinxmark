@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>watermark &mdash; sphinx-watermark  documentation</title>
+    <title>sphinxmark &mdash; sphinxmark  documentation</title>
     
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -24,10 +24,11 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="sphinx-watermark  documentation" href="../index.html" />
+    <link rel="top" title="sphinxmark  documentation" href="../index.html" />
     <link rel="up" title="Module code" href="index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
@@ -40,7 +41,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for watermark</h1><div class="highlight"><pre>
+  <h1>Source code for sphinxmark</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/bin/python3</span>
 <span class="c1"># coding: utf-8</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -58,10 +59,10 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 
-<span class="kn">from</span> <span class="nn">bottle</span> <span class="kn">import</span> <span class="n">TEMPLATE_PATH</span><span class="p">,</span> <span class="n">template</span>
+<span class="kn">from</span> <span class="nn">bottle</span> <span class="k">import</span> <span class="n">TEMPLATE_PATH</span><span class="p">,</span> <span class="n">template</span>
 
 
-<div class="viewcode-block" id="setstatic"><a class="viewcode-back" href="../index.html#watermark.setstatic">[docs]</a><span class="k">def</span> <span class="nf">setstatic</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+<div class="viewcode-block" id="setstatic"><a class="viewcode-back" href="../index.html#sphinxmark.setstatic">[docs]</a><span class="k">def</span> <span class="nf">setstatic</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Set the static path, and create static directory if required.&quot;&quot;&quot;</span>
     <span class="n">staticpath</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">html_static_path</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;html_static_path: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">html_static_path</span><span class="p">))</span>
@@ -80,12 +81,12 @@
     <span class="k">return</span><span class="p">(</span><span class="n">staticpath</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="watermark"><a class="viewcode-back" href="../index.html#watermark.watermark">[docs]</a><span class="k">def</span> <span class="nf">watermark</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
+<div class="viewcode-block" id="watermark"><a class="viewcode-back" href="../index.html#sphinxmark.watermark">[docs]</a><span class="k">def</span> <span class="nf">watermark</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Add watermark.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">watermark_debug</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">watermark_debug</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">watermark_enable</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">watermark_enable</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">staticpath</span> <span class="o">=</span> <span class="n">setstatic</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">staticpath</span> <span class="ow">is</span> <span class="mi">1</span><span class="p">:</span>
@@ -106,7 +107,7 @@
             <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Image: &#39;</span> <span class="o">+</span> <span class="n">image</span><span class="p">)</span>
 
         <span class="n">image</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">staticpath</span><span class="p">,</span> <span class="n">image</span><span class="p">))</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">staticpath</span><span class="p">,</span> <span class="n">image</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Cannot find &#39;</span><span class="si">%s</span><span class="s2">&#39;. Place watermark images in &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span>
                           <span class="n">image</span><span class="p">,</span> <span class="n">staticpath</span><span class="p">)</span>
         <span class="n">cssfile</span> <span class="o">=</span> <span class="s1">&#39;watermark.css&#39;</span>
@@ -115,18 +116,18 @@
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">staticpath</span><span class="p">,</span> <span class="n">cssfile</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">css</span><span class="p">)</span>
-        <span class="n">app</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;adding watermark...&#39;</span><span class="p">,</span> <span class="n">nonl</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;adding watermark...&#39;</span><span class="p">,</span> <span class="n">nonl</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">add_stylesheet</span><span class="p">(</span><span class="n">cssfile</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39; done&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="setup"><a class="viewcode-back" href="../index.html#watermark.setup">[docs]</a><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+<div class="viewcode-block" id="setup"><a class="viewcode-back" href="../index.html#sphinxmark.setup">[docs]</a><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Setup for Sphinx ext.&quot;&quot;&quot;</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1">:Watermark: </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1">:Watermark: </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;watermark_enable&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;watermark_enable&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;watermark_image&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-        <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;watermark_debug&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;watermark_debug&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;env-updated&#39;</span><span class="p">,</span> <span class="n">watermark</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Failed to add watermark.&#39;</span><span class="p">)</span>
@@ -168,8 +169,8 @@
       &copy;2016, Brian Moss.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
     </div>
 

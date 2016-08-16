@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>sphinx-watermark &mdash; sphinx-watermark  documentation</title>
+    <title>sphinxmark &mdash; sphinxmark  documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,9 +24,10 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="sphinx-watermark  documentation" href="#" />
+    <link rel="top" title="sphinxmark  documentation" href="#" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
@@ -39,29 +40,29 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="sphinx-watermark">
-<h1>sphinx-watermark<a class="headerlink" href="#sphinx-watermark" title="Permalink to this headline">¶</a></h1>
-<p>sphinx-watermark is an extension for Sphinx that enables watermarks for
+  <div class="section" id="sphinxmark">
+<h1>sphinxmark<a class="headerlink" href="#sphinxmark" title="Permalink to this headline">¶</a></h1>
+<p>sphinxmark is an extension for Sphinx that enables watermarks for
 HTML output.</p>
-<p><em>Last updated:</em> Jul 13, 2016</p>
+<p><em>Last updated:</em> Aug 16, 2016</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Install sphinx-watermark:</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span>$ pip install watermark
+<li><p class="first">Install sphinxmark:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span>$ pip install sphinxmark
 </pre></div>
 </div>
 </li>
-<li><p class="first">Open <code class="docutils literal"><span class="pre">conf.py</span></code> and import watermark:</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">watermark</span>
+<li><p class="first">Open <code class="docutils literal"><span class="pre">conf.py</span></code> and import sphinxmark:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sphinxmark</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Add watermark to the list of extensions in <code class="docutils literal"><span class="pre">conf.py</span></code>:</p>
+<li><p class="first">Add sphinxmark to the list of extensions in <code class="docutils literal"><span class="pre">conf.py</span></code>:</p>
 <div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
    <span class="s1">&#39;sphinx.ext.autodoc&#39;</span><span class="p">,</span>
    <span class="s1">&#39;sphinx.ext.doctest&#39;</span><span class="p">,</span>
-   <span class="s1">&#39;watermark&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;sphinxmark&#39;</span><span class="p">,</span>
 <span class="p">]</span>
 </pre></div>
 </div>
@@ -97,8 +98,8 @@ work with themes that do not place body content in <code class="docutils literal
 reason, watermark does not work with <code class="docutils literal"><span class="pre">sphinx_rtd_theme</span></code>.</p>
 </div>
 </div>
-<div class="section" id="module-watermark">
-<span id="source-code"></span><h2>Source code<a class="headerlink" href="#module-watermark" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-sphinxmark">
+<span id="source-code"></span><h2>Source code<a class="headerlink" href="#module-sphinxmark" title="Permalink to this headline">¶</a></h2>
 <p>A Sphinx extension that enables watermarks for HTML output.</p>
 <dl class="docutils">
 <dt>Options:</dt>
@@ -108,20 +109,20 @@ reason, watermark does not work with <code class="docutils literal"><span class=
 </dd>
 </dl>
 <dl class="function">
-<dt id="watermark.setstatic">
-<code class="descclassname">watermark.</code><code class="descname">setstatic</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/watermark.html#setstatic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#watermark.setstatic" title="Permalink to this definition">¶</a></dt>
+<dt id="sphinxmark.setstatic">
+<code class="descclassname">sphinxmark.</code><code class="descname">setstatic</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinxmark.html#setstatic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinxmark.setstatic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the static path, and create static directory if required.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="watermark.setup">
-<code class="descclassname">watermark.</code><code class="descname">setup</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/watermark.html#setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#watermark.setup" title="Permalink to this definition">¶</a></dt>
+<dt id="sphinxmark.setup">
+<code class="descclassname">sphinxmark.</code><code class="descname">setup</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinxmark.html#setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinxmark.setup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup for Sphinx ext.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="watermark.watermark">
-<code class="descclassname">watermark.</code><code class="descname">watermark</code><span class="sig-paren">(</span><em>app</em>, <em>env</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/watermark.html#watermark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#watermark.watermark" title="Permalink to this definition">¶</a></dt>
+<dt id="sphinxmark.watermark">
+<code class="descclassname">sphinxmark.</code><code class="descname">watermark</code><span class="sig-paren">(</span><em>app</em>, <em>env</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sphinxmark.html#watermark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinxmark.watermark" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add watermark.</p>
 </dd></dl>
 
@@ -136,9 +137,9 @@ reason, watermark does not work with <code class="docutils literal"><span class=
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">sphinx-watermark</a><ul>
+<li><a class="reference internal" href="#">sphinxmark</a><ul>
 <li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#module-watermark">Source code</a></li>
+<li><a class="reference internal" href="#module-sphinxmark">Source code</a></li>
 </ul>
 </li>
 </ul>
@@ -174,8 +175,8 @@ reason, watermark does not work with <code class="docutils literal"><span class=
       &copy;2016, Brian Moss.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
       <a href="_sources/index.txt"
