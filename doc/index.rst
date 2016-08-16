@@ -1,8 +1,8 @@
-================
-sphinx-watermark
-================
+==========
+sphinxmark
+==========
 
-sphinx-watermark is an extension for Sphinx that enables watermarks for
+sphinxmark is an extension for Sphinx that enables watermarks for
 HTML output.
 
 *Last updated:* |today|
@@ -10,26 +10,26 @@ HTML output.
 Usage
 ~~~~~
 
-#. Install sphinx-watermark:
+#. Install sphinxmark:
 
    .. code::
 
-      $ pip install watermark
+      $ pip install sphinxmark
 
-#. Open ``conf.py`` and import watermark:
+#. Open ``conf.py`` and import sphinxmark:
 
    .. code::
 
-      import watermark
+      import sphinxmark
 
-#. Add watermark to the list of extensions in ``conf.py``:
+#. Add sphinxmark to the list of extensions in ``conf.py``:
 
    .. code::
 
       extensions = [
          'sphinx.ext.autodoc',
          'sphinx.ext.doctest',
-         'watermark',
+         'sphinxmark',
       ]
 
 #. Specify a static directory in ``conf.py`` for your watermark files. If the
@@ -68,5 +68,5 @@ Usage
 Source code
 ~~~~~~~~~~~
 
-.. automodule:: watermark
+.. automodule:: sphinxmark
    :members:

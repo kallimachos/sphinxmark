@@ -1,9 +1,9 @@
-================
-sphinx-watermark
-================
+==========
+sphinxmark
+==========
 
-.. image:: https://travis-ci.org/kallimachos/sphinx-watermark.svg?branch=master
-   :target: https://travis-ci.org/kallimachos/sphinx-watermark
+.. image:: https://travis-ci.org/kallimachos/sphinxmark.svg?branch=master
+   :target: https://travis-ci.org/kallimachos/sphinxmark
 
 .. image:: https://img.shields.io/badge/Python-3.4-brightgreen.svg?style=flat
    :target: http://python.org
@@ -11,26 +11,26 @@ sphinx-watermark
 .. image:: http://img.shields.io/badge/license-GPL-blue.svg?style=flat
    :target: http://opensource.org/licenses/GPL-3.0
 
-sphinx-watermark is an extension for Sphinx that enables watermarks for
+sphinxmark is an extension for Sphinx that enables watermarks for
 HTML output.
 
-Full documentation: https://kallimachos.github.io/sphinx-watermark/
+Full documentation: https://kallimachos.github.io/sphinxmark/
 
 
-Usage
-~~~~~
+Propsed Usage (note this module is not yet pip installable)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Install sphinx-watermark:
 
    .. code::
 
-      $ pip install watermark
+      $ pip install sphinxmark
 
-#. Open ``conf.py`` and import watermark:
+#. Open ``conf.py`` and import sphinxwatermark:
 
    .. code::
 
-      import watermark
+      import sphinxmark
 
 #. Add watermark to the list of extensions in ``conf.py``:
 
@@ -39,7 +39,7 @@ Usage
       extensions = [
          'sphinx.ext.autodoc',
          'sphinx.ext.doctest',
-         'watermark',
+         'sphinxmark',
       ]
 
 #. Specify a static directory in ``conf.py`` for your watermark files. If the

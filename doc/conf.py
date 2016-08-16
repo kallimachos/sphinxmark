@@ -46,7 +46,7 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.viewcode',
     'sphinx-prompt',
-    'watermark',
+    'sphinxmark',
 ]
 
 if spelling is not None:
@@ -67,7 +67,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'sphinx-watermark'
+project = 'sphinxmark'
 copyright = '2016, Brian Moss'
 author = 'Brian Moss'
 
