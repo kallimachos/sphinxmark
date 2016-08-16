@@ -2,27 +2,28 @@
 sphinxmark
 ==========
 
-sphinxmark is an extension for Sphinx that enables watermarks for
+**sphinxmark** is an extension for Sphinx that enables watermarks for
 HTML output.
 
-*Last updated:* |today|
+Full documentation: https://kallimachos.github.io/sphinxmark/
 
-Usage
-~~~~~
 
-#. Install sphinxmark:
+Proposed Usage (note this module is not yet pip installable)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Install sphinx-watermark:
 
    .. code::
 
       $ pip install sphinxmark
 
-#. Open ``conf.py`` and import sphinxmark:
+#. Open ``conf.py`` and import sphinxwatermark:
 
    .. code::
 
       import sphinxmark
 
-#. Add sphinxmark to the list of extensions in ``conf.py``:
+#. Add watermark to the list of extensions in ``conf.py``:
 
    .. code::
 

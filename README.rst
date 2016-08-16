@@ -11,14 +11,14 @@ sphinxmark
 .. image:: http://img.shields.io/badge/license-GPL-blue.svg?style=flat
    :target: http://opensource.org/licenses/GPL-3.0
 
-sphinxmark is an extension for Sphinx that enables watermarks for
+**sphinxmark** is an extension for Sphinx that enables watermarks for
 HTML output.
 
 Full documentation: https://kallimachos.github.io/sphinxmark/
 
 
-Propsed Usage (note this module is not yet pip installable)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Proposed Usage (note this module is not yet pip installable)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Install sphinx-watermark:
 
