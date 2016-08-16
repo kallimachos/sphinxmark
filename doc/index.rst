@@ -11,13 +11,13 @@ Full documentation: https://kallimachos.github.io/sphinxmark/
 Proposed Usage (note this module is not yet pip installable)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Install sphinx-watermark:
+#. Install sphinxmark:
 
    .. code::
 
       $ pip install sphinxmark
 
-#. Open ``conf.py`` and import sphinxwatermark:
+#. Open ``conf.py`` and import sphinxmark:
 
    .. code::
 
