@@ -66,6 +66,23 @@ Proposed Usage (note this module cannot yet be installed with pip)
    reason, watermark does not work with ``sphinx_rtd_theme``.
 
 
+Future enhancements
+~~~~~~~~~~~~~~~~~~~
+.. code::
+
+   .. watermark:: Mitaka  # this would work on that page only
+
+Watermark should accept image file or text.
+
+
+To-do
+~~~~~
+- add tests
+- improve warnings, errors, and exception capture
+- make extension work with all themes (or at least all included Sphinx themes
+  and ``sphinx_rtd_theme``)
+
+
 Source code
 ~~~~~~~~~~~
 
