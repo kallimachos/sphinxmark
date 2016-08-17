@@ -6,7 +6,7 @@
 from codecs import open
 from os import path
 
-from setuptools import find_packages, setup
+from setuptools import setup
 
 here = path.abspath(path.dirname(__file__))
 
@@ -37,13 +37,10 @@ setup(
 
     keywords='sphinx documentation watermark',
 
-    packages=find_packages(exclude=['doc', 'tools', 'tests']),
+    py_modules=['sphinxmark'],
 
     install_requires=['bottle'],
 
-    # If there are data files included in your packages that need to be
-    # installed, specify them here.  If using Python 2.6 or less, then these
-    # have to be included in MANIFEST.in as well.
     package_data={
         'sphinxmark': ['watermark-draft.png', 'watermark.tpl'],
     },

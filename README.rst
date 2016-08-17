@@ -17,8 +17,8 @@ HTML output.
 Full documentation: https://kallimachos.github.io/sphinxmark/
 
 
-Proposed Usage (note this module cannot yet be installed with pip)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Usage
+~~~~~
 
 #. Install sphinxmark:
 
@@ -73,21 +73,3 @@ Proposed Usage (note this module cannot yet be installed with pip)
    as the watermark for any area defined as ``div.body``. Watermark will not
    work with themes that do not place body content in ``div.body``. For this
    reason, watermark does not work with ``sphinx_rtd_theme``.
-
-
-Future enhancements
--------------------
-.. code::
-
-   .. watermark:: Mitaka  # this would work on that page only
-
-Watermark should accept image file or text.
-
-
-To-do
-~~~~~
-- make module pip installable
-- add tests
-- improve warnings, errors, and exception capture
-- make extension work with all themes (or at least all included Sphinx themes
-  and ``sphinx_rtd_theme``)
