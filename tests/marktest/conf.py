@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+"""Documentation for testing sphinxmark."""
 
-import openstackdocstheme
-import sphinx_rtd_theme
+# import openstackdocstheme
+# import sphinx_rtd_theme
 
 # -- General configuration ------------------------------------------------
 
@@ -51,7 +51,7 @@ html_theme = 'alabaster'
 # html_theme = 'openstackdocs'
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = [openstackdocstheme.get_html_theme_path()]
+# html_theme_path = [openstackdocstheme.get_html_theme_path()]
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
