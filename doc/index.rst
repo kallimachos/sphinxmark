@@ -54,7 +54,7 @@ Usage
 .. important::
 
    The extension provides a template css file that uses the specified image
-   as the watermark for any area defined as ``div.body``. Sphinxmark does not
+   as the watermark for any area defined as ``div.body``. sphinxmark does not
    work with themes that do not place body content in ``div.body``. For this
    reason, sphinxmark does not work with ``sphinx_rtd_theme``.
 
@@ -65,7 +65,7 @@ Future enhancements
 
    .. watermark:: Mitaka  # this would work on that page only
 
-Sphinxmark should accept image file or text.
+sphinxmark should accept image file or text.
 
 
 To-do
