@@ -48,12 +48,19 @@ Usage
 #. Put images in your static directory and use the ``watermark_image`` option
    to specify a custom watermark image.
 
-.. important::
+.. note::
 
    The extension provides a template css file that uses the specified image
-   as the watermark for any area defined as ``div.body``. sphinxmark does not
-   work with themes that do not place body content in ``div.body``. For this
-   reason, sphinxmark does not work with ``sphinx_rtd_theme``.
+   as the watermark for any area defined as ``div.body`` by default. To use
+   sphinxmark with themes that have the document body in a different div,
+   specify the div using the ``watermark_div`` option.
+
+   For example, for the ``sphinx_rtd_theme``,
+   use ``watermark_div = 'document'``.
+
+   For ``openstackdocstheme``,
+   use ``watermark_div = 'docs-body'``.
+
 
 
 Future enhancements

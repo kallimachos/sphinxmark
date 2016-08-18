@@ -82,12 +82,16 @@ are not retained.</p>
 to specify a custom watermark image.</p>
 </li>
 </ol>
-<div class="admonition important">
-<p class="first admonition-title">Important</p>
-<p class="last">The extension provides a template css file that uses the specified image
-as the watermark for any area defined as <code class="docutils literal"><span class="pre">div.body</span></code>. sphinxmark does not
-work with themes that do not place body content in <code class="docutils literal"><span class="pre">div.body</span></code>. For this
-reason, sphinxmark does not work with <code class="docutils literal"><span class="pre">sphinx_rtd_theme</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The extension provides a template css file that uses the specified image
+as the watermark for any area defined as <code class="docutils literal"><span class="pre">div.body</span></code> by default. To use
+sphinxmark with themes that have the document body in a different div,
+specify the div using the <code class="docutils literal"><span class="pre">watermark_div</span></code> option.</p>
+<p>For example, for the <code class="docutils literal"><span class="pre">sphinx_rtd_theme</span></code>,
+use <code class="docutils literal"><span class="pre">watermark_div</span> <span class="pre">=</span> <span class="pre">'document'</span></code>.</p>
+<p class="last">For <code class="docutils literal"><span class="pre">openstackdocstheme</span></code>,
+use <code class="docutils literal"><span class="pre">watermark_div</span> <span class="pre">=</span> <span class="pre">'docs-body'</span></code>.</p>
 </div>
 </div>
 <div class="section" id="future-enhancements">
