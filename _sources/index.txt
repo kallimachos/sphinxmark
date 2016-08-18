@@ -8,20 +8,14 @@ HTML output.
 Full documentation: https://kallimachos.github.io/sphinxmark/
 
 
-Proposed Usage (note this module cannot yet be installed with pip)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Usage
+~~~~~
 
 #. Install sphinxmark:
 
    .. code::
 
       $ pip install sphinxmark
-
-#. Open ``conf.py`` and import sphinxmark:
-
-   .. code::
-
-      import sphinxmark
 
 #. Add watermark to the list of extensions in ``conf.py``:
 
@@ -86,5 +80,5 @@ To-do
 Source code
 ~~~~~~~~~~~
 
-.. automodule:: sphinxmark
+.. automodule:: __init__
    :members:
