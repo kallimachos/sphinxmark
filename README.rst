@@ -39,11 +39,7 @@ Usage
 
    .. code::
 
-      extensions = [
-         'sphinx.ext.autodoc',
-         'sphinx.ext.doctest',
-         'sphinxmark',
-      ]
+      extensions = ['sphinxmark']
 
 #. Specify a static directory in ``conf.py`` for your image files. If the
    path does not exist, the sphinxmark extension creates the directory and
@@ -64,6 +60,7 @@ Usage
 
       watermark_enable = True
       watermark_image = 'default'
+      watermark_div = 'default'
       watermark_debug = False
 
 #. Put images in your static directory and use the ``watermark_image`` option

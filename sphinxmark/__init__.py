@@ -8,6 +8,8 @@ Options:
 
     watermark_image = 'default' (image file; default=watermark-draft.png)
 
+    watermark_div = 'default' (CSS div; default=body)
+
     watermark_debug = True|False (default=False)
 """
 
@@ -66,8 +68,14 @@ def watermark(app, env):
         if os.path.exists(os.path.join(staticpath, image)) is False:
             logging.error("Cannot find '%s'. Place watermark images in '%s'",
                           image, staticpath)
+
+        if app.config.watermark_div == 'default':
+            div = 'body'
+        else:
+            div = app.config.watermark_div
+
         cssfile = 'watermark.css'
-        css = template('watermark', image=image)
+        css = template('watermark', div=div, image=image)
         logging.debug("Template: " + css)
 
         with open(os.path.join(staticpath, cssfile), 'w') as f:
@@ -83,6 +91,7 @@ def setup(app):
     try:
         app.add_config_value('watermark_enable', False, 'html')
         app.add_config_value('watermark_image', 'default', 'html')
+        app.add_config_value('watermark_div', 'default', 'html')
         app.add_config_value('watermark_debug', False, 'html')
         app.connect('env-updated', watermark)
     except:
