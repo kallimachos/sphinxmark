@@ -17,7 +17,7 @@ Usage
 
       $ pip install sphinxmark
 
-#. Add watermark to the list of extensions in ``conf.py``:
+#. Add sphinxmark to the list of extensions in ``conf.py``:
 
    .. code::
 
@@ -27,8 +27,8 @@ Usage
          'sphinxmark',
       ]
 
-#. Specify a static directory in ``conf.py`` for your watermark files. If the
-   path does not exist, the watermark extension creates the directory and
+#. Specify a static directory in ``conf.py`` for your image files. If the
+   path does not exist, the sphinxmark extension creates the directory and
    populates it with ``watermark.css`` and ``watermark-draft.png``:
 
    .. code::
@@ -40,7 +40,7 @@ Usage
       ``watermark.css`` is recreated on each Sphinx run. Edits to this file
       are not retained.
 
-#. Configure watermark in ``conf.py`` as required:
+#. Configure sphinxmark in ``conf.py`` as required:
 
    .. code::
 
@@ -48,16 +48,15 @@ Usage
       watermark_image = 'default'
       watermark_debug = False
 
-#. Put images in your static directory and edit ``watermark_image``
-   to use custom watermarks.
-
+#. Put images in your static directory and use the ``watermark_image`` option
+   to specify a custom watermark image.
 
 .. important::
 
    The extension provides a template css file that uses the specified image
-   as the watermark for any area defined as ``div.body``. Watermark will not
+   as the watermark for any area defined as ``div.body``. Sphinxmark does not
    work with themes that do not place body content in ``div.body``. For this
-   reason, watermark does not work with ``sphinx_rtd_theme``.
+   reason, sphinxmark does not work with ``sphinx_rtd_theme``.
 
 
 Future enhancements
@@ -66,7 +65,7 @@ Future enhancements
 
    .. watermark:: Mitaka  # this would work on that page only
 
-Watermark should accept image file or text.
+Sphinxmark should accept image file or text.
 
 
 To-do
