@@ -54,11 +54,7 @@ HTML output.</p>
 </div>
 </li>
 <li><p class="first">Add sphinxmark to the list of extensions in <code class="docutils literal"><span class="pre">conf.py</span></code>:</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
-   <span class="s1">&#39;sphinx.ext.autodoc&#39;</span><span class="p">,</span>
-   <span class="s1">&#39;sphinx.ext.doctest&#39;</span><span class="p">,</span>
-   <span class="s1">&#39;sphinxmark&#39;</span><span class="p">,</span>
-<span class="p">]</span>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sphinxmark&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </li>
@@ -77,6 +73,7 @@ are not retained.</p>
 <li><p class="first">Configure sphinxmark in <code class="docutils literal"><span class="pre">conf.py</span></code> as required:</p>
 <div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">watermark_enable</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">watermark_image</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
+<span class="n">watermark_div</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
 <span class="n">watermark_debug</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </div>
@@ -116,6 +113,7 @@ and <code class="docutils literal"><span class="pre">sphinx_rtd_theme</span></co
 <dt>Options:</dt>
 <dd><p class="first">watermark_enable = True|False (default=False)</p>
 <p>watermark_image = &#8216;default&#8217; (image file; default=watermark-draft.png)</p>
+<p>watermark_div = &#8216;default&#8217; (CSS div; default=body)</p>
 <p class="last">watermark_debug = True|False (default=False)</p>
 </dd>
 </dl>

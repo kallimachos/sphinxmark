@@ -52,6 +52,8 @@
 
 <span class="sd">    watermark_image = &#39;default&#39; (image file; default=watermark-draft.png)</span>
 
+<span class="sd">    watermark_div = &#39;default&#39; (CSS div; default=body)</span>
+
 <span class="sd">    watermark_debug = True|False (default=False)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -110,8 +112,14 @@
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">staticpath</span><span class="p">,</span> <span class="n">image</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Cannot find &#39;</span><span class="si">%s</span><span class="s2">&#39;. Place watermark images in &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span>
                           <span class="n">image</span><span class="p">,</span> <span class="n">staticpath</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">watermark_div</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
+            <span class="n">div</span> <span class="o">=</span> <span class="s1">&#39;body&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">div</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">watermark_div</span>
+
         <span class="n">cssfile</span> <span class="o">=</span> <span class="s1">&#39;watermark.css&#39;</span>
-        <span class="n">css</span> <span class="o">=</span> <span class="n">template</span><span class="p">(</span><span class="s1">&#39;watermark&#39;</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="n">template</span><span class="p">(</span><span class="s1">&#39;watermark&#39;</span><span class="p">,</span> <span class="n">div</span><span class="o">=</span><span class="n">div</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">)</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Template: &quot;</span> <span class="o">+</span> <span class="n">css</span><span class="p">)</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">staticpath</span><span class="p">,</span> <span class="n">cssfile</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -127,6 +135,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;watermark_enable&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;watermark_image&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;watermark_div&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;watermark_debug&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;env-updated&#39;</span><span class="p">,</span> <span class="n">watermark</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
