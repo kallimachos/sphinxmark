@@ -5,11 +5,20 @@ sphinxmark
 .. image:: https://travis-ci.org/kallimachos/sphinxmark.svg?branch=master
    :target: https://travis-ci.org/kallimachos/sphinxmark
 
+.. image:: https://img.shields.io/badge/Python-2.7-brightgreen.svg?style=flat
+   :target: http://python.org
+
 .. image:: https://img.shields.io/badge/Python-3.4-brightgreen.svg?style=flat
    :target: http://python.org
 
 .. image:: http://img.shields.io/badge/license-GPL-blue.svg?style=flat
    :target: http://opensource.org/licenses/GPL-3.0
+
+.. image:: https://img.shields.io/pypi/status/sphinxmark.svg?style=flat
+   :target: https://pypi.python.org/pypi/sphinxmark
+
+.. image:: https://img.shields.io/pypi/v/sphinxmark.svg?style=flat
+   :target: https://pypi.python.org/pypi/sphinxmark
 
 **sphinxmark** is an extension for Sphinx that enables watermarks for
 HTML output.
@@ -25,12 +34,6 @@ Usage
    .. code::
 
       $ pip install sphinxmark
-
-#. Open ``conf.py`` and import sphinxmark:
-
-   .. code::
-
-      import sphinxmark
 
 #. Add watermark to the list of extensions in ``conf.py``:
 
