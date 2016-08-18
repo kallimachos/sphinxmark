@@ -43,7 +43,5 @@ setup(
         'sphinxmark': ['watermark-draft.png', 'watermark.tpl'],
     },
 
-    # py_modules=['sphinxmark'],
-
     install_requires=['bottle'],
 )

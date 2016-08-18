@@ -86,5 +86,5 @@ To-do
 Source code
 ~~~~~~~~~~~
 
-.. automodule:: sphinxmark
+.. automodule:: __init__
    :members:
