@@ -31,9 +31,9 @@ Installation
 
 Install sphinxmark using pip:
 
-   .. code::
+.. code::
 
-      $ pip install sphinxmark
+   $ pip install sphinxmark
 
 
 Usage
