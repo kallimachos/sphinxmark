@@ -5,7 +5,7 @@ sphinxmark
 **sphinxmark** is an extension for Sphinx that enables watermarks for
 HTML output.
 
-Full documentation: https://kallimachos.github.io/sphinxmark/
+Source code: https://github.com/kallimachos/sphinxmark
 
 
 Usage
@@ -60,24 +60,6 @@ Usage
 
    For ``openstackdocstheme``,
    use ``watermark_div = 'docs-body'``.
-
-
-
-Future enhancements
-~~~~~~~~~~~~~~~~~~~
-.. code::
-
-   .. watermark:: Mitaka  # this would work on that page only
-
-sphinxmark should accept image file or text.
-
-
-To-do
-~~~~~
-- add tests
-- improve warnings, errors, and exception capture
-- make extension work with all themes (or at least all included Sphinx themes
-  and ``sphinx_rtd_theme``)
 
 
 Source code
