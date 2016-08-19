@@ -3,14 +3,7 @@
 """
 A Sphinx extension that enables watermarks for HTML output.
 
-Options:
-    watermark_enable = True|False (default=False)
-
-    watermark_image = 'default' (image file; default=watermark-draft.png)
-
-    watermark_div = 'default' (CSS div; default=body)
-
-    watermark_debug = True|False (default=False)
+https://github.com/kallimachos/sphinxmark
 """
 
 import logging
@@ -18,6 +11,7 @@ import os
 import shutil
 
 from bottle import TEMPLATE_PATH, template
+from PIL import Image, ImageDraw, ImageFont
 
 
 def setstatic(app):
@@ -37,6 +31,40 @@ def setstatic(app):
         os.makedirs(staticpath)
 
     return(staticpath)
+
+
+def createimage(text, srcdir, staticpath):
+    """Create PNG image from string."""
+    width = 400
+    height = 300
+
+    img = Image.new('RGBA', (width, height), (255, 255, 255, 0))
+    d = ImageDraw.Draw(img)
+
+    # set font
+    fontfile = os.path.join(srcdir, 'arial.ttf')
+    font = ImageFont.truetype(fontfile, 100)
+
+    # set x y location for text
+    xsize, ysize = d.textsize(text, font)
+    logging.debug('x = ' + str(xsize) + '\ny = ' + str(ysize))
+    x = (width / 2) - (xsize / 2)
+    y = 20
+
+    # add text to image
+    d.text((x, y), text, font=font, fill=(255, 0, 0), align="center")
+
+    # set opacity
+    img.putalpha(40)
+
+    # save image
+    imagename = 'textmark_' + text + '.png'
+    imagefile = os.path.join(staticpath, imagename)
+    logging.debug('imagefile: ' + imagefile)
+    img.save(imagefile, 'PNG')
+    logging.debug('Image saved to: ' + imagefile)
+
+    return(imagename)
 
 
 def watermark(app, env):
@@ -60,6 +88,11 @@ def watermark(app, env):
             logging.debug('Using default image: ' + image)
             shutil.copy(image, staticpath)
             logging.debug("Copying '" + image + "' to '" + staticpath + "'")
+
+        elif app.config.watermark_image == 'text':
+            image = createimage(app.config.watermark_text, srcdir, staticpath)
+            logging.debug('Image: ' + image)
+
         else:
             image = app.config.watermark_image
             logging.debug('Image: ' + image)
@@ -91,6 +124,7 @@ def setup(app):
     try:
         app.add_config_value('watermark_enable', False, 'html')
         app.add_config_value('watermark_image', 'default', 'html')
+        app.add_config_value('watermark_text', 'default', 'html')
         app.add_config_value('watermark_div', 'default', 'html')
         app.add_config_value('watermark_debug', False, 'html')
         app.connect('env-updated', watermark)

@@ -6,6 +6,7 @@ isort
 openstackdocstheme
 pep8-naming
 pep257
+Pillow
 pyenchant
 pytest
 pytest-cov
