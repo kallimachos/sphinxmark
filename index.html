@@ -149,8 +149,9 @@ HTML output.</p>
 </div>
 </li>
 <li><p class="first">Specify a static directory in <code class="docutils literal"><span class="pre">conf.py</span></code> for your image files. If the
-path does not exist, the sphinxmark extension creates the directory and
-populates it with <code class="docutils literal"><span class="pre">watermark.css</span></code> and <code class="docutils literal"><span class="pre">watermark-draft.png</span></code>:</p>
+path does not exist, sphinxmark creates the directory and
+populates it with <code class="docutils literal"><span class="pre">watermark.css</span></code> and <code class="docutils literal"><span class="pre">watermark-draft.png</span></code>. If no value
+is given, the path defaults to <code class="docutils literal"><span class="pre">_static</span></code>.</p>
 <div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_static&#39;</span><span class="p">]</span>
 </pre></div>
 </div>

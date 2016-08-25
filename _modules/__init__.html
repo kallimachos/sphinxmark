@@ -143,15 +143,18 @@
     <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;html_static_path: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">html_static_path</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">staticpath</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Config error: set `html_static_path` in conf.py&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="mi">1</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;html_static_path not set. Using _static/&#39;</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">html_static_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;_static&#39;</span><span class="p">)</span>
+        <span class="n">staticpath</span> <span class="o">=</span> <span class="s1">&#39;_static&#39;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">staticpath</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">html_static_path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Using &#39;&quot;</span> <span class="o">+</span> <span class="n">staticpath</span> <span class="o">+</span> <span class="s2">&quot;&#39; as static path.&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">staticpath</span><span class="p">):</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Watermark: Creating &#39;</span> <span class="o">+</span> <span class="n">staticpath</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Creating &#39;</span> <span class="o">+</span> <span class="n">staticpath</span><span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">staticpath</span><span class="p">)</span>
+
+    <span class="n">staticpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">staticpath</span><span class="p">)</span>
 
     <span class="k">return</span><span class="p">(</span><span class="n">staticpath</span><span class="p">)</span></div>
 
@@ -195,12 +198,10 @@
     <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">watermark_debug</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
+    <span class="n">app</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;adding watermark...&#39;</span><span class="p">,</span> <span class="n">nonl</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">watermark_enable</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">staticpath</span> <span class="o">=</span> <span class="n">setstatic</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">staticpath</span> <span class="ow">is</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Failed to add watermark.&#39;</span><span class="p">)</span>
-            <span class="k">return</span>
 
         <span class="c1"># append source directory to TEMPLATE_PATH so template is found</span>
         <span class="n">srcdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
@@ -236,7 +237,6 @@
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">staticpath</span><span class="p">,</span> <span class="n">cssfile</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">css</span><span class="p">)</span>
-        <span class="n">app</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;adding watermark...&#39;</span><span class="p">,</span> <span class="n">nonl</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">add_stylesheet</span><span class="p">(</span><span class="n">cssfile</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39; done&#39;</span><span class="p">)</span></div>
 
