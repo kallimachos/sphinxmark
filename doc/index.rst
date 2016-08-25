@@ -28,8 +28,9 @@ Usage
       extensions = ['sphinxmark']
 
 #. Specify a static directory in ``conf.py`` for your image files. If the
-   path does not exist, the sphinxmark extension creates the directory and
-   populates it with ``watermark.css`` and ``watermark-draft.png``:
+   path does not exist, sphinxmark creates the directory and
+   populates it with ``watermark.css`` and ``watermark-draft.png``. If no value
+   is given, the path defaults to ``_static``.
 
    .. code::
 

@@ -20,15 +20,18 @@ def setstatic(app):
     logging.debug('html_static_path: ' + str(app.config.html_static_path))
 
     if not staticpath:
-        logging.error('Config error: set `html_static_path` in conf.py')
-        return 1
+        logging.debug('html_static_path not set. Using _static/')
+        app.config.html_static_path.append('_static')
+        staticpath = '_static'
     else:
         staticpath = app.config.html_static_path[0]
         logging.debug("Using '" + staticpath + "' as static path.")
 
     if not os.path.exists(staticpath):
-        logging.debug('Watermark: Creating ' + staticpath)
+        logging.debug('Creating ' + staticpath)
         os.makedirs(staticpath)
+
+    staticpath = os.path.abspath(staticpath)
 
     return(staticpath)
 
@@ -72,12 +75,10 @@ def watermark(app, env):
     if app.config.watermark_debug is True:
         logging.basicConfig(level=logging.DEBUG)
 
+    app.info('adding watermark...', nonl=True)
+
     if app.config.watermark_enable is True:
         staticpath = setstatic(app)
-
-        if staticpath is 1:
-            logging.error('Failed to add watermark.')
-            return
 
         # append source directory to TEMPLATE_PATH so template is found
         srcdir = os.path.abspath(os.path.dirname(__file__))
@@ -113,7 +114,6 @@ def watermark(app, env):
 
         with open(os.path.join(staticpath, cssfile), 'w') as f:
             f.write(css)
-        app.info('adding watermark...', nonl=True)
         app.add_stylesheet(cssfile)
         app.info(' done')
 
