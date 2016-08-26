@@ -5,3 +5,6 @@ __pycache__/
 MANIFEST
 .coverage
 _build/
+temp.css
+textmark_*
+sphinxmark.egg-info/

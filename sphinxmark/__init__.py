@@ -7,36 +7,29 @@ https://github.com/kallimachos/sphinxmark
 """
 
 import logging
-import os
 import shutil
 
+from os import path
 from bottle import TEMPLATE_PATH, template
 from PIL import Image, ImageDraw, ImageFont
 
 
 def setstatic(app):
-    """Set the static path, and create static directory if required."""
+    """Set the static path."""
     staticpath = app.config.html_static_path
-    logging.debug('html_static_path: ' + str(app.config.html_static_path))
+    logging.debug('html_static_path: ' + str(staticpath))
 
     if not staticpath:
         logging.debug('html_static_path not set. Using _static/')
         app.config.html_static_path.append('_static')
-        staticpath = '_static'
-    else:
-        staticpath = app.config.html_static_path[0]
-        logging.debug("Using '" + staticpath + "' as static path.")
 
-    if not os.path.exists(staticpath):
-        logging.debug('Creating ' + staticpath)
-        os.makedirs(staticpath)
-
-    staticpath = os.path.abspath(staticpath)
+    staticpath = path.join(app.confdir, app.config.html_static_path[0])
+    logging.debug('static path: ' + staticpath)
 
     return(staticpath)
 
 
-def createimage(text, srcdir, staticpath):
+def createimage(text, srcdir):
     """Create PNG image from string."""
     width = 400
     height = 300
@@ -45,7 +38,7 @@ def createimage(text, srcdir, staticpath):
     d = ImageDraw.Draw(img)
 
     # set font
-    fontfile = os.path.join(srcdir, 'arial.ttf')
+    fontfile = path.join(srcdir, 'arial.ttf')
     font = ImageFont.truetype(fontfile, 100)
 
     # set x y location for text
@@ -62,7 +55,7 @@ def createimage(text, srcdir, staticpath):
 
     # save image
     imagename = 'textmark_' + text + '.png'
-    imagefile = os.path.join(staticpath, imagename)
+    imagefile = path.join(srcdir, imagename)
     logging.debug('imagefile: ' + imagefile)
     img.save(imagefile, 'PNG')
     logging.debug('Image saved to: ' + imagefile)
@@ -78,41 +71,38 @@ def watermark(app, env):
     app.info('adding watermark...', nonl=True)
 
     if app.config.watermark_enable is True:
-        staticpath = setstatic(app)
-
         # append source directory to TEMPLATE_PATH so template is found
-        srcdir = os.path.abspath(os.path.dirname(__file__))
+        srcdir = path.abspath(path.dirname(__file__))
         TEMPLATE_PATH.append(srcdir)
 
         if app.config.watermark_image == 'default':
-            image = os.path.join(srcdir, 'watermark-draft.png')
-            logging.debug('Using default image: ' + image)
-            shutil.copy(image, staticpath)
-            logging.debug("Copying '" + image + "' to '" + staticpath + "'")
+            imagefile = path.join(srcdir, 'watermark-draft.png')
+            logging.debug('Using default image: ' + imagefile)
 
         elif app.config.watermark_image == 'text':
-            image = createimage(app.config.watermark_text, srcdir, staticpath)
-            logging.debug('Image: ' + image)
+            imagefile = createimage(app.config.watermark_text, srcdir)
+            logging.debug('Image: ' + imagefile)
 
         else:
+            staticpath = setstatic(app)
             image = app.config.watermark_image
             logging.debug('Image: ' + image)
-
-        image = os.path.basename(image)
-        if os.path.exists(os.path.join(staticpath, image)) is False:
-            logging.error("Cannot find '%s'. Place watermark images in '%s'",
-                          image, staticpath)
+            imagefile = path.abspath(path.join(staticpath, image))
+            logging.debug('Imagefile: ' + imagefile)
+            if path.exists(imagefile) is False:
+                logging.error("Cannot find '%s'. Put watermark images in '%s'",
+                              image, staticpath)
 
         if app.config.watermark_div == 'default':
             div = 'body'
         else:
             div = app.config.watermark_div
 
-        cssfile = 'watermark.css'
-        css = template('watermark', div=div, image=image)
+        css = template('watermark', div=div, image=imagefile)
         logging.debug("Template: " + css)
 
-        with open(os.path.join(staticpath, cssfile), 'w') as f:
+        cssfile = path.abspath(path.join(srcdir, 'temp.css'))
+        with open(cssfile, 'w') as f:
             f.write(css)
         app.add_stylesheet(cssfile)
         app.info(' done')
