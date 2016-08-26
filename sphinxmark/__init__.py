@@ -7,7 +7,6 @@ https://github.com/kallimachos/sphinxmark
 """
 
 import logging
-import shutil
 
 from os import path
 from bottle import TEMPLATE_PATH, template
