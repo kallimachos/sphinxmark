@@ -142,31 +142,26 @@ HTML output.</p>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Configure sphinxmark in your <code class="docutils literal"><span class="pre">conf.py</span></code> file.</p>
 <ol class="arabic">
-<li><p class="first">Add sphinxmark to the list of extensions in <code class="docutils literal"><span class="pre">conf.py</span></code>:</p>
+<li><p class="first">Add sphinxmark to the list of extensions:</p>
 <div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sphinxmark&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Specify a static directory in <code class="docutils literal"><span class="pre">conf.py</span></code> for your image files. If the
-path does not exist, sphinxmark creates the directory and
-populates it with <code class="docutils literal"><span class="pre">watermark.css</span></code> and <code class="docutils literal"><span class="pre">watermark-draft.png</span></code>. If no value
-is given, the path defaults to <code class="docutils literal"><span class="pre">_static</span></code>.</p>
+<li><p class="first">If you are using a custom image file, specify its directory relative
+to the <code class="docutils literal"><span class="pre">conf.py</span></code> file. If no value is given, the path defaults to
+<code class="docutils literal"><span class="pre">_static</span></code>.</p>
 <div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_static&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last"><code class="docutils literal"><span class="pre">watermark.css</span></code> is recreated on each Sphinx run. Edits to this file
-are not retained.</p>
-</div>
 </li>
-<li><p class="first">Configure sphinxmark in <code class="docutils literal"><span class="pre">conf.py</span></code> as required:</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">watermark_enable</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">watermark_image</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
-<span class="n">watermark_text</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
-<span class="n">watermark_div</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
-<span class="n">watermark_debug</span> <span class="o">=</span> <span class="kc">False</span>
+<li><p class="first">Enable sphinxmark and set options as required:</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">sphinxmark_enable</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sphinxmark_div</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
+<span class="n">sphinxmark_image</span> <span class="o">=</span> <span class="s1">&#39;text&#39;</span>
+<span class="n">sphinxmark_text</span> <span class="o">=</span> <span class="s1">&#39;Pre-Release&#39;</span>
+<span class="n">sphinxmark_text_size</span> <span class="o">=</span> <span class="mi">80</span>
 </pre></div>
 </div>
 </li>
@@ -175,73 +170,109 @@ are not retained.</p>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>watermark_enable (bool)</dt>
+<dt>sphinxmark_enable (bool)</dt>
 <dd><ul class="first last">
-<li><p class="first"><code class="docutils literal"><span class="pre">True</span></code> enable watermarks</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">True</span></code> - enable watermarks</p>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">False</span></code> disable watermarks</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">False</span></code> - disable watermarks</p>
 </li>
 <li><p class="first">Default = False</p>
 </li>
 <li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">watermark_enable</span> <span class="pre">=</span> <span class="pre">True</span></code></p>
+<p><code class="docutils literal"><span class="pre">sphinxmark_enable</span> <span class="pre">=</span> <span class="pre">True</span></code></p>
 </li>
 </ul>
 </dd>
-<dt>watermark_image (string)</dt>
-<dd><ul class="first last">
-<li><p class="first">image file in <code class="docutils literal"><span class="pre">_static</span></code> directory to use as watermark</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">text</span></code> selects the text-based watermark specified in
-<code class="docutils literal"><span class="pre">watermark_text</span></code> option</p>
-</li>
-<li><p class="first">Default = watermark-draft.png (included DRAFT image)</p>
-</li>
-<li><p class="first">Examples:</p>
-<p><code class="docutils literal"><span class="pre">watermark_image</span> <span class="pre">=</span> <span class="pre">'preview_mark.png'</span></code></p>
-<p><code class="docutils literal"><span class="pre">watermark_image</span> <span class="pre">=</span> <span class="pre">'text'</span></code></p>
-</li>
-</ul>
-</dd>
-<dt>watermark_text (string)</dt>
-<dd><ul class="first last">
-<li><p class="first">Text to use for watermark when <code class="docutils literal"><span class="pre">text</span></code> option is selected in
-<code class="docutils literal"><span class="pre">watermark_image</span></code></p>
-</li>
-<li><p class="first">Default = default</p>
-</li>
-<li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">watermark_text</span> <span class="pre">=</span> <span class="pre">'Preview'</span></code></p>
-</li>
-</ul>
-</dd>
-<dt>watermark_div (string)</dt>
+<dt>sphinxmark_div (string)</dt>
 <dd><ul class="first last">
 <li><p class="first">CSS div where watermark is displayed</p>
 </li>
 <li><p class="first">sphinxmark provides a template css file that uses the specified image
-as the watermark for any area defined as <code class="docutils literal"><span class="pre">div.body</span></code> by default. To use
+as the watermark for any area defined as <code class="docutils literal"><span class="pre">div.body</span></code> by default. This
+setting works for the default Sphinx theme. To use
 sphinxmark with themes that have the document body in a different div,
-specify the div using the <code class="docutils literal"><span class="pre">watermark_div</span></code> option.</p>
+specify the div using the <code class="docutils literal"><span class="pre">sphinxmark_div</span></code> option.</p>
 </li>
-<li><p class="first">Default = body (this works for default Sphinx theme)</p>
+<li><p class="first">Default = &#8216;body&#8217;</p>
 </li>
 <li><p class="first">Examples:</p>
-<p>sphinx_rtd_theme -&gt; <code class="docutils literal"><span class="pre">watermark_div</span> <span class="pre">=</span> <span class="pre">'document'</span></code></p>
-<p>openstackdocstheme -&gt; <code class="docutils literal"><span class="pre">watermark_div</span> <span class="pre">=</span> <span class="pre">'docs-body'</span></code></p>
+<p>sphinx_rtd_theme -&gt; <code class="docutils literal"><span class="pre">sphinxmark_div</span> <span class="pre">=</span> <span class="pre">'document'</span></code></p>
+<p>openstackdocstheme -&gt; <code class="docutils literal"><span class="pre">sphinxmark_div</span> <span class="pre">=</span> <span class="pre">'docs-body'</span></code></p>
 </li>
 </ul>
 </dd>
-<dt>watermark_debug (bool)</dt>
+<dt>sphinxmark_image (string)</dt>
 <dd><ul class="first last">
-<li><p class="first"><code class="docutils literal"><span class="pre">True</span></code> enable debugging output during Sphinx build</p>
+<li><p class="first">image file in <code class="docutils literal"><span class="pre">html_static_path</span></code> directory to use as watermark</p>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">False</span></code> disable debugging output during Sphinx build</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">text</span></code> selects the text-based watermark specified in the
+<code class="docutils literal"><span class="pre">sphinxmark_text</span></code> option</p>
+</li>
+<li><p class="first">if no image is specified, a default DRAFT watermark image is used</p>
+</li>
+<li><p class="first">Default = &#8216;default&#8217;</p>
+</li>
+<li><p class="first">Examples:</p>
+<p><code class="docutils literal"><span class="pre">sphinxmark_image</span> <span class="pre">=</span> <span class="pre">'preview_mark.png'</span></code></p>
+<p><code class="docutils literal"><span class="pre">sphinxmark_image</span> <span class="pre">=</span> <span class="pre">'text'</span></code></p>
+</li>
+</ul>
+</dd>
+<dt>sphinxmark_text (string)</dt>
+<dd><ul class="first last">
+<li><p class="first">Text to use for watermark when <code class="docutils literal"><span class="pre">text</span></code> option is selected in
+<code class="docutils literal"><span class="pre">sphinxmark_image</span></code></p>
+</li>
+<li><p class="first">Default = &#8216;default&#8217;</p>
+</li>
+<li><p class="first">Example:</p>
+<p><code class="docutils literal"><span class="pre">sphinxmark_text</span> <span class="pre">=</span> <span class="pre">'Preview'</span></code></p>
+</li>
+</ul>
+</dd>
+<dt>sphinxmark_text_size (int)</dt>
+<dd><ul class="first last">
+<li><p class="first">Font size for text specified in <code class="docutils literal"><span class="pre">sphinxmark_text</span></code></p>
+</li>
+<li><p class="first">Default = 100</p>
+</li>
+<li><p class="first">Example:</p>
+<p><code class="docutils literal"><span class="pre">sphinxmark_text_size</span> <span class="pre">=</span> <span class="pre">100</span></code></p>
+</li>
+</ul>
+</dd>
+<dt>sphinxmark_text_color (tuple)</dt>
+<dd><ul class="first last">
+<li><p class="first">RGB color code for text specified in <code class="docutils literal"><span class="pre">sphinxmark_text</span></code>.</p>
+</li>
+<li><p class="first">Default = (255, 0, 0)</p>
+</li>
+<li><p class="first">Example:</p>
+<p><code class="docutils literal"><span class="pre">sphinxmark_text_color</span> <span class="pre">=</span> <span class="pre">(255,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p>
+</li>
+</ul>
+</dd>
+<dt>sphinxmark_text_opacity (int)</dt>
+<dd><ul class="first last">
+<li><p class="first">Opacity (RGB Alpha) for text specified in <code class="docutils literal"><span class="pre">sphinxmark_text</span></code></p>
+</li>
+<li><p class="first">Default = 40</p>
+</li>
+<li><p class="first">Example:</p>
+<p><code class="docutils literal"><span class="pre">sphinxmark_text_opacity</span> <span class="pre">=</span> <span class="pre">40</span></code></p>
+</li>
+</ul>
+</dd>
+<dt>sphinxmark_debug (bool)</dt>
+<dd><ul class="first last">
+<li><p class="first"><code class="docutils literal"><span class="pre">True</span></code> - enable debug level logging</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">False</span></code> - disable debug level logging</p>
 </li>
 <li><p class="first">Default = False</p>
 </li>
 <li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">watermark_debug</span> <span class="pre">=</span> <span class="pre">True</span></code></p>
+<p><code class="docutils literal"><span class="pre">sphinxmark_debug</span> <span class="pre">=</span> <span class="pre">True</span></code></p>
 </li>
 </ul>
 </dd>
@@ -253,7 +284,7 @@ specify the div using the <code class="docutils literal"><span class="pre">water
 <p><a class="reference external" href="https://github.com/kallimachos/sphinxmark">https://github.com/kallimachos/sphinxmark</a></p>
 <dl class="function">
 <dt id="__init__.createimage">
-<code class="descclassname">__init__.</code><code class="descname">createimage</code><span class="sig-paren">(</span><em>text</em>, <em>srcdir</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/__init__.html#createimage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#__init__.createimage" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">__init__.</code><code class="descname">createimage</code><span class="sig-paren">(</span><em>app</em>, <em>srcdir</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/__init__.html#createimage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#__init__.createimage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create PNG image from string.</p>
 </dd></dl>
 
