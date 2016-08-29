@@ -62,8 +62,11 @@ html_theme_path = [openstackdocstheme.get_html_theme_path()]
 htmlhelp_basename = 'testmarkdoc'
 
 # Options for sphinxmark
-watermark_enable = True
-watermark_image = 'default'
-watermark_text = 'Mitaka'
-watermark_div = 'docs-body'
-watermark_debug = False
+sphinxmark_enable = True
+sphinxmark_div = 'docs-body'
+sphinxmark_image = 'text'
+sphinxmark_text = 'Mitaka'
+sphinxmark_text_color = (255, 0, 0)
+sphinxmark_text_size = 100
+sphinxmark_text_opacity = 40
+sphinxmark_debug = False

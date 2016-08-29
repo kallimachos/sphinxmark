@@ -28,17 +28,19 @@ def setstatic(app):
     return(staticpath)
 
 
-def createimage(text, srcdir):
+def createimage(app, srcdir):
     """Create PNG image from string."""
+    text = app.config.sphinxmark_text
+
+    # draw transparent background
     width = 400
     height = 300
-
     img = Image.new('RGBA', (width, height), (255, 255, 255, 0))
     d = ImageDraw.Draw(img)
 
     # set font
     fontfile = path.join(srcdir, 'arial.ttf')
-    font = ImageFont.truetype(fontfile, 100)
+    font = ImageFont.truetype(fontfile, app.config.sphinxmark_text_size)
 
     # set x y location for text
     xsize, ysize = d.textsize(text, font)
@@ -47,10 +49,11 @@ def createimage(text, srcdir):
     y = 20
 
     # add text to image
-    d.text((x, y), text, font=font, fill=(255, 0, 0), align="center")
+    color = app.config.sphinxmark_text_color
+    d.text((x, y), text, font=font, fill=color, align="center")
 
     # set opacity
-    img.putalpha(40)
+    img.putalpha(app.config.sphinxmark_text_opacity)
 
     # save image
     imagename = 'textmark_' + text + '.png'
@@ -64,27 +67,27 @@ def createimage(text, srcdir):
 
 def watermark(app, env):
     """Add watermark."""
-    if app.config.watermark_debug is True:
+    if app.config.sphinxmark_debug is True:
         logging.basicConfig(level=logging.DEBUG)
 
     app.info('adding watermark...', nonl=True)
 
-    if app.config.watermark_enable is True:
+    if app.config.sphinxmark_enable is True:
         # append source directory to TEMPLATE_PATH so template is found
         srcdir = path.abspath(path.dirname(__file__))
         TEMPLATE_PATH.append(srcdir)
 
-        if app.config.watermark_image == 'default':
+        if app.config.sphinxmark_image == 'default':
             imagefile = path.join(srcdir, 'watermark-draft.png')
             logging.debug('Using default image: ' + imagefile)
 
-        elif app.config.watermark_image == 'text':
-            imagefile = createimage(app.config.watermark_text, srcdir)
+        elif app.config.sphinxmark_image == 'text':
+            imagefile = createimage(app, srcdir)
             logging.debug('Image: ' + imagefile)
 
         else:
             staticpath = setstatic(app)
-            image = app.config.watermark_image
+            image = app.config.sphinxmark_image
             logging.debug('Image: ' + image)
             imagefile = path.abspath(path.join(staticpath, image))
             logging.debug('Imagefile: ' + imagefile)
@@ -92,10 +95,10 @@ def watermark(app, env):
                 logging.error("Cannot find '%s'. Put watermark images in '%s'",
                               image, staticpath)
 
-        if app.config.watermark_div == 'default':
+        if app.config.sphinxmark_div == 'default':
             div = 'body'
         else:
-            div = app.config.watermark_div
+            div = app.config.sphinxmark_div
 
         css = template('watermark', div=div, image=imagefile)
         logging.debug("Template: " + css)
@@ -109,13 +112,16 @@ def watermark(app, env):
 
 def setup(app):
     """Setup for Sphinx ext."""
-    logging.basicConfig(format='%(levelname)s:Watermark: %(message)s')
+    logging.basicConfig(format='%(levelname)s:sphinxmark: %(message)s')
     try:
-        app.add_config_value('watermark_enable', False, 'html')
-        app.add_config_value('watermark_image', 'default', 'html')
-        app.add_config_value('watermark_text', 'default', 'html')
-        app.add_config_value('watermark_div', 'default', 'html')
-        app.add_config_value('watermark_debug', False, 'html')
+        app.add_config_value('sphinxmark_enable', False, 'html')
+        app.add_config_value('sphinxmark_div', 'default', 'html')
+        app.add_config_value('sphinxmark_image', 'default', 'html')
+        app.add_config_value('sphinxmark_text', 'default', 'html')
+        app.add_config_value('sphinxmark_text_color', (255, 0, 0), 'html')
+        app.add_config_value('sphinxmark_text_size', 100, 'html')
+        app.add_config_value('sphinxmark_text_opacity', 40, 'html')
+        app.add_config_value('sphinxmark_debug', False, 'html')
         app.connect('env-updated', watermark)
     except:
         logging.error('Failed to add watermark.')

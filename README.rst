@@ -45,78 +45,16 @@ Usage
 
       extensions = ['sphinxmark']
 
-#. Specify a static directory in ``conf.py`` for your image files. If the
-   path does not exist, sphinxmark creates the directory and
-   populates it with ``watermark.css`` and ``watermark-draft.png``. If no value
-   is given, the path defaults to ``_static``.
+#. Enable sphinxmark in ``conf.py``:
 
    .. code::
 
-      html_static_path = ['_static']
+      sphinxmark_enable = True
 
-   .. warning::
+#. Build your docs as normal. A DRAFT watermark now appears behind the text.
 
-      ``watermark.css`` is recreated on each Sphinx run. Edits to this file
-      are not retained.
+   .. note::
 
-#. Configure sphinxmark in ``conf.py`` as required:
-
-   .. code::
-
-      watermark_enable = True
-      watermark_image = 'default'
-      watermark_text = 'default'
-      watermark_div = 'default'
-      watermark_debug = False
-
-
-Options
-~~~~~~~
-
-watermark_enable (bool)
-   - ``True`` enable watermarks
-   - ``False`` disable watermarks
-   - Default = False
-   - Example:
-
-     ``watermark_enable = True``
-
-watermark_image (string)
-   - image file in ``_static`` directory to use as watermark
-   - ``text`` selects the text-based watermark specified in
-     ``watermark_text`` option
-   - Default = watermark-draft.png (included DRAFT image)
-   - Examples:
-
-     ``watermark_image = 'preview_mark.png'``
-
-     ``watermark_image = 'text'``
-
-watermark_text (string)
-   - Text to use for watermark when ``text`` option is selected in
-     ``watermark_image``
-   - Default = default
-   - Example:
-
-     ``watermark_text = 'Preview'``
-
-watermark_div (string)
-   - CSS div where watermark is displayed
-   - sphinxmark provides a template css file that uses the specified image
-     as the watermark for any area defined as ``div.body`` by default. To use
-     sphinxmark with themes that have the document body in a different div,
-     specify the div using the ``watermark_div`` option.
-   - Default = body (this works for default Sphinx theme)
-   - Examples:
-
-     sphinx_rtd_theme -> ``watermark_div = 'document'``
-
-     openstackdocstheme -> ``watermark_div = 'docs-body'``
-
-watermark_debug (bool)
-   - ``True`` enable debugging output during Sphinx build
-   - ``False`` disable debugging output during Sphinx build
-   - Default = False
-   - Example:
-
-     ``watermark_debug = True``
+      Some Sphinx themes place body content in different CSS divs. See the
+      `sphinxmark documentation <https://kallimachos.github.io/sphinxmark/>`_
+      for full configuration details.
