@@ -7,10 +7,11 @@ https://github.com/kallimachos/sphinxmark
 """
 
 import logging
+import os
 
-from os import path
 from bottle import TEMPLATE_PATH, template
 from PIL import Image, ImageDraw, ImageFont
+from shutil import copy
 
 
 def setstatic(app):
@@ -22,13 +23,13 @@ def setstatic(app):
         logging.debug('html_static_path not set. Using _static/')
         app.config.html_static_path.append('_static')
 
-    staticpath = path.join(app.confdir, app.config.html_static_path[0])
+    staticpath = os.path.join(app.confdir, app.config.html_static_path[0])
     logging.debug('static path: ' + staticpath)
 
     return(staticpath)
 
 
-def createimage(app, srcdir):
+def createimage(app, srcdir, buildpath):
     """Create PNG image from string."""
     text = app.config.sphinxmark_text
 
@@ -39,7 +40,7 @@ def createimage(app, srcdir):
     d = ImageDraw.Draw(img)
 
     # set font
-    fontfile = path.join(srcdir, 'arial.ttf')
+    fontfile = os.path.join(srcdir, 'arial.ttf')
     font = ImageFont.truetype(fontfile, app.config.sphinxmark_text_size)
 
     # set x y location for text
@@ -57,8 +58,9 @@ def createimage(app, srcdir):
 
     # save image
     imagename = 'textmark_' + text + '.png'
-    imagefile = path.join(srcdir, imagename)
-    logging.debug('imagefile: ' + imagefile)
+
+    imagefile = os.path.join(buildpath, imagename)
+    logging.debug('imagefile: ' + imagename)
     img.save(imagefile, 'PNG')
     logging.debug('Image saved to: ' + imagefile)
 
@@ -74,24 +76,33 @@ def watermark(app, env):
 
     if app.config.sphinxmark_enable is True:
         # append source directory to TEMPLATE_PATH so template is found
-        srcdir = path.abspath(path.dirname(__file__))
+        srcdir = os.path.abspath(os.path.dirname(__file__))
         TEMPLATE_PATH.append(srcdir)
+        buildpath = os.path.join(app.outdir, 'sphinxmark')
+        try:
+            os.makedirs(buildpath)
+        except OSError:
+            if not os.path.isdir(buildpath):
+                raise
 
         if app.config.sphinxmark_image == 'default':
-            imagefile = path.join(srcdir, 'watermark-draft.png')
+            draftimage = 'watermark-draft.png'
+            imagefile = os.path.join(srcdir, draftimage)
+            copy(imagefile, buildpath)
+            imagefile = os.path.join(buildpath, draftimage)
             logging.debug('Using default image: ' + imagefile)
 
         elif app.config.sphinxmark_image == 'text':
-            imagefile = createimage(app, srcdir)
+            imagefile = createimage(app, srcdir, buildpath)
             logging.debug('Image: ' + imagefile)
 
         else:
             staticpath = setstatic(app)
             image = app.config.sphinxmark_image
             logging.debug('Image: ' + image)
-            imagefile = path.abspath(path.join(staticpath, image))
+            imagefile = os.path.join(staticpath, image)
             logging.debug('Imagefile: ' + imagefile)
-            if path.exists(imagefile) is False:
+            if os.path.exists(imagefile) is False:
                 logging.error("Cannot find '%s'. Put watermark images in '%s'",
                               image, staticpath)
 
@@ -102,8 +113,8 @@ def watermark(app, env):
 
         css = template('watermark', div=div, image=imagefile)
         logging.debug("Template: " + css)
+        cssfile = os.path.abspath(os.path.join(buildpath, 'temp.css'))
 
-        cssfile = path.abspath(path.join(srcdir, 'temp.css'))
         with open(cssfile, 'w') as f:
             f.write(css)
         app.add_stylesheet(cssfile)
