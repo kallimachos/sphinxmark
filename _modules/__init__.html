@@ -137,21 +137,6 @@
 <span class="kn">from</span> <span class="nn">shutil</span> <span class="k">import</span> <span class="n">copy</span>
 
 
-<div class="viewcode-block" id="setstatic"><a class="viewcode-back" href="../index.html#__init__.setstatic">[docs]</a><span class="k">def</span> <span class="nf">setstatic</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the static path.&quot;&quot;&quot;</span>
-    <span class="n">staticpath</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">html_static_path</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;html_static_path: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">staticpath</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">staticpath</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;html_static_path not set. Using _static/&#39;</span><span class="p">)</span>
-        <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">html_static_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;_static&#39;</span><span class="p">)</span>
-
-    <span class="n">staticpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">confdir</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">html_static_path</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;static path: &#39;</span> <span class="o">+</span> <span class="n">staticpath</span><span class="p">)</span>
-
-    <span class="k">return</span><span class="p">(</span><span class="n">staticpath</span><span class="p">)</span></div>
-
-
 <div class="viewcode-block" id="createimage"><a class="viewcode-back" href="../index.html#__init__.createimage">[docs]</a><span class="k">def</span> <span class="nf">createimage</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">srcdir</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Create PNG image from string.&quot;&quot;&quot;</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_text</span>
@@ -180,14 +165,12 @@
     <span class="n">img</span><span class="o">.</span><span class="n">putalpha</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_text_opacity</span><span class="p">)</span>
 
     <span class="c1"># save image</span>
-    <span class="n">imagename</span> <span class="o">=</span> <span class="s1">&#39;textmark_&#39;</span> <span class="o">+</span> <span class="n">text</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span>
+    <span class="n">imagefile</span> <span class="o">=</span> <span class="s1">&#39;textmark_&#39;</span> <span class="o">+</span> <span class="n">text</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span>
+    <span class="n">imagepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span>
+    <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">imagepath</span><span class="p">,</span> <span class="s1">&#39;PNG&#39;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Image saved to: &#39;</span> <span class="o">+</span> <span class="n">imagepath</span><span class="p">)</span>
 
-    <span class="n">imagefile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">buildpath</span><span class="p">,</span> <span class="n">imagename</span><span class="p">)</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;imagefile: &#39;</span> <span class="o">+</span> <span class="n">imagename</span><span class="p">)</span>
-    <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">imagefile</span><span class="p">,</span> <span class="s1">&#39;PNG&#39;</span><span class="p">)</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Image saved to: &#39;</span> <span class="o">+</span> <span class="n">imagefile</span><span class="p">)</span>
-
-    <span class="k">return</span><span class="p">(</span><span class="n">imagename</span><span class="p">)</span></div>
+    <span class="k">return</span><span class="p">(</span><span class="n">imagefile</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="watermark"><a class="viewcode-back" href="../index.html#__init__.watermark">[docs]</a><span class="k">def</span> <span class="nf">watermark</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
@@ -201,7 +184,8 @@
         <span class="c1"># append source directory to TEMPLATE_PATH so template is found</span>
         <span class="n">srcdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
         <span class="n">TEMPLATE_PATH</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">srcdir</span><span class="p">)</span>
-        <span class="n">buildpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">outdir</span><span class="p">,</span> <span class="s1">&#39;sphinxmark&#39;</span><span class="p">)</span>
+        <span class="n">staticbase</span> <span class="o">=</span> <span class="s1">&#39;_static&#39;</span>
+        <span class="n">buildpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">outdir</span><span class="p">,</span> <span class="n">staticbase</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">buildpath</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
@@ -209,25 +193,30 @@
                 <span class="k">raise</span>
 
         <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_image</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
-            <span class="n">draftimage</span> <span class="o">=</span> <span class="s1">&#39;watermark-draft.png&#39;</span>
-            <span class="n">imagefile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">srcdir</span><span class="p">,</span> <span class="n">draftimage</span><span class="p">)</span>
-            <span class="n">copy</span><span class="p">(</span><span class="n">imagefile</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">)</span>
-            <span class="n">imagefile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">buildpath</span><span class="p">,</span> <span class="n">draftimage</span><span class="p">)</span>
+            <span class="n">imagefile</span> <span class="o">=</span> <span class="s1">&#39;watermark-draft.png&#39;</span>
+            <span class="n">imagepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">srcdir</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span>
+            <span class="n">copy</span><span class="p">(</span><span class="n">imagepath</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">)</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Using default image: &#39;</span> <span class="o">+</span> <span class="n">imagefile</span><span class="p">)</span>
-
         <span class="k">elif</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_image</span> <span class="o">==</span> <span class="s1">&#39;text&#39;</span><span class="p">:</span>
             <span class="n">imagefile</span> <span class="o">=</span> <span class="n">createimage</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">srcdir</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">)</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Image: &#39;</span> <span class="o">+</span> <span class="n">imagefile</span><span class="p">)</span>
-
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">staticpath</span> <span class="o">=</span> <span class="n">setstatic</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-            <span class="n">image</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_image</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Image: &#39;</span> <span class="o">+</span> <span class="n">image</span><span class="p">)</span>
-            <span class="n">imagefile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">staticpath</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Imagefile: &#39;</span> <span class="o">+</span> <span class="n">imagefile</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">imagefile</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Cannot find &#39;</span><span class="si">%s</span><span class="s2">&#39;. Put watermark images in &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span>
-                              <span class="n">image</span><span class="p">,</span> <span class="n">staticpath</span><span class="p">)</span>
+            <span class="n">imagefile</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_image</span>
+
+            <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">html_static_path</span><span class="p">:</span>
+                <span class="n">staticpath</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">html_static_path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">staticpath</span> <span class="o">=</span> <span class="s1">&#39;_static&#39;</span>
+
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;static path: &#39;</span> <span class="o">+</span> <span class="n">staticpath</span><span class="p">)</span>
+            <span class="n">imagepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">staticpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Imagepath: &#39;</span> <span class="o">+</span> <span class="n">imagepath</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">imagepath</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Cannot find &#39;</span><span class="si">%s</span><span class="s2">&#39;. Put watermark &quot;</span> <span class="o">+</span>
+                              <span class="s2">&quot;images in the &#39;_static&#39; directory or &quot;</span> <span class="o">+</span>
+                              <span class="s2">&quot;specify the location using &#39;html_static_path&#39;.&quot;</span><span class="p">,</span>
+                              <span class="n">imagefile</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_div</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
             <span class="n">div</span> <span class="o">=</span> <span class="s1">&#39;body&#39;</span>
@@ -236,17 +225,18 @@
 
         <span class="n">css</span> <span class="o">=</span> <span class="n">template</span><span class="p">(</span><span class="s1">&#39;watermark&#39;</span><span class="p">,</span> <span class="n">div</span><span class="o">=</span><span class="n">div</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">imagefile</span><span class="p">)</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Template: &quot;</span> <span class="o">+</span> <span class="n">css</span><span class="p">)</span>
-        <span class="n">cssfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">buildpath</span><span class="p">,</span> <span class="s1">&#39;temp.css&#39;</span><span class="p">))</span>
+        <span class="n">cssname</span> <span class="o">=</span> <span class="s1">&#39;sphinxmark.css&#39;</span>
+        <span class="n">cssfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">buildpath</span><span class="p">,</span> <span class="n">cssname</span><span class="p">)</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cssfile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">css</span><span class="p">)</span>
-        <span class="n">app</span><span class="o">.</span><span class="n">add_stylesheet</span><span class="p">(</span><span class="n">cssfile</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">add_stylesheet</span><span class="p">(</span><span class="n">cssname</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39; done&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="setup"><a class="viewcode-back" href="../index.html#__init__.setup">[docs]</a><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Setup for Sphinx ext.&quot;&quot;&quot;</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1">:sphinxmark: </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_enable&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_div&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
