@@ -74,20 +74,21 @@ def watermark(app, env):
             imagepath = os.path.join(srcdir, imagefile)
             copy(imagepath, buildpath)
             logging.debug('Using default image: ' + imagefile)
-
         elif app.config.sphinxmark_image == 'text':
             imagefile = createimage(app, srcdir, buildpath)
             logging.debug('Image: ' + imagefile)
-
         else:
             imagefile = app.config.sphinxmark_image
+
             if app.config.html_static_path:
                 staticpath = app.config.html_static_path[0]
             else:
                 staticpath = '_static'
+
             logging.debug('static path: ' + staticpath)
             imagepath = os.path.join(staticpath, imagefile)
             logging.debug('Imagepath: ' + imagepath)
+
             if os.path.exists(imagepath) is False:
                 logging.error("Cannot find '%s'. Put watermark " +
                               "images in the '_static' directory or " +
