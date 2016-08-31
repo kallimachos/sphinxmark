@@ -40,15 +40,14 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
-
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-# html_theme = 'alabaster'
+html_theme = 'alabaster'
 # html_theme = 'sphinx_rtd_theme'
-html_theme = 'openstackdocs'
+# html_theme = 'openstackdocs'
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = [openstackdocstheme.get_html_theme_path()]
@@ -63,8 +62,8 @@ htmlhelp_basename = 'testmarkdoc'
 
 # Options for sphinxmark
 sphinxmark_enable = True
-sphinxmark_div = 'docs-body'
-sphinxmark_image = 'new.png'
+sphinxmark_div = 'default'
+sphinxmark_image = 'default'
 sphinxmark_text = 'Mitaka'
 sphinxmark_text_color = (255, 0, 0)
 sphinxmark_text_size = 100
