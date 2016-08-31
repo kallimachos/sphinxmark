@@ -14,21 +14,6 @@ from PIL import Image, ImageDraw, ImageFont
 from shutil import copy
 
 
-def setstatic(app):
-    """Set the static path."""
-    staticpath = app.config.html_static_path
-    logging.debug('html_static_path: ' + str(staticpath))
-
-    if not staticpath:
-        logging.debug('html_static_path not set. Using _static/')
-        app.config.html_static_path.append('_static')
-
-    staticpath = os.path.join(app.confdir, app.config.html_static_path[0])
-    logging.debug('static path: ' + staticpath)
-
-    return(staticpath)
-
-
 def createimage(app, srcdir, buildpath):
     """Create PNG image from string."""
     text = app.config.sphinxmark_text
@@ -57,14 +42,12 @@ def createimage(app, srcdir, buildpath):
     img.putalpha(app.config.sphinxmark_text_opacity)
 
     # save image
-    imagename = 'textmark_' + text + '.png'
+    imagefile = 'textmark_' + text + '.png'
+    imagepath = os.path.join(buildpath, imagefile)
+    img.save(imagepath, 'PNG')
+    logging.debug('Image saved to: ' + imagepath)
 
-    imagefile = os.path.join(buildpath, imagename)
-    logging.debug('imagefile: ' + imagename)
-    img.save(imagefile, 'PNG')
-    logging.debug('Image saved to: ' + imagefile)
-
-    return(imagename)
+    return(imagefile)
 
 
 def watermark(app, env):
@@ -78,7 +61,8 @@ def watermark(app, env):
         # append source directory to TEMPLATE_PATH so template is found
         srcdir = os.path.abspath(os.path.dirname(__file__))
         TEMPLATE_PATH.append(srcdir)
-        buildpath = os.path.join(app.outdir, 'sphinxmark')
+        staticbase = '_static'
+        buildpath = os.path.join(app.outdir, staticbase)
         try:
             os.makedirs(buildpath)
         except OSError:
@@ -86,10 +70,9 @@ def watermark(app, env):
                 raise
 
         if app.config.sphinxmark_image == 'default':
-            draftimage = 'watermark-draft.png'
-            imagefile = os.path.join(srcdir, draftimage)
-            copy(imagefile, buildpath)
-            imagefile = os.path.join(buildpath, draftimage)
+            imagefile = 'watermark-draft.png'
+            imagepath = os.path.join(srcdir, imagefile)
+            copy(imagepath, buildpath)
             logging.debug('Using default image: ' + imagefile)
 
         elif app.config.sphinxmark_image == 'text':
@@ -97,14 +80,19 @@ def watermark(app, env):
             logging.debug('Image: ' + imagefile)
 
         else:
-            staticpath = setstatic(app)
-            image = app.config.sphinxmark_image
-            logging.debug('Image: ' + image)
-            imagefile = os.path.join(staticpath, image)
-            logging.debug('Imagefile: ' + imagefile)
-            if os.path.exists(imagefile) is False:
-                logging.error("Cannot find '%s'. Put watermark images in '%s'",
-                              image, staticpath)
+            imagefile = app.config.sphinxmark_image
+            if app.config.html_static_path:
+                staticpath = app.config.html_static_path[0]
+            else:
+                staticpath = '_static'
+            logging.debug('static path: ' + staticpath)
+            imagepath = os.path.join(staticpath, imagefile)
+            logging.debug('Imagepath: ' + imagepath)
+            if os.path.exists(imagepath) is False:
+                logging.error("Cannot find '%s'. Put watermark " +
+                              "images in the '_static' directory or " +
+                              "specify the location using 'html_static_path'.",
+                              imagefile)
 
         if app.config.sphinxmark_div == 'default':
             div = 'body'
@@ -113,17 +101,18 @@ def watermark(app, env):
 
         css = template('watermark', div=div, image=imagefile)
         logging.debug("Template: " + css)
-        cssfile = os.path.abspath(os.path.join(buildpath, 'temp.css'))
+        cssname = 'sphinxmark.css'
+        cssfile = os.path.join(buildpath, cssname)
 
         with open(cssfile, 'w') as f:
             f.write(css)
-        app.add_stylesheet(cssfile)
+        app.add_stylesheet(cssname)
         app.info(' done')
 
 
 def setup(app):
     """Setup for Sphinx ext."""
-    logging.basicConfig(format='%(levelname)s:sphinxmark: %(message)s')
+    logging.basicConfig(format='%(levelname)s: %(message)s')
     try:
         app.add_config_value('sphinxmark_enable', False, 'html')
         app.add_config_value('sphinxmark_div', 'default', 'html')
