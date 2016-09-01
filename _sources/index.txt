@@ -118,7 +118,7 @@ sphinxmark_text_opacity (int)
 Troubleshooting
 ~~~~~~~~~~~~~~~
 You can enable debugging output for sphinxmark by raising the output verbosity
-level >= 2 by passing the ``-vv`` option on the command line.
+level >= 2. Pass the ``-vv`` option on the command line.
 
 Example:
 
