@@ -6,7 +6,6 @@ A Sphinx extension that enables watermarks for HTML output.
 https://github.com/kallimachos/sphinxmark
 """
 
-import logging
 import os
 
 from bottle import TEMPLATE_PATH, template
@@ -30,7 +29,7 @@ def createimage(app, srcdir, buildpath):
 
     # set x y location for text
     xsize, ysize = d.textsize(text, font)
-    logging.debug('x = ' + str(xsize) + '\ny = ' + str(ysize))
+    app.debug('[sphinxmark] x = ' + str(xsize) + '\ny = ' + str(ysize))
     x = (width / 2) - (xsize / 2)
     y = 20
 
@@ -45,16 +44,13 @@ def createimage(app, srcdir, buildpath):
     imagefile = 'textmark_' + text + '.png'
     imagepath = os.path.join(buildpath, imagefile)
     img.save(imagepath, 'PNG')
-    logging.debug('Image saved to: ' + imagepath)
+    app.debug('[sphinxmark] Image saved to: ' + imagepath)
 
     return(imagefile)
 
 
 def watermark(app, env):
     """Add watermark."""
-    if app.config.sphinxmark_debug is True:
-        logging.basicConfig(level=logging.DEBUG)
-
     app.info('adding watermark...', nonl=True)
 
     if app.config.sphinxmark_enable is True:
@@ -73,10 +69,10 @@ def watermark(app, env):
             imagefile = 'watermark-draft.png'
             imagepath = os.path.join(srcdir, imagefile)
             copy(imagepath, buildpath)
-            logging.debug('Using default image: ' + imagefile)
+            app.debug('[sphinxmark] Using default image: ' + imagefile)
         elif app.config.sphinxmark_image == 'text':
             imagefile = createimage(app, srcdir, buildpath)
-            logging.debug('Image: ' + imagefile)
+            app.debug('[sphinxmark] Image: ' + imagefile)
         else:
             imagefile = app.config.sphinxmark_image
 
@@ -85,15 +81,19 @@ def watermark(app, env):
             else:
                 staticpath = '_static'
 
-            logging.debug('static path: ' + staticpath)
-            imagepath = os.path.join(staticpath, imagefile)
-            logging.debug('Imagepath: ' + imagepath)
+            app.debug('[sphinxmark] static path: ' + staticpath)
+            imagepath = os.path.join(app.confdir, staticpath, imagefile)
+            app.debug('[sphinxmark] Imagepath: ' + imagepath)
 
-            if os.path.exists(imagepath) is False:
-                logging.error("Cannot find '%s'. Put watermark " +
-                              "images in the '_static' directory or " +
-                              "specify the location using 'html_static_path'.",
-                              imagefile)
+            try:
+                copy(imagepath, buildpath)
+            except:
+                message = ("Cannot find '" + imagefile + "'. Put watermark " +
+                           "images in the '_static' directory or " +
+                           "specify the location using 'html_static_path'.")
+                app.warn(message)
+                app.warn('Failed to add watermark.')
+                return
 
         if app.config.sphinxmark_div == 'default':
             div = 'body'
@@ -101,7 +101,7 @@ def watermark(app, env):
             div = app.config.sphinxmark_div
 
         css = template('watermark', div=div, image=imagefile)
-        logging.debug("Template: " + css)
+        app.debug('[sphinxmark] Template: ' + css)
         cssname = 'sphinxmark.css'
         cssfile = os.path.join(buildpath, cssname)
 
@@ -113,7 +113,6 @@ def watermark(app, env):
 
 def setup(app):
     """Setup for Sphinx ext."""
-    logging.basicConfig(format='%(levelname)s: %(message)s')
     try:
         app.add_config_value('sphinxmark_enable', False, 'html')
         app.add_config_value('sphinxmark_div', 'default', 'html')
@@ -122,10 +121,9 @@ def setup(app):
         app.add_config_value('sphinxmark_text_color', (255, 0, 0), 'html')
         app.add_config_value('sphinxmark_text_size', 100, 'html')
         app.add_config_value('sphinxmark_text_opacity', 40, 'html')
-        app.add_config_value('sphinxmark_debug', False, 'html')
         app.connect('env-updated', watermark)
     except:
-        logging.error('Failed to add watermark.')
+        app.warn('Failed to add watermark.')
     return {'version': '0.1'}
 
 

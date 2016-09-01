@@ -114,13 +114,15 @@ sphinxmark_text_opacity (int)
 
      ``sphinxmark_text_opacity = 40``
 
-sphinxmark_debug (bool)
-   - ``True`` - enable debug level logging
-   - ``False`` - disable debug level logging
-   - Default = False
-   - Example:
 
-     ``sphinxmark_debug = True``
+Troubleshooting
+~~~~~~~~~~~~~~~
+You can enable debugging output for sphinxmark by raising the output verbosity
+level >= 2 by passing the ``-vv`` option on the command line.
+
+Example:
+
+   ``sphinx-build -vv -b html sourcedir buildir``
 
 
 Source code

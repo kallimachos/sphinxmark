@@ -62,10 +62,9 @@ htmlhelp_basename = 'testmarkdoc'
 
 # Options for sphinxmark
 sphinxmark_enable = True
-sphinxmark_div = 'default'
-sphinxmark_image = 'default'
-sphinxmark_text = 'Mitaka'
-sphinxmark_text_color = (255, 0, 0)
-sphinxmark_text_size = 100
-sphinxmark_text_opacity = 40
-sphinxmark_debug = False
+# sphinxmark_div = 'default'
+# sphinxmark_image = 'new.png'
+# sphinxmark_text = 'default'
+# sphinxmark_text_color = (255, 0, 0)
+# sphinxmark_text_size = 100
+# sphinxmark_text_opacity = 40

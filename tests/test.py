@@ -3,117 +3,144 @@
 """Sphinxmark test file."""
 
 from pytest import mark
-from sphinx_testing import TestApp
+from sphinx_testing import TestApp as MakeApp  # rename to prevent warning
 
 xfail = mark.xfail
+
+# defaults = {'sphinxmark_enable': True,
+#             'sphinxmark_div': 'default',
+#             'sphinxmark_image': 'default',
+#             'sphinxmark_text': 'default',
+#             'sphinxmark_text_color': (255, 0, 0),
+#             'sphinxmark_text_size': 100,
+#             'sphinxmark_text_opacity': 40}
+
+htmlfile = 'index.html'
+htmlresult = ('<link rel="stylesheet" ' +
+              'href="_static/sphinxmark.css" type="text/css" />')
+cssfile = '_static/sphinxmark.css'
 
 
 def test_defaults():
     """Test defaults."""
-    app = TestApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True)
+    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True)
     app.builder.build_all()
-    html = (app.outdir / 'index.html').read_text()
-    css = (app.outdir / '_static/sphinxmark.css').read_text()
-    assert ('<link rel="stylesheet" ' +
-            'href="_static/sphinxmark.css" type="text/css" />') in html
+    assert app.config.sphinxmark_div == 'default'
+    assert app.config.sphinxmark_image == 'default'
+    assert app.config.sphinxmark_text == 'default'
+    assert app.config.sphinxmark_text_color == (255, 0, 0)
+    assert app.config.sphinxmark_text_size == 100
+    assert app.config.sphinxmark_text_opacity == 40
+
+    html = (app.outdir / htmlfile).read_text()
+    assert htmlresult in html
+
+    css = (app.outdir / cssfile).read_text()
     assert ('url("watermark-draft.png")') in css
 
 
 def test_textmark():
     """Test textmark."""
-    app = TestApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
+    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
                   confoverrides={'sphinxmark_image': 'text',
                                  'sphinxmark_text': 'Mitaka'})
     app.builder.build_all()
-    html = (app.outdir / 'index.html').read_text()
-    css = (app.outdir / '_static/sphinxmark.css').read_text()
-    assert ('<link rel="stylesheet" ' +
-            'href="_static/sphinxmark.css" type="text/css" />') in html
+    assert app.config.sphinxmark_image == 'text'
+    assert app.config.sphinxmark_text == 'Mitaka'
+
+    html = (app.outdir / htmlfile).read_text()
+    assert htmlresult in html
+
+    css = (app.outdir / cssfile).read_text()
     assert ('url("textmark_Mitaka.png")') in css
 
 
 def test_image():
     """Test image."""
-    app = TestApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
-                  confoverrides={'sphinxmark_image': 'new.png'})
+    image = 'new.png'
+    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
+                  confoverrides={'sphinxmark_image': image})
     app.builder.build_all()
-    html = (app.outdir / 'index.html').read_text()
-    css = (app.outdir / '_static/sphinxmark.css').read_text()
-    assert ('<link rel="stylesheet" ' +
-            'href="_static/sphinxmark.css" type="text/css" />') in html
-    assert ('url("new.png")') in css
+    assert app.config.sphinxmark_image == image
+
+    html = (app.outdir / htmlfile).read_text()
+    assert htmlresult in html
+
+    css = (app.outdir / cssfile).read_text()
+    cssresult = 'url("%s")' % image
+    assert cssresult in css
 
 
-@xfail
-def test_imagefail(capsys):
-    """Test image."""
+@xfail(raises=IOError)
+def test_imagefail():
+    """Test image not found."""
     # ------------------ THIS SHOULD FAIL ------------------
-    app = TestApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
-                  confoverrides={'sphinxmark_image': 'fail.png'})
+    image = 'fail.png'
+    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
+                  confoverrides={'sphinxmark_image': image})
     app.builder.build_all()
-    html = (app.outdir / 'index.html').read_text()
-    css = (app.outdir / '_static/sphinxmark.css').read_text()
-    assert ('<link rel="stylesheet" ' +
-            'href="_static/sphinxmark.css" type="text/css" />') in html
-    assert ('url("fail.png")') in css
-    out, err = capsys.readouterr()
-    assert err == 'hello'
+    assert app.config.sphinxmark_image == image
+
+    html = (app.outdir / htmlfile).read_text()
+    assert htmlresult in html
+
+    css = (app.outdir / cssfile).read_text()
+    cssresult = 'url("%s")' % image
+    assert cssresult in css
 
 
-def test_myoutput(capsys):
-    """Temp test function for error streams."""
-    print("hello")
-    import sys
-    sys.stderr.write("world\n")
-    out, err = capsys.readouterr()
-    assert out == "hello\n"
-    assert err == "world\n"
-    print("next")
-    out, err = capsys.readouterr()
-    assert out == "next\n"
-
-
-@xfail
-def test_imagefail2():
-    """Test image."""
-    # ------------------ THIS SHOULD FAIL ------------------
-    app = TestApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
-                  confoverrides={'sphinxmark_image': 'fail.png'})
-    app.builder.build_all()
-    html = (app.outdir / 'index.html').read_text()
-    css = (app.outdir / '_static/sphinxmark.css').read_text()
-    assert ('<link rel="stylesheet" ' +
-            'href="_static/sphinxmark.css" type="text/css" />') in html
-    assert ('url("bob.png")') in css
-
-
-@xfail
 def test_static():
     """Test static."""
-    # ------------------ THIS SHOULD FAIL ------------------
-    app = TestApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
-                  confoverrides={'html_static_path': ['static'],
-                                 'sphinxmark_image': 'new.png'})
+    image = 'sample.png'
+    htmlpath = ['static']
+    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
+                  confoverrides={'sphinxmark_image': image,
+                                 'html_static_path': htmlpath})
     app.builder.build_all()
-    html = (app.outdir / 'index.html').read_text()
-    css = (app.outdir / '_static/sphinxmark.css').read_text()
-    assert ('<link rel="stylesheet" ' +
-            'href="_static/sphinxmark.css" type="text/css" />') in html
-    assert ('url("new.png")') in css
+    assert app.config.sphinxmark_image == image
+    assert app.config.html_static_path == htmlpath
+
+    html = (app.outdir / htmlfile).read_text()
+    assert htmlresult in html
+
+    css = (app.outdir / cssfile).read_text()
+    cssresult = 'url("%s")' % image
+    assert cssresult in css
 
 
-@xfail
+@xfail(raises=IOError)
+def test_staticfail():
+    """Test static not found."""
+    # ------------------ THIS SHOULD FAIL ------------------
+    image = 'new.png'
+    htmlpath = ['static']
+    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
+                  confoverrides={'sphinxmark_image': image,
+                                 'html_static_path': htmlpath})
+    app.builder.build_all()
+    assert app.config.sphinxmark_image == image
+    assert app.config.html_static_path == htmlpath
+
+    html = (app.outdir / htmlfile).read_text()
+    assert htmlresult in html
+
+    css = (app.outdir / cssfile).read_text()
+    cssresult = 'url("%s")' % image
+    assert cssresult in css
+
+
 def test_div():
     """Test div."""
-    # ------------------ THIS SHOULD FAIL ------------------
-    app = TestApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
-                  confoverrides={'sphinxmark_div': 'docs-body'})
+    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
+                  confoverrides={'sphinxmark_div': 'body-test'})
     app.builder.build_all()
-    html = (app.outdir / 'index.html').read_text()
-    css = (app.outdir / '_static/sphinxmark.css').read_text()
-    assert ('<link rel="stylesheet" ' +
-            'href="_static/sphinxmark.css" type="text/css" />') in html
-    assert ('url("watermark-draft.png")') in css
+    assert app.config.sphinxmark_div == 'body-test'
+
+    html = (app.outdir / htmlfile).read_text()
+    assert htmlresult in html
+
+    css = (app.outdir / cssfile).read_text()
+    assert ('div.body-test') in css
 
 
 if __name__ == '__main__':
