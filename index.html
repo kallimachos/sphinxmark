@@ -81,6 +81,7 @@
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 <li><a class="reference internal" href="#module-__init__">Source code</a></li>
 </ul>
 </li>
@@ -263,20 +264,15 @@ specify the div using the <code class="docutils literal"><span class="pre">sphin
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_debug (bool)</dt>
-<dd><ul class="first last">
-<li><p class="first"><code class="docutils literal"><span class="pre">True</span></code> - enable debug level logging</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">False</span></code> - disable debug level logging</p>
-</li>
-<li><p class="first">Default = False</p>
-</li>
-<li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">sphinxmark_debug</span> <span class="pre">=</span> <span class="pre">True</span></code></p>
-</li>
-</ul>
-</dd>
 </dl>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>You can enable debugging output for sphinxmark by raising the output verbosity
+level &gt;= 2 by passing the <code class="docutils literal"><span class="pre">-vv</span></code> option on the command line.</p>
+<p>Example:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">sphinx-build</span> <span class="pre">-vv</span> <span class="pre">-b</span> <span class="pre">html</span> <span class="pre">sourcedir</span> <span class="pre">buildir</span></code></div></blockquote>
 </div>
 <div class="section" id="module-__init__">
 <span id="source-code"></span><h2>Source code<a class="headerlink" href="#module-__init__" title="Permalink to this headline">¶</a></h2>
