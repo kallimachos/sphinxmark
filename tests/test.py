@@ -9,6 +9,7 @@ xfail = mark.xfail
 
 # defaults = {'sphinxmark_enable': True,
 #             'sphinxmark_div': 'default',
+#             'sphinxmark_repeat': True,
 #             'sphinxmark_image': 'default',
 #             'sphinxmark_text': 'default',
 #             'sphinxmark_text_color': (255, 0, 0),
@@ -27,6 +28,7 @@ def test_defaults():
     app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True)
     app.builder.build_all()
     assert app.config.sphinxmark_div == 'default'
+    assert app.config.sphinxmark_repeat is True
     assert app.config.sphinxmark_image == 'default'
     assert app.config.sphinxmark_text == 'default'
     assert app.config.sphinxmark_text_color == (255, 0, 0)
@@ -39,6 +41,33 @@ def test_defaults():
 
     css = (app.outdir / cssfile).read_text()
     assert ('url("watermark-draft.png")') in css
+
+
+def test_repeat():
+    """Text repeat."""
+    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True)
+    app.builder.build_all()
+    assert app.config.sphinxmark_repeat is True
+
+    html = (app.outdir / htmlfile).read_text()
+    assert htmlresult in html
+
+    css = (app.outdir / cssfile).read_text()
+    assert ('background-repeat: repeat-y !important;') in css
+
+
+def test_no_repeat():
+    """Text no repeat."""
+    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
+                  confoverrides={'sphinxmark_repeat': False})
+    app.builder.build_all()
+    assert app.config.sphinxmark_repeat is False
+
+    html = (app.outdir / htmlfile).read_text()
+    assert htmlresult in html
+
+    css = (app.outdir / cssfile).read_text()
+    assert ('background-repeat: no-repeat !important;') in css
 
 
 def test_textmark():
