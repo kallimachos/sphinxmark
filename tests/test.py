@@ -13,7 +13,8 @@ xfail = mark.xfail
 #             'sphinxmark_text': 'default',
 #             'sphinxmark_text_color': (255, 0, 0),
 #             'sphinxmark_text_size': 100,
-#             'sphinxmark_text_opacity': 40}
+#             'sphinxmark_text_opacity': 20
+#             'sphinxmark_text_spacing': 400}
 
 htmlfile = 'index.html'
 htmlresult = ('<link rel="stylesheet" ' +
@@ -30,7 +31,8 @@ def test_defaults():
     assert app.config.sphinxmark_text == 'default'
     assert app.config.sphinxmark_text_color == (255, 0, 0)
     assert app.config.sphinxmark_text_size == 100
-    assert app.config.sphinxmark_text_opacity == 40
+    assert app.config.sphinxmark_text_opacity == 20
+    assert app.config.sphinxmark_text_spacing == 400
 
     html = (app.outdir / htmlfile).read_text()
     assert htmlresult in html

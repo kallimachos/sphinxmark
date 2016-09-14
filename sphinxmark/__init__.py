@@ -19,7 +19,7 @@ def createimage(app, srcdir, buildpath):
 
     # draw transparent background
     width = 400
-    height = 300
+    height = app.config.sphinxmark_text_spacing
     img = Image.new('RGBA', (width, height), (255, 255, 255, 0))
     d = ImageDraw.Draw(img)
 
@@ -31,7 +31,7 @@ def createimage(app, srcdir, buildpath):
     xsize, ysize = d.textsize(text, font)
     app.debug('[sphinxmark] x = ' + str(xsize) + '\ny = ' + str(ysize))
     x = (width / 2) - (xsize / 2)
-    y = 20
+    y = 50
 
     # add text to image
     color = app.config.sphinxmark_text_color
@@ -120,7 +120,8 @@ def setup(app):
         app.add_config_value('sphinxmark_text', 'default', 'html')
         app.add_config_value('sphinxmark_text_color', (255, 0, 0), 'html')
         app.add_config_value('sphinxmark_text_size', 100, 'html')
-        app.add_config_value('sphinxmark_text_opacity', 40, 'html')
+        app.add_config_value('sphinxmark_text_opacity', 20, 'html')
+        app.add_config_value('sphinxmark_text_spacing', 400, 'html')
         app.connect('env-updated', watermark)
     except:
         app.warn('Failed to add watermark.')

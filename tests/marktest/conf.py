@@ -63,8 +63,9 @@ htmlhelp_basename = 'testmarkdoc'
 # Options for sphinxmark
 sphinxmark_enable = True
 # sphinxmark_div = 'default'
-# sphinxmark_image = 'new.png'
+# sphinxmark_image = 'default'
 # sphinxmark_text = 'default'
 # sphinxmark_text_color = (255, 0, 0)
 # sphinxmark_text_size = 100
-# sphinxmark_text_opacity = 40
+# sphinxmark_text_opacity = 20
+# sphinxmark_text_spacing = 400
