@@ -119,11 +119,17 @@ sphinxmark_text_color (tuple)
 
 sphinxmark_text_opacity (int)
    - Opacity (RGB Alpha) for text specified in ``sphinxmark_text``
-   - Default = 40
+   - Default = 20
    - Example:
 
-     ``sphinxmark_text_opacity = 40``
+     ``sphinxmark_text_opacity = 20``
 
+sphinxmark_text_spacing (int)
+   - Set spacing between text watermarks
+   - Default = 400
+   - Example:
+
+      ``sphinxmark_text_spacing = 400``
 
 Troubleshooting
 ~~~~~~~~~~~~~~~
