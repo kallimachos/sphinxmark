@@ -4,7 +4,9 @@
 __pycache__/
 MANIFEST
 .coverage
+build/
 _build/
+dist/
 temp.css
 textmark_*
 sphinxmark.egg-info/
