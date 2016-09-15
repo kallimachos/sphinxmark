@@ -13,6 +13,39 @@ from PIL import Image, ImageDraw, ImageFont
 from shutil import copy
 
 
+def buildcss(app, buildpath, imagefile):
+    """Create CSS file."""
+    # set default values
+    div = 'body'
+    repeat = 'repeat-y'
+    position = 'center'
+    attachment = 'scroll'
+
+    if app.config.sphinxmark_div != 'default':
+        div = app.config.sphinxmark_div
+
+    if app.config.sphinxmark_repeat is False:
+        repeat = 'no-repeat'
+
+    if app.config.sphinxmark_fixed is True:
+        attachment = 'fixed'
+
+    border = app.config.sphinxmark_border
+    if border == 'left' or border == 'right':
+        css = template('border', div=div, image=imagefile, side=border)
+    else:
+        css = template('watermark', div=div, image=imagefile, repeat=repeat,
+                       position=position, attachment=attachment)
+    app.debug('[sphinxmark] Template: ' + css)
+    cssname = 'sphinxmark.css'
+    cssfile = os.path.join(buildpath, cssname)
+
+    with open(cssfile, 'w') as f:
+        f.write(css)
+
+    return(cssname)
+
+
 def createimage(app, srcdir, buildpath):
     """Create PNG image from string."""
     text = app.config.sphinxmark_text
@@ -31,7 +64,7 @@ def createimage(app, srcdir, buildpath):
     xsize, ysize = d.textsize(text, font)
     app.debug('[sphinxmark] x = ' + str(xsize) + '\ny = ' + str(ysize))
     x = (width / 2) - (xsize / 2)
-    y = 50
+    y = (height / 2) - (ysize / 2)
 
     # add text to image
     color = app.config.sphinxmark_text_color
@@ -39,6 +72,9 @@ def createimage(app, srcdir, buildpath):
 
     # set opacity
     img.putalpha(app.config.sphinxmark_text_opacity)
+
+    # rotate image
+    img = img.rotate(app.config.sphinxmark_text_rotation)
 
     # save image
     imagefile = 'textmark_' + text + '.png'
@@ -49,69 +85,58 @@ def createimage(app, srcdir, buildpath):
     return(imagefile)
 
 
+def getimage(app, env):
+    """Get image file."""
+    # append source directory to TEMPLATE_PATH so template is found
+    srcdir = os.path.abspath(os.path.dirname(__file__))
+    TEMPLATE_PATH.append(srcdir)
+    staticbase = '_static'
+    buildpath = os.path.join(app.outdir, staticbase)
+    try:
+        os.makedirs(buildpath)
+    except OSError:
+        if not os.path.isdir(buildpath):
+            raise
+
+    if app.config.sphinxmark_image == 'default':
+        imagefile = 'watermark-draft.png'
+        imagepath = os.path.join(srcdir, imagefile)
+        copy(imagepath, buildpath)
+        app.debug('[sphinxmark] Using default image: ' + imagefile)
+    elif app.config.sphinxmark_image == 'text':
+        imagefile = createimage(app, srcdir, buildpath)
+        app.debug('[sphinxmark] Image: ' + imagefile)
+    else:
+        imagefile = app.config.sphinxmark_image
+
+        if app.config.html_static_path:
+            staticpath = app.config.html_static_path[0]
+        else:
+            staticpath = '_static'
+
+        app.debug('[sphinxmark] static path: ' + staticpath)
+        imagepath = os.path.join(app.confdir, staticpath, imagefile)
+        app.debug('[sphinxmark] Imagepath: ' + imagepath)
+
+        try:
+            copy(imagepath, buildpath)
+        except:
+            message = ("Cannot find '" + imagefile + "'. Put watermark " +
+                       "images in the '_static' directory or " +
+                       "specify the location using 'html_static_path'.")
+            app.warn(message)
+            app.warn('Failed to add watermark.')
+            return
+
+    return(buildpath, imagefile)
+
+
 def watermark(app, env):
     """Add watermark."""
-    app.info('adding watermark...', nonl=True)
-
     if app.config.sphinxmark_enable is True:
-        # append source directory to TEMPLATE_PATH so template is found
-        srcdir = os.path.abspath(os.path.dirname(__file__))
-        TEMPLATE_PATH.append(srcdir)
-        staticbase = '_static'
-        buildpath = os.path.join(app.outdir, staticbase)
-        try:
-            os.makedirs(buildpath)
-        except OSError:
-            if not os.path.isdir(buildpath):
-                raise
-
-        if app.config.sphinxmark_image == 'default':
-            imagefile = 'watermark-draft.png'
-            imagepath = os.path.join(srcdir, imagefile)
-            copy(imagepath, buildpath)
-            app.debug('[sphinxmark] Using default image: ' + imagefile)
-        elif app.config.sphinxmark_image == 'text':
-            imagefile = createimage(app, srcdir, buildpath)
-            app.debug('[sphinxmark] Image: ' + imagefile)
-        else:
-            imagefile = app.config.sphinxmark_image
-
-            if app.config.html_static_path:
-                staticpath = app.config.html_static_path[0]
-            else:
-                staticpath = '_static'
-
-            app.debug('[sphinxmark] static path: ' + staticpath)
-            imagepath = os.path.join(app.confdir, staticpath, imagefile)
-            app.debug('[sphinxmark] Imagepath: ' + imagepath)
-
-            try:
-                copy(imagepath, buildpath)
-            except:
-                message = ("Cannot find '" + imagefile + "'. Put watermark " +
-                           "images in the '_static' directory or " +
-                           "specify the location using 'html_static_path'.")
-                app.warn(message)
-                app.warn('Failed to add watermark.')
-                return
-
-        if app.config.sphinxmark_div == 'default':
-            div = 'body'
-        else:
-            div = app.config.sphinxmark_div
-
-        if app.config.sphinxmark_repeat is True:
-            repeat = 'repeat-y'
-        else:
-            repeat = 'no-repeat'
-
-        css = template('watermark', div=div, image=imagefile, repeat=repeat)
-        app.debug('[sphinxmark] Template: ' + css)
-        cssname = 'sphinxmark.css'
-        cssfile = os.path.join(buildpath, cssname)
-
-        with open(cssfile, 'w') as f:
-            f.write(css)
+        app.info('adding watermark...', nonl=True)
+        buildpath, imagefile = getimage(app, env)
+        cssname = buildcss(app, buildpath, imagefile)
         app.add_stylesheet(cssname)
         app.info(' done')
 
@@ -121,13 +146,16 @@ def setup(app):
     try:
         app.add_config_value('sphinxmark_enable', False, 'html')
         app.add_config_value('sphinxmark_div', 'default', 'html')
+        app.add_config_value('sphinxmark_border', None, 'html')
         app.add_config_value('sphinxmark_repeat', True, 'html')
+        app.add_config_value('sphinxmark_fixed', False, 'html')
         app.add_config_value('sphinxmark_image', 'default', 'html')
         app.add_config_value('sphinxmark_text', 'default', 'html')
         app.add_config_value('sphinxmark_text_color', (255, 0, 0), 'html')
         app.add_config_value('sphinxmark_text_size', 100, 'html')
         app.add_config_value('sphinxmark_text_opacity', 20, 'html')
         app.add_config_value('sphinxmark_text_spacing', 400, 'html')
+        app.add_config_value('sphinxmark_text_rotation', 0, 'html')
         app.connect('env-updated', watermark)
     except:
         app.warn('Failed to add watermark.')

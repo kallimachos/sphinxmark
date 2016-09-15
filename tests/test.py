@@ -9,13 +9,16 @@ xfail = mark.xfail
 
 # defaults = {'sphinxmark_enable': True,
 #             'sphinxmark_div': 'default',
+#             'sphinxmark_border': None,
 #             'sphinxmark_repeat': True,
+#             'sphinxmark_fixed': False,
 #             'sphinxmark_image': 'default',
 #             'sphinxmark_text': 'default',
 #             'sphinxmark_text_color': (255, 0, 0),
 #             'sphinxmark_text_size': 100,
-#             'sphinxmark_text_opacity': 20
-#             'sphinxmark_text_spacing': 400}
+#             'sphinxmark_text_opacity': 20,
+#             'sphinxmark_text_spacing': 400,
+#             'sphinxmark_text_rotation': 0}
 
 htmlfile = 'index.html'
 htmlresult = ('<link rel="stylesheet" ' +
@@ -29,18 +32,49 @@ def test_defaults():
     app.builder.build_all()
     assert app.config.sphinxmark_div == 'default'
     assert app.config.sphinxmark_repeat is True
+    assert app.config.sphinxmark_border is None
+    assert app.config.sphinxmark_fixed is False
     assert app.config.sphinxmark_image == 'default'
     assert app.config.sphinxmark_text == 'default'
     assert app.config.sphinxmark_text_color == (255, 0, 0)
     assert app.config.sphinxmark_text_size == 100
     assert app.config.sphinxmark_text_opacity == 20
     assert app.config.sphinxmark_text_spacing == 400
+    assert app.config.sphinxmark_text_rotation == 0
 
     html = (app.outdir / htmlfile).read_text()
     assert htmlresult in html
 
     css = (app.outdir / cssfile).read_text()
     assert ('url("watermark-draft.png")') in css
+
+
+def test_div():
+    """Test div."""
+    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
+                  confoverrides={'sphinxmark_div': 'body-test'})
+    app.builder.build_all()
+    assert app.config.sphinxmark_div == 'body-test'
+
+    html = (app.outdir / htmlfile).read_text()
+    assert htmlresult in html
+
+    css = (app.outdir / cssfile).read_text()
+    assert ('div.body-test') in css
+
+
+def test_border():
+    """Test border."""
+    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
+                  confoverrides={'sphinxmark_border': 'left'})
+    app.builder.build_all()
+    assert app.config.sphinxmark_border == 'left'
+
+    html = (app.outdir / htmlfile).read_text()
+    assert htmlresult in html
+
+    css = (app.outdir / cssfile).read_text()
+    assert ('border-left') in css
 
 
 def test_repeat():
@@ -70,20 +104,18 @@ def test_no_repeat():
     assert ('background-repeat: no-repeat !important;') in css
 
 
-def test_textmark():
-    """Test textmark."""
+def test_fixed():
+    """Test fixed."""
     app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
-                  confoverrides={'sphinxmark_image': 'text',
-                                 'sphinxmark_text': 'Mitaka'})
+                  confoverrides={'sphinxmark_fixed': True})
     app.builder.build_all()
-    assert app.config.sphinxmark_image == 'text'
-    assert app.config.sphinxmark_text == 'Mitaka'
+    assert app.config.sphinxmark_fixed is True
 
     html = (app.outdir / htmlfile).read_text()
     assert htmlresult in html
 
     css = (app.outdir / cssfile).read_text()
-    assert ('url("textmark_Mitaka.png")') in css
+    assert ('background-attachment: fixed') in css
 
 
 def test_image():
@@ -102,7 +134,7 @@ def test_image():
     assert cssresult in css
 
 
-@xfail(raises=IOError)
+@xfail(raises=TypeError)
 def test_imagefail():
     """Test image not found."""
     # ------------------ THIS SHOULD FAIL ------------------
@@ -118,6 +150,22 @@ def test_imagefail():
     css = (app.outdir / cssfile).read_text()
     cssresult = 'url("%s")' % image
     assert cssresult in css
+
+
+def test_textmark():
+    """Test textmark."""
+    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
+                  confoverrides={'sphinxmark_image': 'text',
+                                 'sphinxmark_text': 'Mitaka'})
+    app.builder.build_all()
+    assert app.config.sphinxmark_image == 'text'
+    assert app.config.sphinxmark_text == 'Mitaka'
+
+    html = (app.outdir / htmlfile).read_text()
+    assert htmlresult in html
+
+    css = (app.outdir / cssfile).read_text()
+    assert ('url("textmark_Mitaka.png")') in css
 
 
 def test_static():
@@ -139,7 +187,7 @@ def test_static():
     assert cssresult in css
 
 
-@xfail(raises=IOError)
+@xfail(raises=TypeError)
 def test_staticfail():
     """Test static not found."""
     # ------------------ THIS SHOULD FAIL ------------------
@@ -158,20 +206,6 @@ def test_staticfail():
     css = (app.outdir / cssfile).read_text()
     cssresult = 'url("%s")' % image
     assert cssresult in css
-
-
-def test_div():
-    """Test div."""
-    app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
-                  confoverrides={'sphinxmark_div': 'body-test'})
-    app.builder.build_all()
-    assert app.config.sphinxmark_div == 'body-test'
-
-    html = (app.outdir / htmlfile).read_text()
-    assert htmlresult in html
-
-    css = (app.outdir / cssfile).read_text()
-    assert ('div.body-test') in css
 
 
 if __name__ == '__main__':

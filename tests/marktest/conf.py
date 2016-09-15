@@ -62,11 +62,14 @@ htmlhelp_basename = 'testmarkdoc'
 
 # Options for sphinxmark
 sphinxmark_enable = True
-# sphinxmark_div = 'default'
-# sphinxmark_repeat = True
-# sphinxmark_image = 'default'
-# sphinxmark_text = 'default'
+# sphinxmark_div = 'docs-body'
+# sphinxmark_border = 'left'
+# sphinxmark_repeat = False
+# sphinxmark_fixed = True
+# sphinxmark_image = 'text'
+# sphinxmark_text = 'Mitaka'
 # sphinxmark_text_color = (255, 0, 0)
 # sphinxmark_text_size = 100
-# sphinxmark_text_opacity = 20
-# sphinxmark_text_spacing = 400
+# sphinxmark_text_opacity = 50
+# sphinxmark_text_spacing = 600
+# sphinxmark_text_rotation = 90
