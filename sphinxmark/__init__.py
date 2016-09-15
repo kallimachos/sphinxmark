@@ -100,7 +100,12 @@ def watermark(app, env):
         else:
             div = app.config.sphinxmark_div
 
-        css = template('watermark', div=div, image=imagefile)
+        if app.config.sphinxmark_repeat is True:
+            repeat = 'repeat-y'
+        else:
+            repeat = 'no-repeat'
+
+        css = template('watermark', div=div, image=imagefile, repeat=repeat)
         app.debug('[sphinxmark] Template: ' + css)
         cssname = 'sphinxmark.css'
         cssfile = os.path.join(buildpath, cssname)
@@ -116,6 +121,7 @@ def setup(app):
     try:
         app.add_config_value('sphinxmark_enable', False, 'html')
         app.add_config_value('sphinxmark_div', 'default', 'html')
+        app.add_config_value('sphinxmark_repeat', True, 'html')
         app.add_config_value('sphinxmark_image', 'default', 'html')
         app.add_config_value('sphinxmark_text', 'default', 'html')
         app.add_config_value('sphinxmark_text_color', (255, 0, 0), 'html')

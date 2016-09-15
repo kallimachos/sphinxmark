@@ -83,6 +83,13 @@ sphinxmark_div (string)
 
      openstackdocstheme -> ``sphinxmark_div = 'docs-body'``
 
+sphinxmark_repeat (bool)
+   - ``True`` - image repeats down the page
+   - ``False`` - image appears once at top of page
+   - Default = True
+
+      ``sphinxmark_repeat = True``
+
 sphinxmark_image (string)
    - image file in ``html_static_path`` directory to use as watermark
    - ``text`` selects the text-based watermark specified in the
@@ -130,6 +137,7 @@ sphinxmark_text_spacing (int)
    - Example:
 
       ``sphinxmark_text_spacing = 400``
+
 
 Troubleshooting
 ~~~~~~~~~~~~~~~

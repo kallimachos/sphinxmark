@@ -63,6 +63,7 @@ htmlhelp_basename = 'testmarkdoc'
 # Options for sphinxmark
 sphinxmark_enable = True
 # sphinxmark_div = 'default'
+# sphinxmark_repeat = True
 # sphinxmark_image = 'default'
 # sphinxmark_text = 'default'
 # sphinxmark_text_color = (255, 0, 0)
