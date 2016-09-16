@@ -83,12 +83,35 @@ sphinxmark_div (string)
 
      openstackdocstheme -> ``sphinxmark_div = 'docs-body'``
 
+sphinxmark_border (string)
+   - ``left`` - place watermark on left border
+   - ``right`` - place watermark on right border
+   - setting the ``sphinxmark_border`` option overrides the
+     ``sphinxmark_repeat`` and ``sphinxmark_fixed`` options.
+   - when using a text watermark, adjust the ``sphinxmark_text`` options
+     to achieve the desired appearance.
+   - Default = None
+   - Example:
+
+     ``sphinxmark_border = 'left'``
+
 sphinxmark_repeat (bool)
    - ``True`` - image repeats down the page
    - ``False`` - image appears once at top of page
    - Default = True
+   - Example:
 
-      ``sphinxmark_repeat = True``
+     ``sphinxmark_repeat = True``
+
+sphinxmark_fixed (bool)
+   - ``True`` - watermark does not scroll with content
+   - ``False`` - watermark scrolls with content
+   - This option centers the watermark in the viewport, not the div
+     specified by ``sphinxmark_div``.
+   - Default = False
+   - Example:
+
+     ``sphinxmark_fixed = False``
 
 sphinxmark_image (string)
    - image file in ``html_static_path`` directory to use as watermark
@@ -138,6 +161,12 @@ sphinxmark_text_spacing (int)
 
       ``sphinxmark_text_spacing = 400``
 
+sphinxmark_text_rotation (int)
+   - Text watermark rotation
+   - Default = 0
+   - Example:
+
+     ``sphinxmark_text_rotation = 90``
 
 Troubleshooting
 ~~~~~~~~~~~~~~~
