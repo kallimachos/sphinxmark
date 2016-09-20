@@ -106,8 +106,8 @@ sphinxmark_repeat (bool)
 sphinxmark_fixed (bool)
    - ``True`` - watermark does not scroll with content
    - ``False`` - watermark scrolls with content
-   - This option centers the watermark in the viewport, not the div
-     specified by ``sphinxmark_div``.
+   - When set to ``True``, this option centers the watermark in the viewport,
+     not the div specified by ``sphinxmark_div``.
    - Default = False
    - Example:
 
