@@ -35,7 +35,6 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.coverage',
     'sphinx.ext.viewcode',
-    'sphinx-prompt',
 ]
 
 if spelling is not None:
@@ -65,7 +64,7 @@ author = 'Brian Moss'
 # built documents.
 #
 # The short X.Y version.
-version = '0.1.12'
+version = '0.1.14'
 # The full version, including alpha/beta/rc tags.
 # release = 'beta'
 
