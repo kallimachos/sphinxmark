@@ -30,6 +30,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="sphinxmark  documentation" href="../index.html"/>
         <link rel="up" title="Module code" href="index.html"/> 
 
@@ -226,7 +229,7 @@
     <span class="k">return</span><span class="p">(</span><span class="n">imagefile</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="getimage"><a class="viewcode-back" href="../index.html#__init__.getimage">[docs]</a><span class="k">def</span> <span class="nf">getimage</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
+<div class="viewcode-block" id="getimage"><a class="viewcode-back" href="../index.html#__init__.getimage">[docs]</a><span class="k">def</span> <span class="nf">getimage</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get image file.&quot;&quot;&quot;</span>
     <span class="c1"># append source directory to TEMPLATE_PATH so template is found</span>
     <span class="n">srcdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
@@ -276,14 +279,18 @@
     <span class="sd">&quot;&quot;&quot;Add watermark.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_enable</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">app</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;adding watermark...&#39;</span><span class="p">,</span> <span class="n">nonl</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span> <span class="o">=</span> <span class="n">getimage</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span>
+        <span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span> <span class="o">=</span> <span class="n">getimage</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
         <span class="n">cssname</span> <span class="o">=</span> <span class="n">buildcss</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">add_stylesheet</span><span class="p">(</span><span class="n">cssname</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39; done&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="setup"><a class="viewcode-back" href="../index.html#__init__.setup">[docs]</a><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Setup for Sphinx ext.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Setup for Sphinx extension.</span>
+
+<span class="sd">    :param app: Sphinx application context.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_enable&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
         <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_div&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
