@@ -99,7 +99,7 @@ def createimage(app, srcdir, buildpath):
     return(imagefile)
 
 
-def getimage(app, env):
+def getimage(app):
     """Get image file."""
     # append source directory to TEMPLATE_PATH so template is found
     srcdir = os.path.abspath(os.path.dirname(__file__))
@@ -149,14 +149,18 @@ def watermark(app, env):
     """Add watermark."""
     if app.config.sphinxmark_enable is True:
         app.info('adding watermark...', nonl=True)
-        buildpath, imagefile = getimage(app, env)
+        buildpath, imagefile = getimage(app)
         cssname = buildcss(app, buildpath, imagefile)
         app.add_stylesheet(cssname)
         app.info(' done')
 
 
 def setup(app):
-    """Setup for Sphinx ext."""
+    """
+    Setup for Sphinx extension.
+
+    :param app: Sphinx application context.
+    """
     try:
         app.add_config_value('sphinxmark_enable', False, 'html')
         app.add_config_value('sphinxmark_div', 'default', 'html')
