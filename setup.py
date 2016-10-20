@@ -16,7 +16,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='sphinxmark',
-    version='0.1.14',
+    version='0.1.15',
     description='A Sphinx extension that enables watermarks for HTML output.',
     long_description=long_description,
     url='https://github.com/kallimachos/sphinxmark',
@@ -44,5 +44,8 @@ setup(
                        'watermark.tpl', 'arial.ttf'],
     },
 
-    install_requires=['bottle', 'Pillow'],
+    install_requires=[
+        'bottle<=0.12.10',
+        'Pillow<=3.4.1',
+    ],
 )
