@@ -57,19 +57,15 @@ Configure sphinxmark in your ``conf.py`` file.
       sphinxmark_text = 'Pre-Release'
       sphinxmark_text_size = 80
 
-.. important::
-
-   If you define ``html_context`` in your ``conf.py``, you must add the
-   ``bolditalic.css`` style sheet to it.
-
-   **Example**
+#. If you define ``html_context`` in your ``conf.py``, you must add the
+   ``sphinxmark.css`` style sheet to it.
 
    .. code::
 
       html_context = {
         'css_files': [
           '_static/bespoke.css',  # custom CSS styling
-          '_static/bolditalic.css',  # bolditalic styling
+          '_static/sphinxmark.css',  # watermark styling
           ],
         }
 
