@@ -181,21 +181,18 @@ to the <code class="docutils literal"><span class="pre">conf.py</span></code> fi
 </pre></div>
 </div>
 </li>
-</ol>
-<div class="admonition important">
-<p class="first admonition-title">Important</p>
-<p>If you define <code class="docutils literal"><span class="pre">html_context</span></code> in your <code class="docutils literal"><span class="pre">conf.py</span></code>, you must add the
-<code class="docutils literal"><span class="pre">bolditalic.css</span></code> style sheet to it.</p>
-<p><strong>Example</strong></p>
-<div class="code last highlight-default"><div class="highlight"><pre><span></span><span class="n">html_context</span> <span class="o">=</span> <span class="p">{</span>
+<li><p class="first">If you define <code class="docutils literal"><span class="pre">html_context</span></code> in your <code class="docutils literal"><span class="pre">conf.py</span></code>, you must add the
+<code class="docutils literal"><span class="pre">sphinxmark.css</span></code> style sheet to it.</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">html_context</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">&#39;css_files&#39;</span><span class="p">:</span> <span class="p">[</span>
     <span class="s1">&#39;_static/bespoke.css&#39;</span><span class="p">,</span>  <span class="c1"># custom CSS styling</span>
-    <span class="s1">&#39;_static/bolditalic.css&#39;</span><span class="p">,</span>  <span class="c1"># bolditalic styling</span>
+    <span class="s1">&#39;_static/sphinxmark.css&#39;</span><span class="p">,</span>  <span class="c1"># watermark styling</span>
     <span class="p">],</span>
   <span class="p">}</span>
 </pre></div>
 </div>
-</div>
+</li>
+</ol>
 </div>
 <div class="section" id="options">
 <h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
