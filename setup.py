@@ -46,6 +46,6 @@ setup(
 
     install_requires=[
         'bottle<=0.12.10',
-        'Pillow<=3.4.1',
+        'Pillow<3.5',
     ],
 )
