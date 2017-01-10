@@ -257,6 +257,25 @@ not the div specified by <code class="docutils literal"><span class="pre">sphinx
 </li>
 </ul>
 </dd>
+<dt>sphinxmark_text_width (int)</dt>
+<dd><ul class="first last">
+<li><p class="first">Width of transparent box containing text specified in <code class="docutils literal"><span class="pre">sphinxmark_text</span></code></p>
+</li>
+<li><p class="first">If a large <code class="docutils literal"><span class="pre">sphinxmark_text_size</span></code> is specified, or the
+<code class="docutils literal"><span class="pre">sphinxmark_text</span></code> string is long, you may need to set this option
+to a number higher than the default for the entire string to display. Note
+that the text will be cut off at the edge of the containing CSS div
+regardless of the <code class="docutils literal"><span class="pre">sphinxmark_text_width</span></code> setting.</p>
+</li>
+<li><p class="first">Default = 1000</p>
+</li>
+<li><p class="first">Example:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">sphinxmark_text_width</span> <span class="pre">=</span> <span class="pre">1000</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
 <dt>sphinxmark_text_color (tuple)</dt>
 <dd><ul class="first last">
 <li><p class="first">RGB color code for text specified in <code class="docutils literal"><span class="pre">sphinxmark_text</span></code>.</p>
