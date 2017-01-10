@@ -70,6 +70,7 @@ sphinxmark_enable = True
 # sphinxmark_text = 'Mitaka'
 # sphinxmark_text_color = (255, 0, 0)
 # sphinxmark_text_size = 100
+# sphinxmark_text_width = 1000
 # sphinxmark_text_opacity = 50
 # sphinxmark_text_spacing = 600
 # sphinxmark_text_rotation = 90

@@ -81,6 +81,18 @@ sphinxmark_text_size (int)
 
      ``sphinxmark_text_size = 100``
 
+sphinxmark_text_width (int)
+   - Width of transparent box containing text specified in ``sphinxmark_text``
+   - If a large ``sphinxmark_text_size`` is specified, or the
+     ``sphinxmark_text`` string is long, you may need to set this option
+     to a number higher than the default for the entire string to display. Note
+     that the text will be cut off at the edge of the containing CSS div
+     regardless of the ``sphinxmark_text_width`` setting.
+   - Default = 1000
+   - Example:
+
+      ``sphinxmark_text_width = 1000``
+
 sphinxmark_text_color (tuple)
    - RGB color code for text specified in ``sphinxmark_text``.
    - Default = (255, 0, 0)

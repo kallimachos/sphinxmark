@@ -16,6 +16,7 @@ xfail = mark.xfail
 #             'sphinxmark_text': 'default',
 #             'sphinxmark_text_color': (255, 0, 0),
 #             'sphinxmark_text_size': 100,
+#             'sphinxmark_text_width': 1000,
 #             'sphinxmark_text_opacity': 20,
 #             'sphinxmark_text_spacing': 400,
 #             'sphinxmark_text_rotation': 0}
@@ -38,6 +39,7 @@ def test_defaults():
     assert app.config.sphinxmark_text == 'default'
     assert app.config.sphinxmark_text_color == (255, 0, 0)
     assert app.config.sphinxmark_text_size == 100
+    assert app.config.sphinxmark_text_width == 1000
     assert app.config.sphinxmark_text_opacity == 20
     assert app.config.sphinxmark_text_spacing == 400
     assert app.config.sphinxmark_text_rotation == 0
