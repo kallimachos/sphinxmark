@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.16
+                0.1.17
               </div>
             
           
@@ -83,8 +83,15 @@
           
             
             
-                <!-- Local TOC -->
-                <div class="local-toc"></div>
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../options.html">Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../relnotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source.html">Source code</a></li>
+</ul>
+
             
           
         </div>
@@ -157,7 +164,7 @@
 <span class="kn">from</span> <span class="nn">shutil</span> <span class="k">import</span> <span class="n">copy</span>
 
 
-<div class="viewcode-block" id="buildcss"><a class="viewcode-back" href="../index.html#__init__.buildcss">[docs]</a><span class="k">def</span> <span class="nf">buildcss</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">):</span>
+<div class="viewcode-block" id="buildcss"><a class="viewcode-back" href="../source.html#__init__.buildcss">[docs]</a><span class="k">def</span> <span class="nf">buildcss</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Create CSS file.&quot;&quot;&quot;</span>
     <span class="c1"># set default values</span>
     <span class="n">div</span> <span class="o">=</span> <span class="s1">&#39;body&#39;</span>
@@ -190,7 +197,7 @@
     <span class="k">return</span><span class="p">(</span><span class="n">cssname</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="createimage"><a class="viewcode-back" href="../index.html#__init__.createimage">[docs]</a><span class="k">def</span> <span class="nf">createimage</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">srcdir</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">):</span>
+<div class="viewcode-block" id="createimage"><a class="viewcode-back" href="../source.html#__init__.createimage">[docs]</a><span class="k">def</span> <span class="nf">createimage</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">srcdir</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Create PNG image from string.&quot;&quot;&quot;</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_text</span>
 
@@ -229,7 +236,7 @@
     <span class="k">return</span><span class="p">(</span><span class="n">imagefile</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="getimage"><a class="viewcode-back" href="../index.html#__init__.getimage">[docs]</a><span class="k">def</span> <span class="nf">getimage</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+<div class="viewcode-block" id="getimage"><a class="viewcode-back" href="../source.html#__init__.getimage">[docs]</a><span class="k">def</span> <span class="nf">getimage</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get image file.&quot;&quot;&quot;</span>
     <span class="c1"># append source directory to TEMPLATE_PATH so template is found</span>
     <span class="n">srcdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
@@ -275,7 +282,7 @@
     <span class="k">return</span><span class="p">(</span><span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="watermark"><a class="viewcode-back" href="../index.html#__init__.watermark">[docs]</a><span class="k">def</span> <span class="nf">watermark</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
+<div class="viewcode-block" id="watermark"><a class="viewcode-back" href="../source.html#__init__.watermark">[docs]</a><span class="k">def</span> <span class="nf">watermark</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Add watermark.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_enable</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">app</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;adding watermark...&#39;</span><span class="p">,</span> <span class="n">nonl</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -285,7 +292,7 @@
         <span class="n">app</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39; done&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="setup"><a class="viewcode-back" href="../index.html#__init__.setup">[docs]</a><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+<div class="viewcode-block" id="setup"><a class="viewcode-back" href="../source.html#__init__.setup">[docs]</a><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Setup for Sphinx extension.</span>
 

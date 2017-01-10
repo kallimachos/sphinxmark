@@ -33,7 +33,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="sphinxmark  documentation" href="#"/> 
+    <link rel="top" title="sphinxmark  documentation" href="#"/>
+        <link rel="next" title="Installation" href="installation.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -61,7 +62,7 @@
             
             
               <div class="version">
-                0.1.16
+                0.1.17
               </div>
             
           
@@ -82,18 +83,15 @@
           
             
             
-                <!-- Local TOC -->
-                <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">sphinxmark</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#options">Options</a></li>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
-<li><a class="reference internal" href="#module-__init__">Source code</a></li>
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="relnotes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">Source code</a></li>
 </ul>
-</li>
-</ul>
-</div>
+
             
           
         </div>
@@ -141,290 +139,18 @@
 <p><strong>sphinxmark</strong> is an extension for Sphinx that enables watermarks for
 HTML output.</p>
 <p>Source code: <a class="reference external" href="https://github.com/kallimachos/sphinxmark">https://github.com/kallimachos/sphinxmark</a></p>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>Install sphinxmark using pip:</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span>$ pip install sphinxmark
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Sphinxmark uses the <a class="reference external" href="http://pillow.readthedocs.io/en/3.1.x/index.html">Pillow module</a> for creating PNG files.
-If you encounter <code class="docutils literal"><span class="pre">C</span> <span class="pre">module</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">installed</span></code> errors when Sphinx loads the
-sphinxmark extension, you may need to install some of the
-<a class="reference external" href="http://pillow.readthedocs.io/en/3.1.x/installation.html#external-libraries">external libraries</a>
-for Pillow.</p>
-</div>
-</div>
-<div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<p>Configure sphinxmark in your <code class="docutils literal"><span class="pre">conf.py</span></code> file.</p>
-<ol class="arabic">
-<li><p class="first">Add sphinxmark to the list of extensions:</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sphinxmark&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">If you are using a custom image file, specify its directory relative
-to the <code class="docutils literal"><span class="pre">conf.py</span></code> file. If no value is given, the path defaults to
-<code class="docutils literal"><span class="pre">_static</span></code>.</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_static&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">Enable sphinxmark and set options as required:</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">sphinxmark_enable</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">sphinxmark_div</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
-<span class="n">sphinxmark_image</span> <span class="o">=</span> <span class="s1">&#39;text&#39;</span>
-<span class="n">sphinxmark_text</span> <span class="o">=</span> <span class="s1">&#39;Pre-Release&#39;</span>
-<span class="n">sphinxmark_text_size</span> <span class="o">=</span> <span class="mi">80</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">If you define <code class="docutils literal"><span class="pre">html_context</span></code> in your <code class="docutils literal"><span class="pre">conf.py</span></code>, you must add the
-<code class="docutils literal"><span class="pre">sphinxmark.css</span></code> style sheet to it.</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">html_context</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;css_files&#39;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s1">&#39;_static/bespoke.css&#39;</span><span class="p">,</span>  <span class="c1"># custom CSS styling</span>
-    <span class="s1">&#39;_static/sphinxmark.css&#39;</span><span class="p">,</span>  <span class="c1"># watermark styling</span>
-    <span class="p">],</span>
-  <span class="p">}</span>
-</pre></div>
-</div>
-</li>
-</ol>
-</div>
-<div class="section" id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>sphinxmark_enable (bool)</dt>
-<dd><ul class="first last">
-<li><p class="first"><code class="docutils literal"><span class="pre">True</span></code> - enable watermarks</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">False</span></code> - disable watermarks</p>
-</li>
-<li><p class="first">Default = False</p>
-</li>
-<li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">sphinxmark_enable</span> <span class="pre">=</span> <span class="pre">True</span></code></p>
-</li>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="relnotes.html">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="relnotes.html#release-0-1-17">Release 0.1.17</a></li>
 </ul>
-</dd>
-<dt>sphinxmark_div (string)</dt>
-<dd><ul class="first last">
-<li><p class="first">CSS div where watermark is displayed</p>
 </li>
-<li><p class="first">sphinxmark provides a template css file that uses the specified image
-as the watermark for any area defined as <code class="docutils literal"><span class="pre">div.body</span></code> by default. This
-setting works for the default Sphinx theme. To use
-sphinxmark with themes that have the document body in a different div,
-specify the div using the <code class="docutils literal"><span class="pre">sphinxmark_div</span></code> option.</p>
-</li>
-<li><p class="first">Default = &#8216;body&#8217;</p>
-</li>
-<li><p class="first">Examples:</p>
-<p>sphinx_rtd_theme -&gt; <code class="docutils literal"><span class="pre">sphinxmark_div</span> <span class="pre">=</span> <span class="pre">'document'</span></code></p>
-<p>openstackdocstheme -&gt; <code class="docutils literal"><span class="pre">sphinxmark_div</span> <span class="pre">=</span> <span class="pre">'docs-body'</span></code></p>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="source.html">Source code</a></li>
 </ul>
-</dd>
-<dt>sphinxmark_border (string)</dt>
-<dd><ul class="first last">
-<li><p class="first"><code class="docutils literal"><span class="pre">left</span></code> - place watermark on left border</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">right</span></code> - place watermark on right border</p>
-</li>
-<li><p class="first">setting the <code class="docutils literal"><span class="pre">sphinxmark_border</span></code> option overrides the
-<code class="docutils literal"><span class="pre">sphinxmark_repeat</span></code> and <code class="docutils literal"><span class="pre">sphinxmark_fixed</span></code> options.</p>
-</li>
-<li><p class="first">when using a text watermark, adjust the <code class="docutils literal"><span class="pre">sphinxmark_text</span></code> options
-to achieve the desired appearance.</p>
-</li>
-<li><p class="first">Default = None</p>
-</li>
-<li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">sphinxmark_border</span> <span class="pre">=</span> <span class="pre">'left'</span></code></p>
-</li>
-</ul>
-</dd>
-<dt>sphinxmark_repeat (bool)</dt>
-<dd><ul class="first last">
-<li><p class="first"><code class="docutils literal"><span class="pre">True</span></code> - image repeats down the page</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">False</span></code> - image appears once at top of page</p>
-</li>
-<li><p class="first">Default = True</p>
-</li>
-<li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">sphinxmark_repeat</span> <span class="pre">=</span> <span class="pre">True</span></code></p>
-</li>
-</ul>
-</dd>
-<dt>sphinxmark_fixed (bool)</dt>
-<dd><ul class="first last">
-<li><p class="first"><code class="docutils literal"><span class="pre">True</span></code> - watermark does not scroll with content</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">False</span></code> - watermark scrolls with content</p>
-</li>
-<li><p class="first">When set to <code class="docutils literal"><span class="pre">True</span></code>, this option centers the watermark in the viewport,
-not the div specified by <code class="docutils literal"><span class="pre">sphinxmark_div</span></code>.</p>
-</li>
-<li><p class="first">Default = False</p>
-</li>
-<li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">sphinxmark_fixed</span> <span class="pre">=</span> <span class="pre">False</span></code></p>
-</li>
-</ul>
-</dd>
-<dt>sphinxmark_image (string)</dt>
-<dd><ul class="first last">
-<li><p class="first">image file in <code class="docutils literal"><span class="pre">html_static_path</span></code> directory to use as watermark</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">text</span></code> selects the text-based watermark specified in the
-<code class="docutils literal"><span class="pre">sphinxmark_text</span></code> option</p>
-</li>
-<li><p class="first">if no image is specified, a default DRAFT watermark image is used</p>
-</li>
-<li><p class="first">Default = &#8216;default&#8217;</p>
-</li>
-<li><p class="first">Examples:</p>
-<p><code class="docutils literal"><span class="pre">sphinxmark_image</span> <span class="pre">=</span> <span class="pre">'preview_mark.png'</span></code></p>
-<p><code class="docutils literal"><span class="pre">sphinxmark_image</span> <span class="pre">=</span> <span class="pre">'text'</span></code></p>
-</li>
-</ul>
-</dd>
-<dt>sphinxmark_text (string)</dt>
-<dd><ul class="first last">
-<li><p class="first">Text to use for watermark when <code class="docutils literal"><span class="pre">text</span></code> option is selected in
-<code class="docutils literal"><span class="pre">sphinxmark_image</span></code></p>
-</li>
-<li><p class="first">Default = &#8216;default&#8217;</p>
-</li>
-<li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">sphinxmark_text</span> <span class="pre">=</span> <span class="pre">'Preview'</span></code></p>
-</li>
-</ul>
-</dd>
-<dt>sphinxmark_text_size (int)</dt>
-<dd><ul class="first last">
-<li><p class="first">Font size for text specified in <code class="docutils literal"><span class="pre">sphinxmark_text</span></code></p>
-</li>
-<li><p class="first">Default = 100</p>
-</li>
-<li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">sphinxmark_text_size</span> <span class="pre">=</span> <span class="pre">100</span></code></p>
-</li>
-</ul>
-</dd>
-<dt>sphinxmark_text_color (tuple)</dt>
-<dd><ul class="first last">
-<li><p class="first">RGB color code for text specified in <code class="docutils literal"><span class="pre">sphinxmark_text</span></code>.</p>
-</li>
-<li><p class="first">Default = (255, 0, 0)</p>
-</li>
-<li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">sphinxmark_text_color</span> <span class="pre">=</span> <span class="pre">(255,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p>
-</li>
-</ul>
-</dd>
-<dt>sphinxmark_text_opacity (int)</dt>
-<dd><ul class="first last">
-<li><p class="first">Opacity (RGB Alpha) for text specified in <code class="docutils literal"><span class="pre">sphinxmark_text</span></code></p>
-</li>
-<li><p class="first">Default = 20</p>
-</li>
-<li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">sphinxmark_text_opacity</span> <span class="pre">=</span> <span class="pre">20</span></code></p>
-</li>
-</ul>
-</dd>
-<dt>sphinxmark_text_spacing (int)</dt>
-<dd><ul class="first last">
-<li><p class="first">Set spacing between text watermarks</p>
-</li>
-<li><p class="first">Default = 400</p>
-</li>
-<li><p class="first">Example:</p>
-<blockquote>
-<div><p><code class="docutils literal"><span class="pre">sphinxmark_text_spacing</span> <span class="pre">=</span> <span class="pre">400</span></code></p>
-</div></blockquote>
-</li>
-</ul>
-</dd>
-<dt>sphinxmark_text_rotation (int)</dt>
-<dd><ul class="first last">
-<li><p class="first">Text watermark rotation</p>
-</li>
-<li><p class="first">Default = 0</p>
-</li>
-<li><p class="first">Example:</p>
-<p><code class="docutils literal"><span class="pre">sphinxmark_text_rotation</span> <span class="pre">=</span> <span class="pre">90</span></code></p>
-</li>
-</ul>
-</dd>
-</dl>
-</div>
-<div class="section" id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
-<p>You can enable debugging output for sphinxmark by raising the output verbosity
-level &gt;= 2. Pass the <code class="docutils literal"><span class="pre">-vv</span></code> option on the command line.</p>
-<p>Example:</p>
-<blockquote>
-<div><code class="docutils literal"><span class="pre">sphinx-build</span> <span class="pre">-vv</span> <span class="pre">-b</span> <span class="pre">html</span> <span class="pre">sourcedir</span> <span class="pre">buildir</span></code></div></blockquote>
-</div>
-<div class="section" id="module-__init__">
-<span id="source-code"></span><h2>Source code<a class="headerlink" href="#module-__init__" title="Permalink to this headline">¶</a></h2>
-<p>A Sphinx extension that enables watermarks for HTML output.</p>
-<p><a class="reference external" href="https://github.com/kallimachos/sphinxmark">https://github.com/kallimachos/sphinxmark</a></p>
-<p>Copyright 2016 Brian Moss</p>
-<p>Licensed under the Apache License, Version 2.0 (the &#8220;License&#8221;);
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at</p>
-<blockquote>
-<div><a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></div></blockquote>
-<p>Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an &#8220;AS IS&#8221; BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.</p>
-<dl class="function">
-<dt id="__init__.buildcss">
-<code class="descclassname">__init__.</code><code class="descname">buildcss</code><span class="sig-paren">(</span><em>app</em>, <em>buildpath</em>, <em>imagefile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/__init__.html#buildcss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#__init__.buildcss" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create CSS file.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="__init__.createimage">
-<code class="descclassname">__init__.</code><code class="descname">createimage</code><span class="sig-paren">(</span><em>app</em>, <em>srcdir</em>, <em>buildpath</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/__init__.html#createimage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#__init__.createimage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create PNG image from string.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="__init__.getimage">
-<code class="descclassname">__init__.</code><code class="descname">getimage</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/__init__.html#getimage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#__init__.getimage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get image file.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="__init__.setup">
-<code class="descclassname">__init__.</code><code class="descname">setup</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/__init__.html#setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#__init__.setup" title="Permalink to this definition">¶</a></dt>
-<dd><p>Setup for Sphinx extension.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>app</strong> &#8211; Sphinx application context.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="__init__.watermark">
-<code class="descclassname">__init__.</code><code class="descname">watermark</code><span class="sig-paren">(</span><em>app</em>, <em>env</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/__init__.html#watermark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#__init__.watermark" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add watermark.</p>
-</dd></dl>
-
 </div>
 </div>
 
@@ -432,6 +158,13 @@ limitations under the License.</p>
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
   
 
   <hr/>
