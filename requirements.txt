@@ -1,12 +1,12 @@
 bashate
-bottle<=0.12.10
+bottle
 doc8
 flake8
 isort
 openstackdocstheme
 pep8-naming
 pep257
-Pillow<3.5
+Pillow
 pyenchant
 pytest
 pytest-cov
