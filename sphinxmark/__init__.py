@@ -65,7 +65,7 @@ def createimage(app, srcdir, buildpath):
     text = app.config.sphinxmark_text
 
     # draw transparent background
-    width = 400
+    width = app.config.sphinxmark_text_width
     height = app.config.sphinxmark_text_spacing
     img = Image.new('RGBA', (width, height), (255, 255, 255, 0))
     d = ImageDraw.Draw(img)
@@ -171,6 +171,7 @@ def setup(app):
         app.add_config_value('sphinxmark_text', 'default', 'html')
         app.add_config_value('sphinxmark_text_color', (255, 0, 0), 'html')
         app.add_config_value('sphinxmark_text_size', 100, 'html')
+        app.add_config_value('sphinxmark_text_width', 1000, 'html')
         app.add_config_value('sphinxmark_text_opacity', 20, 'html')
         app.add_config_value('sphinxmark_text_spacing', 400, 'html')
         app.add_config_value('sphinxmark_text_rotation', 0, 'html')
