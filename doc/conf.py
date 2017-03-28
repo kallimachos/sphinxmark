@@ -33,7 +33,6 @@ sys.path.insert(0, os.path.abspath('../sphinxmark'))
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
-    'sphinx.ext.coverage',
     'sphinx.ext.viewcode',
 ]
 
@@ -56,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'sphinxmark'
-copyright = '2016, Brian Moss'
+copyright = '2017, Brian Moss'
 author = 'Brian Moss'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -64,7 +63,7 @@ author = 'Brian Moss'
 # built documents.
 #
 # The short X.Y version.
-version = '0.1.17'
+version = '0.1.18'
 # The full version, including alpha/beta/rc tags.
 # release = 'beta'
 

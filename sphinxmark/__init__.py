@@ -5,7 +5,7 @@ A Sphinx extension that enables watermarks for HTML output.
 
 https://github.com/kallimachos/sphinxmark
 
-Copyright 2016 Brian Moss
+Copyright 2017 Brian Moss
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -178,7 +178,11 @@ def setup(app):
         app.connect('env-updated', watermark)
     except:
         app.warn('Failed to add watermark.')
-    return {'version': '0.1'}
+    return {
+        'version': '0.1.18',
+        'parallel_read_safe': True,
+        'parallel_write_safe': True,
+        }
 
 
 if __name__ == '__main__':
