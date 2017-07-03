@@ -82,7 +82,7 @@ def createimage(app, srcdir, buildpath):
 
     # add text to image
     color = app.config.sphinxmark_text_color
-    d.text((x, y), text, font=font, fill=color, align="center")
+    d.text((x, y), text, font=font, fill=color)
 
     # set opacity
     img.putalpha(app.config.sphinxmark_text_opacity)
