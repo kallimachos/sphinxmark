@@ -63,7 +63,7 @@ author = 'Brian Moss'
 # built documents.
 #
 # The short X.Y version.
-version = '0.1.18'
+version = '0.1.19'
 # The full version, including alpha/beta/rc tags.
 # release = 'beta'
 
