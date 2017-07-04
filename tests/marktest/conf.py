@@ -3,6 +3,7 @@
 """Documentation for testing sphinxmark."""
 
 import openstackdocstheme
+
 # import sphinx_rtd_theme
 
 # -- General configuration ------------------------------------------------
