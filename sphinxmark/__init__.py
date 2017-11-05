@@ -134,7 +134,7 @@ def getimage(app):
 
         try:
             copy(imagepath, buildpath)
-        except:
+        except Exception:
             message = ("Cannot find '" + imagefile + "'. Put watermark " +
                        "images in the '_static' directory or " +
                        "specify the location using 'html_static_path'.")
@@ -176,7 +176,7 @@ def setup(app):
         app.add_config_value('sphinxmark_text_spacing', 400, 'html')
         app.add_config_value('sphinxmark_text_rotation', 0, 'html')
         app.connect('env-updated', watermark)
-    except:
+    except Exception:
         app.warn('Failed to add watermark.')
     return {
         'version': '0.1.18',
