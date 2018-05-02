@@ -10,3 +10,4 @@ dist/
 temp.css
 textmark_*
 sphinxmark.egg-info/
+.pytest_cache/
