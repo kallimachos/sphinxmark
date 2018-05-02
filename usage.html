@@ -27,26 +27,19 @@
   
 
   
-  
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="sphinxmark  documentation" href="index.html"/>
-        <link rel="next" title="Options" href="options.html"/>
-        <link rel="prev" title="Installation" href="installation.html"/> 
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Options" href="options.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -63,7 +56,7 @@
 
           
             
-            <img src="_static/sphinx.png" class="logo" />
+            <img src="_static/sphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -113,7 +106,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">sphinxmark</a>
@@ -121,9 +114,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -167,22 +161,22 @@
             
   <div class="section" id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<p>Configure sphinxmark in your <code class="docutils literal"><span class="pre">conf.py</span></code> file.</p>
+<p>Configure sphinxmark in your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> file.</p>
 <ol class="arabic">
 <li><p class="first">Add sphinxmark to the list of extensions:</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sphinxmark&#39;</span><span class="p">]</span>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sphinxmark&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">If you are using a custom image file, specify its directory relative
-to the <code class="docutils literal"><span class="pre">conf.py</span></code> file. If no value is given, the path defaults to
-<code class="docutils literal"><span class="pre">_static</span></code>.</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_static&#39;</span><span class="p">]</span>
+to the <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> file. If no value is given, the path defaults to
+<code class="docutils literal notranslate"><span class="pre">_static</span></code>.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_static&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Enable sphinxmark and set options as required:</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">sphinxmark_enable</span> <span class="o">=</span> <span class="kc">True</span>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinxmark_enable</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">sphinxmark_div</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
 <span class="n">sphinxmark_image</span> <span class="o">=</span> <span class="s1">&#39;text&#39;</span>
 <span class="n">sphinxmark_text</span> <span class="o">=</span> <span class="s1">&#39;Pre-Release&#39;</span>
@@ -190,9 +184,9 @@ to the <code class="docutils literal"><span class="pre">conf.py</span></code> fi
 </pre></div>
 </div>
 </li>
-<li><p class="first">If you define <code class="docutils literal"><span class="pre">html_context</span></code> in your <code class="docutils literal"><span class="pre">conf.py</span></code>, you must add the
-<code class="docutils literal"><span class="pre">sphinxmark.css</span></code> style sheet to it.</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">html_context</span> <span class="o">=</span> <span class="p">{</span>
+<li><p class="first">If you define <code class="docutils literal notranslate"><span class="pre">html_context</span></code> in your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>, you must add the
+<code class="docutils literal notranslate"><span class="pre">sphinxmark.css</span></code> style sheet to it.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">html_context</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">&#39;css_files&#39;</span><span class="p">:</span> <span class="p">[</span>
     <span class="s1">&#39;_static/bespoke.css&#39;</span><span class="p">,</span>  <span class="c1"># custom CSS styling</span>
     <span class="s1">&#39;_static/sphinxmark.css&#39;</span><span class="p">,</span>  <span class="c1"># watermark styling</span>
@@ -206,9 +200,7 @@ to the <code class="docutils literal"><span class="pre">conf.py</span></code> fi
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -230,7 +222,7 @@ to the <code class="docutils literal"><span class="pre">conf.py</span></code> fi
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -249,6 +241,7 @@ to the <code class="docutils literal"><span class="pre">conf.py</span></code> fi
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
             VERSION:'',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -266,14 +259,13 @@ to the <code class="docutils literal"><span class="pre">conf.py</span></code> fi
     <script type="text/javascript" src="_static/js/theme.js"></script>
   
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

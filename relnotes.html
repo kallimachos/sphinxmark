@@ -27,26 +27,19 @@
   
 
   
-  
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="sphinxmark  documentation" href="index.html"/>
-        <link rel="next" title="Code Listing" href="source.html"/>
-        <link rel="prev" title="Troubleshooting" href="troubleshooting.html"/> 
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Code Listing" href="source.html" />
+    <link rel="prev" title="Troubleshooting" href="troubleshooting.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -63,7 +56,7 @@
 
           
             
-            <img src="_static/sphinx.png" class="logo" />
+            <img src="_static/sphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -118,7 +111,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">sphinxmark</a>
@@ -126,9 +119,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -178,16 +172,16 @@
 <li><a class="reference external" href="https://github.com/kallimachos/sphinxmark/pull/29">#29</a>: Fix isort test
 error.</li>
 <li><a class="reference external" href="https://github.com/kallimachos/sphinxmark/pull/28">#28</a>: remove invalid
-argument to <code class="docutils literal"><span class="pre">ImageDraw.text()</span></code> method.</li>
+argument to <code class="docutils literal notranslate"><span class="pre">ImageDraw.text()</span></code> method.</li>
 </ul>
 </div>
 <div class="section" id="release-0-1-18">
 <h2>Release 0.1.18<a class="headerlink" href="#release-0-1-18" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/kallimachos/sphinxmark/issues/26">#26</a>: enable
-<code class="docutils literal"><span class="pre">parallel_read_safe</span></code>.</li>
-<li>Remove unused <code class="docutils literal"><span class="pre">publish.sh</span></code> script.</li>
-<li>Tidy <code class="docutils literal"><span class="pre">tox.ini</span></code> file.</li>
+<code class="docutils literal notranslate"><span class="pre">parallel_read_safe</span></code>.</li>
+<li>Remove unused <code class="docutils literal notranslate"><span class="pre">publish.sh</span></code> script.</li>
+<li>Tidy <code class="docutils literal notranslate"><span class="pre">tox.ini</span></code> file.</li>
 </ul>
 </div>
 <div class="section" id="release-0-1-17">
@@ -196,7 +190,7 @@ argument to <code class="docutils literal"><span class="pre">ImageDraw.text()</s
 <li><a class="reference external" href="https://github.com/kallimachos/sphinxmark/issues/23">#23</a>: remove Pillow
 and Bottle version requirements.</li>
 <li><a class="reference external" href="https://github.com/kallimachos/sphinxmark/issues/22">#22</a>: add
-<code class="docutils literal"><span class="pre">sphinxmark_text_width</span></code> option and increase default width.</li>
+<code class="docutils literal notranslate"><span class="pre">sphinxmark_text_width</span></code> option and increase default width.</li>
 <li>Add Release Notes and restructure documentation.</li>
 </ul>
 </div>
@@ -204,9 +198,7 @@ and Bottle version requirements.</li>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -228,7 +220,7 @@ and Bottle version requirements.</li>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -247,6 +239,7 @@ and Bottle version requirements.</li>
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
             VERSION:'',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -264,14 +257,13 @@ and Bottle version requirements.</li>
     <script type="text/javascript" src="_static/js/theme.js"></script>
   
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

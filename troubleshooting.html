@@ -27,26 +27,19 @@
   
 
   
-  
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="sphinxmark  documentation" href="index.html"/>
-        <link rel="next" title="Release Notes" href="relnotes.html"/>
-        <link rel="prev" title="Options" href="options.html"/> 
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Release Notes" href="relnotes.html" />
+    <link rel="prev" title="Options" href="options.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -63,7 +56,7 @@
 
           
             
-            <img src="_static/sphinx.png" class="logo" />
+            <img src="_static/sphinx.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -113,7 +106,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">sphinxmark</a>
@@ -121,9 +114,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -168,17 +162,15 @@
   <div class="section" id="troubleshooting">
 <h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
 <p>You can enable debugging output for sphinxmark by raising the output verbosity
-level &gt;= 2. Pass the <code class="docutils literal"><span class="pre">-vv</span></code> option on the command line.</p>
+level &gt;= 2. Pass the <code class="docutils literal notranslate"><span class="pre">-vv</span></code> option on the command line.</p>
 <p>Example:</p>
 <blockquote>
-<div><code class="docutils literal"><span class="pre">sphinx-build</span> <span class="pre">-vv</span> <span class="pre">-b</span> <span class="pre">html</span> <span class="pre">sourcedir</span> <span class="pre">buildir</span></code></div></blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">sphinx-build</span> <span class="pre">-vv</span> <span class="pre">-b</span> <span class="pre">html</span> <span class="pre">sourcedir</span> <span class="pre">buildir</span></code></div></blockquote>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -200,7 +192,7 @@ level &gt;= 2. Pass the <code class="docutils literal"><span class="pre">-vv</sp
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -219,6 +211,7 @@ level &gt;= 2. Pass the <code class="docutils literal"><span class="pre">-vv</sp
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
             VERSION:'',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -236,14 +229,13 @@ level &gt;= 2. Pass the <code class="docutils literal"><span class="pre">-vv</sp
     <script type="text/javascript" src="_static/js/theme.js"></script>
   
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
