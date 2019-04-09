@@ -141,16 +141,9 @@ def test_imagefail():
     image = 'fail.png'
     app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
                   confoverrides={'sphinxmark_image': image})
+    assert app.config.sphinxmark_image == image
     with pytest.raises(TypeError):
         app.builder.build_all()
-    assert app.config.sphinxmark_image == image
-
-    html = Path(path.join(app.outdir, htmlfile)).read_text()
-    assert htmlresult in html
-
-    css = Path(path.join(app.outdir, cssfile)).read_text()
-    cssresult = 'url("%s")' % image
-    assert cssresult not in css
 
 
 def test_textmark():
@@ -195,17 +188,10 @@ def test_staticfail():
     app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
                   confoverrides={'sphinxmark_image': image,
                                  'html_static_path': htmlpath})
-    with pytest.raises(TypeError):
-        app.builder.build_all()
     assert app.config.sphinxmark_image == image
     assert app.config.html_static_path == htmlpath
-
-    html = Path(path.join(app.outdir, htmlfile)).read_text()
-    assert htmlresult in html
-
-    css = Path(path.join(app.outdir, cssfile)).read_text()
-    cssresult = 'url("%s")' % image
-    assert cssresult not in css
+    with pytest.raises(TypeError):
+        app.builder.build_all()
 
 
 if __name__ == '__main__':
