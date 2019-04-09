@@ -1,4 +1,6 @@
 css
+isort
+openstackdocstheme
 png
 sphinxmark
 viewport

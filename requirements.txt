@@ -1,11 +1,3 @@
-bottle
-doc8
-openstackdocstheme
-Pillow
-pyenchant
-pytest
-pytest-cov
-sphinx
-sphinxcontrib-spelling
-sphinx_rtd_theme
-sphinx-testing
+bottle>=0.12.0
+Pillow>=6.0.0
+sphinx>=2.0.0

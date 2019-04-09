@@ -2,10 +2,11 @@
 # coding: utf-8
 """Sphinxmark test file."""
 
-from pytest import mark
-from sphinx_testing import TestApp as MakeApp  # rename to prevent warning
+from os import path
+from pathlib import Path
 
-xfail = mark.xfail
+import pytest
+from sphinx_testing import TestApp as MakeApp  # rename to prevent warning
 
 # defaults = {'sphinxmark_enable': True,
 #             'sphinxmark_div': 'default',
@@ -22,9 +23,8 @@ xfail = mark.xfail
 #             'sphinxmark_text_rotation': 0}
 
 htmlfile = 'index.html'
-htmlresult = ('<link rel="stylesheet" ' +
-              'href="_static/sphinxmark.css" type="text/css" />')
 cssfile = '_static/sphinxmark.css'
+htmlresult = ('<link rel="stylesheet" type="text/css" href="%s" />' % cssfile)
 
 
 def test_defaults():
@@ -44,10 +44,10 @@ def test_defaults():
     assert app.config.sphinxmark_text_spacing == 400
     assert app.config.sphinxmark_text_rotation == 0
 
-    html = (app.outdir / htmlfile).read_text()
+    html = Path(path.join(app.outdir, htmlfile)).read_text()
     assert htmlresult in html
 
-    css = (app.outdir / cssfile).read_text()
+    css = Path(path.join(app.outdir, cssfile)).read_text()
     assert ('url("watermark-draft.png")') in css
 
 
@@ -58,10 +58,10 @@ def test_div():
     app.builder.build_all()
     assert app.config.sphinxmark_div == 'body-test'
 
-    html = (app.outdir / htmlfile).read_text()
+    html = Path(path.join(app.outdir, htmlfile)).read_text()
     assert htmlresult in html
 
-    css = (app.outdir / cssfile).read_text()
+    css = Path(path.join(app.outdir, cssfile)).read_text()
     assert ('div.body-test') in css
 
 
@@ -72,10 +72,10 @@ def test_border():
     app.builder.build_all()
     assert app.config.sphinxmark_border == 'left'
 
-    html = (app.outdir / htmlfile).read_text()
+    html = Path(path.join(app.outdir, htmlfile)).read_text()
     assert htmlresult in html
 
-    css = (app.outdir / cssfile).read_text()
+    css = Path(path.join(app.outdir, cssfile)).read_text()
     assert ('border-left') in css
 
 
@@ -85,10 +85,10 @@ def test_repeat():
     app.builder.build_all()
     assert app.config.sphinxmark_repeat is True
 
-    html = (app.outdir / htmlfile).read_text()
+    html = Path(path.join(app.outdir, htmlfile)).read_text()
     assert htmlresult in html
 
-    css = (app.outdir / cssfile).read_text()
+    css = Path(path.join(app.outdir, cssfile)).read_text()
     assert ('background-repeat: repeat-y !important;') in css
 
 
@@ -99,10 +99,10 @@ def test_no_repeat():
     app.builder.build_all()
     assert app.config.sphinxmark_repeat is False
 
-    html = (app.outdir / htmlfile).read_text()
+    html = Path(path.join(app.outdir, htmlfile)).read_text()
     assert htmlresult in html
 
-    css = (app.outdir / cssfile).read_text()
+    css = Path(path.join(app.outdir, cssfile)).read_text()
     assert ('background-repeat: no-repeat !important;') in css
 
 
@@ -113,10 +113,10 @@ def test_fixed():
     app.builder.build_all()
     assert app.config.sphinxmark_fixed is True
 
-    html = (app.outdir / htmlfile).read_text()
+    html = Path(path.join(app.outdir, htmlfile)).read_text()
     assert htmlresult in html
 
-    css = (app.outdir / cssfile).read_text()
+    css = Path(path.join(app.outdir, cssfile)).read_text()
     assert ('background-attachment: fixed') in css
 
 
@@ -128,30 +128,29 @@ def test_image():
     app.builder.build_all()
     assert app.config.sphinxmark_image == image
 
-    html = (app.outdir / htmlfile).read_text()
+    html = Path(path.join(app.outdir, htmlfile)).read_text()
     assert htmlresult in html
 
-    css = (app.outdir / cssfile).read_text()
+    css = Path(path.join(app.outdir, cssfile)).read_text()
     cssresult = 'url("%s")' % image
     assert cssresult in css
 
 
-@xfail(raises=TypeError)
 def test_imagefail():
-    """Test image not found."""
-    # ------------------ THIS SHOULD FAIL ------------------
+    """Test image not found raises TypeError."""
     image = 'fail.png'
     app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
                   confoverrides={'sphinxmark_image': image})
-    app.builder.build_all()
+    with pytest.raises(TypeError):
+        app.builder.build_all()
     assert app.config.sphinxmark_image == image
 
-    html = (app.outdir / htmlfile).read_text()
+    html = Path(path.join(app.outdir, htmlfile)).read_text()
     assert htmlresult in html
 
-    css = (app.outdir / cssfile).read_text()
+    css = Path(path.join(app.outdir, cssfile)).read_text()
     cssresult = 'url("%s")' % image
-    assert cssresult in css
+    assert cssresult not in css
 
 
 def test_textmark():
@@ -163,10 +162,10 @@ def test_textmark():
     assert app.config.sphinxmark_image == 'text'
     assert app.config.sphinxmark_text == 'Mitaka'
 
-    html = (app.outdir / htmlfile).read_text()
+    html = Path(path.join(app.outdir, htmlfile)).read_text()
     assert htmlresult in html
 
-    css = (app.outdir / cssfile).read_text()
+    css = Path(path.join(app.outdir, cssfile)).read_text()
     assert ('url("textmark_Mitaka.png")') in css
 
 
@@ -181,33 +180,32 @@ def test_static():
     assert app.config.sphinxmark_image == image
     assert app.config.html_static_path == htmlpath
 
-    html = (app.outdir / htmlfile).read_text()
+    html = Path(path.join(app.outdir, htmlfile)).read_text()
     assert htmlresult in html
 
-    css = (app.outdir / cssfile).read_text()
+    css = Path(path.join(app.outdir, cssfile)).read_text()
     cssresult = 'url("%s")' % image
     assert cssresult in css
 
 
-@xfail(raises=TypeError)
 def test_staticfail():
-    """Test static not found."""
-    # ------------------ THIS SHOULD FAIL ------------------
+    """Test static not found raises TypeError."""
     image = 'new.png'
     htmlpath = ['static']
     app = MakeApp(srcdir='tests/marktest', copy_srcdir_to_tmpdir=True,
                   confoverrides={'sphinxmark_image': image,
                                  'html_static_path': htmlpath})
-    app.builder.build_all()
+    with pytest.raises(TypeError):
+        app.builder.build_all()
     assert app.config.sphinxmark_image == image
     assert app.config.html_static_path == htmlpath
 
-    html = (app.outdir / htmlfile).read_text()
+    html = Path(path.join(app.outdir, htmlfile)).read_text()
     assert htmlresult in html
 
-    css = (app.outdir / cssfile).read_text()
+    css = Path(path.join(app.outdir, cssfile)).read_text()
     cssresult = 'url("%s")' % image
-    assert cssresult in css
+    assert cssresult not in css
 
 
 if __name__ == '__main__':

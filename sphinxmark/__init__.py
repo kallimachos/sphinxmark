@@ -5,7 +5,7 @@ A Sphinx extension that enables watermarks for HTML output.
 
 https://github.com/kallimachos/sphinxmark
 
-Copyright 2017 Brian Moss
+Copyright 2019 Brian Moss
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,8 +24,9 @@ import os
 from shutil import copy
 
 from bottle import TEMPLATE_PATH, template
-from PIL import Image, ImageDraw, ImageFont
 from sphinx.util import logging
+
+from PIL import Image, ImageDraw, ImageFont
 
 LOG = logging.getLogger(__name__)
 
@@ -138,9 +139,9 @@ def getimage(app):
         try:
             copy(imagepath, buildpath)
         except Exception:
-            message = ("Cannot find '" + imagefile + "'. Put watermark " +
-                       "images in the '_static' directory or " +
-                       "specify the location using 'html_static_path'.")
+            message = ("Cannot find '%s'. Put watermark images in the "
+                       "'_static' directory or specify the location using "
+                       "'html_static_path'." % imagefile)
             LOG.warning(message)
             LOG.warning('Failed to add watermark.')
             return
@@ -154,13 +155,13 @@ def watermark(app, env):
         LOG.info('adding watermark...', nonl=True)
         buildpath, imagefile = getimage(app)
         cssname = buildcss(app, buildpath, imagefile)
-        app.add_stylesheet(cssname)
+        app.add_css_file(cssname)
         LOG.info(' done')
 
 
 def setup(app):
     """
-    Setup for Sphinx extension.
+    Configure setup for Sphinx extension.
 
     :param app: Sphinx application context.
     """
