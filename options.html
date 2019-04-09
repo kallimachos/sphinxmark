@@ -19,35 +19,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Troubleshooting" href="troubleshooting.html" />
     <link rel="prev" title="Usage" href="usage.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -161,187 +162,137 @@
             
   <div class="section" id="options">
 <h1>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h1>
-<dl class="docutils">
-<dt>sphinxmark_enable (bool)</dt>
-<dd><ul class="first last">
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">True</span></code> - enable watermarks</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">False</span></code> - disable watermarks</p>
-</li>
-<li><p class="first">Default = False</p>
-</li>
-<li><p class="first">Example:</p>
+<dl>
+<dt>sphinxmark_enable (bool)</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code> - enable watermarks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code> - disable watermarks</p></li>
+<li><p>Default = False</p></li>
+<li><p>Example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sphinxmark_enable</span> <span class="pre">=</span> <span class="pre">True</span></code></p>
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_div (string)</dt>
-<dd><ul class="first last">
-<li><p class="first">CSS div where watermark is displayed</p>
-</li>
-<li><p class="first">sphinxmark provides a template css file that uses the specified image
+<dt>sphinxmark_div (string)</dt><dd><ul>
+<li><p>CSS div where watermark is displayed</p></li>
+<li><p>sphinxmark provides a template css file that uses the specified image
 as the watermark for any area defined as <code class="docutils literal notranslate"><span class="pre">div.body</span></code> by default. This
 setting works for the default Sphinx theme. To use
 sphinxmark with themes that have the document body in a different div,
-specify the div using the <code class="docutils literal notranslate"><span class="pre">sphinxmark_div</span></code> option.</p>
-</li>
-<li><p class="first">Default = ‘body’</p>
-</li>
-<li><p class="first">Examples:</p>
+specify the div using the <code class="docutils literal notranslate"><span class="pre">sphinxmark_div</span></code> option.</p></li>
+<li><p>Default = ‘body’</p></li>
+<li><p>Examples:</p>
 <p>sphinx_rtd_theme -&gt; <code class="docutils literal notranslate"><span class="pre">sphinxmark_div</span> <span class="pre">=</span> <span class="pre">'document'</span></code></p>
 <p>openstackdocstheme -&gt; <code class="docutils literal notranslate"><span class="pre">sphinxmark_div</span> <span class="pre">=</span> <span class="pre">'docs-body'</span></code></p>
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_border (string)</dt>
-<dd><ul class="first last">
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">left</span></code> - place watermark on left border</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">right</span></code> - place watermark on right border</p>
-</li>
-<li><p class="first">setting the <code class="docutils literal notranslate"><span class="pre">sphinxmark_border</span></code> option overrides the
-<code class="docutils literal notranslate"><span class="pre">sphinxmark_repeat</span></code> and <code class="docutils literal notranslate"><span class="pre">sphinxmark_fixed</span></code> options.</p>
-</li>
-<li><p class="first">when using a text watermark, adjust the <code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code> options
-to achieve the desired appearance.</p>
-</li>
-<li><p class="first">Default = None</p>
-</li>
-<li><p class="first">Example:</p>
+<dt>sphinxmark_border (string)</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">left</span></code> - place watermark on left border</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">right</span></code> - place watermark on right border</p></li>
+<li><p>setting the <code class="docutils literal notranslate"><span class="pre">sphinxmark_border</span></code> option overrides the
+<code class="docutils literal notranslate"><span class="pre">sphinxmark_repeat</span></code> and <code class="docutils literal notranslate"><span class="pre">sphinxmark_fixed</span></code> options.</p></li>
+<li><p>when using a text watermark, adjust the <code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code> options
+to achieve the desired appearance.</p></li>
+<li><p>Default = None</p></li>
+<li><p>Example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sphinxmark_border</span> <span class="pre">=</span> <span class="pre">'left'</span></code></p>
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_repeat (bool)</dt>
-<dd><ul class="first last">
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">True</span></code> - image repeats down the page</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">False</span></code> - image appears once at top of page</p>
-</li>
-<li><p class="first">Default = True</p>
-</li>
-<li><p class="first">Example:</p>
+<dt>sphinxmark_repeat (bool)</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code> - image repeats down the page</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code> - image appears once at top of page</p></li>
+<li><p>Default = True</p></li>
+<li><p>Example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sphinxmark_repeat</span> <span class="pre">=</span> <span class="pre">True</span></code></p>
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_fixed (bool)</dt>
-<dd><ul class="first last">
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">True</span></code> - watermark does not scroll with content</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">False</span></code> - watermark scrolls with content</p>
-</li>
-<li><p class="first">When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, this option centers the watermark in the viewport,
-not the div specified by <code class="docutils literal notranslate"><span class="pre">sphinxmark_div</span></code>.</p>
-</li>
-<li><p class="first">Default = False</p>
-</li>
-<li><p class="first">Example:</p>
+<dt>sphinxmark_fixed (bool)</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code> - watermark does not scroll with content</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code> - watermark scrolls with content</p></li>
+<li><p>When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, this option centers the watermark in the viewport,
+not the div specified by <code class="docutils literal notranslate"><span class="pre">sphinxmark_div</span></code>.</p></li>
+<li><p>Default = False</p></li>
+<li><p>Example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sphinxmark_fixed</span> <span class="pre">=</span> <span class="pre">False</span></code></p>
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_image (string)</dt>
-<dd><ul class="first last">
-<li><p class="first">image file in <code class="docutils literal notranslate"><span class="pre">html_static_path</span></code> directory to use as watermark</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">text</span></code> selects the text-based watermark specified in the
-<code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code> option</p>
-</li>
-<li><p class="first">if no image is specified, a default DRAFT watermark image is used</p>
-</li>
-<li><p class="first">Default = ‘default’</p>
-</li>
-<li><p class="first">Examples:</p>
+<dt>sphinxmark_image (string)</dt><dd><ul>
+<li><p>image file in <code class="docutils literal notranslate"><span class="pre">html_static_path</span></code> directory to use as watermark</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text</span></code> selects the text-based watermark specified in the
+<code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code> option</p></li>
+<li><p>if no image is specified, a default DRAFT watermark image is used</p></li>
+<li><p>Default = ‘default’</p></li>
+<li><p>Examples:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sphinxmark_image</span> <span class="pre">=</span> <span class="pre">'preview_mark.png'</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">sphinxmark_image</span> <span class="pre">=</span> <span class="pre">'text'</span></code></p>
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_text (string)</dt>
-<dd><ul class="first last">
-<li><p class="first">Text to use for watermark when <code class="docutils literal notranslate"><span class="pre">text</span></code> option is selected in
-<code class="docutils literal notranslate"><span class="pre">sphinxmark_image</span></code></p>
-</li>
-<li><p class="first">Default = ‘default’</p>
-</li>
-<li><p class="first">Example:</p>
+<dt>sphinxmark_text (string)</dt><dd><ul>
+<li><p>Text to use for watermark when <code class="docutils literal notranslate"><span class="pre">text</span></code> option is selected in
+<code class="docutils literal notranslate"><span class="pre">sphinxmark_image</span></code></p></li>
+<li><p>Default = ‘default’</p></li>
+<li><p>Example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span> <span class="pre">=</span> <span class="pre">'Preview'</span></code></p>
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_text_size (int)</dt>
-<dd><ul class="first last">
-<li><p class="first">Font size for text specified in <code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code></p>
-</li>
-<li><p class="first">Default = 100</p>
-</li>
-<li><p class="first">Example:</p>
+<dt>sphinxmark_text_size (int)</dt><dd><ul>
+<li><p>Font size for text specified in <code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code></p></li>
+<li><p>Default = 100</p></li>
+<li><p>Example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sphinxmark_text_size</span> <span class="pre">=</span> <span class="pre">100</span></code></p>
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_text_width (int)</dt>
-<dd><ul class="first last">
-<li><p class="first">Width of transparent box containing text specified in <code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code></p>
-</li>
-<li><p class="first">If a large <code class="docutils literal notranslate"><span class="pre">sphinxmark_text_size</span></code> is specified, or the
+<dt>sphinxmark_text_width (int)</dt><dd><ul>
+<li><p>Width of transparent box containing text specified in <code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code></p></li>
+<li><p>If a large <code class="docutils literal notranslate"><span class="pre">sphinxmark_text_size</span></code> is specified, or the
 <code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code> string is long, you may need to set this option
 to a number higher than the default for the entire string to display. Note
 that the text will be cut off at the edge of the containing CSS div
-regardless of the <code class="docutils literal notranslate"><span class="pre">sphinxmark_text_width</span></code> setting.</p>
-</li>
-<li><p class="first">Default = 1000</p>
-</li>
-<li><p class="first">Example:</p>
+regardless of the <code class="docutils literal notranslate"><span class="pre">sphinxmark_text_width</span></code> setting.</p></li>
+<li><p>Default = 1000</p></li>
+<li><p>Example:</p>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">sphinxmark_text_width</span> <span class="pre">=</span> <span class="pre">1000</span></code></p>
 </div></blockquote>
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_text_color (tuple)</dt>
-<dd><ul class="first last">
-<li><p class="first">RGB color code for text specified in <code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code>.</p>
-</li>
-<li><p class="first">Default = (255, 0, 0)</p>
-</li>
-<li><p class="first">Example:</p>
+<dt>sphinxmark_text_color (tuple)</dt><dd><ul>
+<li><p>RGB color code for text specified in <code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code>.</p></li>
+<li><p>Default = (255, 0, 0)</p></li>
+<li><p>Example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sphinxmark_text_color</span> <span class="pre">=</span> <span class="pre">(255,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p>
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_text_opacity (int)</dt>
-<dd><ul class="first last">
-<li><p class="first">Opacity (RGB Alpha) for text specified in <code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code></p>
-</li>
-<li><p class="first">Default = 20</p>
-</li>
-<li><p class="first">Example:</p>
+<dt>sphinxmark_text_opacity (int)</dt><dd><ul>
+<li><p>Opacity (RGB Alpha) for text specified in <code class="docutils literal notranslate"><span class="pre">sphinxmark_text</span></code></p></li>
+<li><p>Default = 20</p></li>
+<li><p>Example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sphinxmark_text_opacity</span> <span class="pre">=</span> <span class="pre">20</span></code></p>
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_text_spacing (int)</dt>
-<dd><ul class="first last">
-<li><p class="first">Set spacing between text watermarks</p>
-</li>
-<li><p class="first">Default = 400</p>
-</li>
-<li><p class="first">Example:</p>
+<dt>sphinxmark_text_spacing (int)</dt><dd><ul>
+<li><p>Set spacing between text watermarks</p></li>
+<li><p>Default = 400</p></li>
+<li><p>Example:</p>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">sphinxmark_text_spacing</span> <span class="pre">=</span> <span class="pre">400</span></code></p>
 </div></blockquote>
 </li>
 </ul>
 </dd>
-<dt>sphinxmark_text_rotation (int)</dt>
-<dd><ul class="first last">
-<li><p class="first">Text watermark rotation</p>
-</li>
-<li><p class="first">Default = 0</p>
-</li>
-<li><p class="first">Example:</p>
+<dt>sphinxmark_text_rotation (int)</dt><dd><ul>
+<li><p>Text watermark rotation</p></li>
+<li><p>Default = 0</p></li>
+<li><p>Example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sphinxmark_text_rotation</span> <span class="pre">=</span> <span class="pre">90</span></code></p>
 </li>
 </ul>
@@ -360,7 +311,7 @@ regardless of the <code class="docutils literal notranslate"><span class="pre">s
         <a href="troubleshooting.html" class="btn btn-neutral float-right" title="Troubleshooting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="usage.html" class="btn btn-neutral" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -369,7 +320,7 @@ regardless of the <code class="docutils literal notranslate"><span class="pre">s
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Brian Moss.
+        &copy; Copyright 2019, Brian Moss
 
     </p>
   </div>
@@ -386,37 +337,16 @@ regardless of the <code class="docutils literal notranslate"><span class="pre">s
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
   <script type="text/javascript">
       jQuery(function () {
-          
-          SphinxRtdTheme.Navigation.enableSticky();
-          
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

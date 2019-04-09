@@ -2,6 +2,13 @@
 Release Notes
 =============
 
+Release 0.2.0
+~~~~~~~~~~~~~
+
+-  `#34 <https://github.com/kallimachos/sphinxmark/pull/34>`_: Add support for
+   Sphinx 2.0. Remove support for Python 2.7.
+
+
 Release 0.1.19
 ~~~~~~~~~~~~~~
 
