@@ -5,7 +5,7 @@ A Sphinx extension that enables watermarks for HTML output.
 
 https://github.com/kallimachos/sphinxmark
 
-Copyright 2017 Brian Moss
+Copyright 2019 Brian Moss
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,10 +21,14 @@ limitations under the License.
 """
 
 import os
+from shutil import copy
 
 from bottle import TEMPLATE_PATH, template
+from sphinx.util import logging
+
 from PIL import Image, ImageDraw, ImageFont
-from shutil import copy
+
+LOG = logging.getLogger(__name__)
 
 
 def buildcss(app, buildpath, imagefile):
@@ -50,7 +54,7 @@ def buildcss(app, buildpath, imagefile):
     else:
         css = template('watermark', div=div, image=imagefile, repeat=repeat,
                        position=position, attachment=attachment)
-    app.debug('[sphinxmark] Template: ' + css)
+    LOG.debug('[sphinxmark] Template: ' + css)
     cssname = 'sphinxmark.css'
     cssfile = os.path.join(buildpath, cssname)
 
@@ -76,7 +80,7 @@ def createimage(app, srcdir, buildpath):
 
     # set x y location for text
     xsize, ysize = d.textsize(text, font)
-    app.debug('[sphinxmark] x = ' + str(xsize) + '\ny = ' + str(ysize))
+    LOG.debug('[sphinxmark] x = ' + str(xsize) + '\ny = ' + str(ysize))
     x = (width / 2) - (xsize / 2)
     y = (height / 2) - (ysize / 2)
 
@@ -94,7 +98,7 @@ def createimage(app, srcdir, buildpath):
     imagefile = 'textmark_' + text + '.png'
     imagepath = os.path.join(buildpath, imagefile)
     img.save(imagepath, 'PNG')
-    app.debug('[sphinxmark] Image saved to: ' + imagepath)
+    LOG.debug('[sphinxmark] Image saved to: ' + imagepath)
 
     return(imagefile)
 
@@ -116,10 +120,10 @@ def getimage(app):
         imagefile = 'watermark-draft.png'
         imagepath = os.path.join(srcdir, imagefile)
         copy(imagepath, buildpath)
-        app.debug('[sphinxmark] Using default image: ' + imagefile)
+        LOG.debug('[sphinxmark] Using default image: ' + imagefile)
     elif app.config.sphinxmark_image == 'text':
         imagefile = createimage(app, srcdir, buildpath)
-        app.debug('[sphinxmark] Image: ' + imagefile)
+        LOG.debug('[sphinxmark] Image: ' + imagefile)
     else:
         imagefile = app.config.sphinxmark_image
 
@@ -128,18 +132,18 @@ def getimage(app):
         else:
             staticpath = '_static'
 
-        app.debug('[sphinxmark] static path: ' + staticpath)
+        LOG.debug('[sphinxmark] static path: ' + staticpath)
         imagepath = os.path.join(app.confdir, staticpath, imagefile)
-        app.debug('[sphinxmark] Imagepath: ' + imagepath)
+        LOG.debug('[sphinxmark] Imagepath: ' + imagepath)
 
         try:
             copy(imagepath, buildpath)
         except Exception:
-            message = ("Cannot find '" + imagefile + "'. Put watermark " +
-                       "images in the '_static' directory or " +
-                       "specify the location using 'html_static_path'.")
-            app.warn(message)
-            app.warn('Failed to add watermark.')
+            message = ("Cannot find '%s'. Put watermark images in the "
+                       "'_static' directory or specify the location using "
+                       "'html_static_path'." % imagefile)
+            LOG.warning(message)
+            LOG.warning('Failed to add watermark.')
             return
 
     return(buildpath, imagefile)
@@ -148,42 +152,36 @@ def getimage(app):
 def watermark(app, env):
     """Add watermark."""
     if app.config.sphinxmark_enable is True:
-        app.info('adding watermark...', nonl=True)
+        LOG.info('adding watermark...', nonl=True)
         buildpath, imagefile = getimage(app)
         cssname = buildcss(app, buildpath, imagefile)
-        app.add_stylesheet(cssname)
-        app.info(' done')
+        app.add_css_file(cssname)
+        LOG.info(' done')
 
 
 def setup(app):
     """
-    Setup for Sphinx extension.
+    Configure setup for Sphinx extension.
 
     :param app: Sphinx application context.
     """
-    try:
-        app.add_config_value('sphinxmark_enable', False, 'html')
-        app.add_config_value('sphinxmark_div', 'default', 'html')
-        app.add_config_value('sphinxmark_border', None, 'html')
-        app.add_config_value('sphinxmark_repeat', True, 'html')
-        app.add_config_value('sphinxmark_fixed', False, 'html')
-        app.add_config_value('sphinxmark_image', 'default', 'html')
-        app.add_config_value('sphinxmark_text', 'default', 'html')
-        app.add_config_value('sphinxmark_text_color', (255, 0, 0), 'html')
-        app.add_config_value('sphinxmark_text_size', 100, 'html')
-        app.add_config_value('sphinxmark_text_width', 1000, 'html')
-        app.add_config_value('sphinxmark_text_opacity', 20, 'html')
-        app.add_config_value('sphinxmark_text_spacing', 400, 'html')
-        app.add_config_value('sphinxmark_text_rotation', 0, 'html')
-        app.connect('env-updated', watermark)
-    except Exception:
-        app.warn('Failed to add watermark.')
+    app.add_config_value('sphinxmark_enable', False, 'html')
+    app.add_config_value('sphinxmark_div', 'default', 'html')
+    app.add_config_value('sphinxmark_border', None, 'html')
+    app.add_config_value('sphinxmark_repeat', True, 'html')
+    app.add_config_value('sphinxmark_fixed', False, 'html')
+    app.add_config_value('sphinxmark_image', 'default', 'html')
+    app.add_config_value('sphinxmark_text', 'default', 'html')
+    app.add_config_value('sphinxmark_text_color', (255, 0, 0), 'html')
+    app.add_config_value('sphinxmark_text_size', 100, 'html')
+    app.add_config_value('sphinxmark_text_width', 1000, 'html')
+    app.add_config_value('sphinxmark_text_opacity', 20, 'html')
+    app.add_config_value('sphinxmark_text_spacing', 400, 'html')
+    app.add_config_value('sphinxmark_text_rotation', 0, 'html')
+    app.connect('env-updated', watermark)
+
     return {
         'version': '0.1.18',
         'parallel_read_safe': True,
         'parallel_write_safe': True,
-        }
-
-
-if __name__ == '__main__':
-    pass
+    }
