@@ -1,40 +1,43 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Code Listing &mdash; sphinxmark  documentation</title>
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="_static/sphinx.ico"/>
   
+
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Release Notes" href="relnotes.html" /> 
@@ -81,6 +84,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -100,6 +104,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -134,18 +139,20 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Code Listing</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="_sources/source.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -163,7 +170,7 @@
 <span id="code-listing"></span><h1>Code Listing<a class="headerlink" href="#module-__init__" title="Permalink to this headline">¶</a></h1>
 <p>A Sphinx extension that enables watermarks for HTML output.</p>
 <p><a class="reference external" href="https://github.com/kallimachos/sphinxmark">https://github.com/kallimachos/sphinxmark</a></p>
-<p>Copyright 2019 Brian Moss</p>
+<p>Copyright 2021 Brian Moss</p>
 <p>Licensed under the Apache License, Version 2.0 (the “License”);
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at</p>
@@ -175,27 +182,27 @@ distributed under the License is distributed on an “AS IS” BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.</p>
-<dl class="function">
-<dt id="__init__.buildcss">
-<code class="descclassname">__init__.</code><code class="descname">buildcss</code><span class="sig-paren">(</span><em>app</em>, <em>buildpath</em>, <em>imagefile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/__init__.html#buildcss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#__init__.buildcss" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="init__.buildcss">
+<span id="__init__.buildcss"></span><code class="sig-prename descclassname"><span class="pre">__init__.</span></code><code class="sig-name descname"><span class="pre">buildcss</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">sphinx.application.Sphinx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buildpath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imagefile</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="reference internal" href="_modules/__init__.html#buildcss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#init__.buildcss" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create CSS file.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="__init__.createimage">
-<code class="descclassname">__init__.</code><code class="descname">createimage</code><span class="sig-paren">(</span><em>app</em>, <em>srcdir</em>, <em>buildpath</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/__init__.html#createimage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#__init__.createimage" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="init__.createimage">
+<span id="__init__.createimage"></span><code class="sig-prename descclassname"><span class="pre">__init__.</span></code><code class="sig-name descname"><span class="pre">createimage</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">sphinx.application.Sphinx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">srcdir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buildpath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="reference internal" href="_modules/__init__.html#createimage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#init__.createimage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create PNG image from string.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="__init__.getimage">
-<code class="descclassname">__init__.</code><code class="descname">getimage</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/__init__.html#getimage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#__init__.getimage" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="init__.getimage">
+<span id="__init__.getimage"></span><code class="sig-prename descclassname"><span class="pre">__init__.</span></code><code class="sig-name descname"><span class="pre">getimage</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">sphinx.application.Sphinx</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">tuple</span><a class="reference internal" href="_modules/__init__.html#getimage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#init__.getimage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get image file.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="__init__.setup">
-<code class="descclassname">__init__.</code><code class="descname">setup</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/__init__.html#setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#__init__.setup" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="init__.setup">
+<span id="__init__.setup"></span><code class="sig-prename descclassname"><span class="pre">__init__.</span></code><code class="sig-name descname"><span class="pre">setup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">sphinx.application.Sphinx</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="reference internal" href="_modules/__init__.html#setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#init__.setup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Configure setup for Sphinx extension.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -204,9 +211,9 @@ limitations under the License.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="__init__.watermark">
-<code class="descclassname">__init__.</code><code class="descname">watermark</code><span class="sig-paren">(</span><em>app</em>, <em>env</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/__init__.html#watermark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#__init__.watermark" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="init__.watermark">
+<span id="__init__.watermark"></span><code class="sig-prename descclassname"><span class="pre">__init__.</span></code><code class="sig-name descname"><span class="pre">watermark</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">sphinx.application.Sphinx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">sphinx.environment.BuildEnvironment</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="_modules/__init__.html#watermark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#init__.watermark" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add watermark.</p>
 </dd></dl>
 
@@ -217,27 +224,28 @@ limitations under the License.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="relnotes.html" class="btn btn-neutral float-left" title="Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="relnotes.html" class="btn btn-neutral float-left" title="Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Brian Moss
+        &#169; Copyright 2019, Brian Moss.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -245,7 +253,6 @@ limitations under the License.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

@@ -1,40 +1,43 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>__init__ &mdash; sphinxmark  documentation</title>
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../_static/sphinx.ico"/>
   
+
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
@@ -80,6 +83,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -99,6 +103,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -133,11 +138,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="index.html">Module code</a> &raquo;</li>
         
@@ -164,7 +171,7 @@
 
 <span class="sd">https://github.com/kallimachos/sphinxmark</span>
 
-<span class="sd">Copyright 2019 Brian Moss</span>
+<span class="sd">Copyright 2021 Brian Moss</span>
 
 <span class="sd">Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
 <span class="sd">you may not use this file except in compliance with the License.</span>
@@ -179,67 +186,74 @@
 <span class="sd">limitations under the License.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">shutil</span> <span class="k">import</span> <span class="n">copy</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">shutil</span> <span class="kn">import</span> <span class="n">copy</span>
 
-<span class="kn">from</span> <span class="nn">bottle</span> <span class="k">import</span> <span class="n">TEMPLATE_PATH</span><span class="p">,</span> <span class="n">template</span>
-<span class="kn">from</span> <span class="nn">sphinx.util</span> <span class="k">import</span> <span class="n">logging</span>
-
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span><span class="p">,</span> <span class="n">ImageFont</span>
+<span class="kn">from</span> <span class="nn">bottle</span> <span class="kn">import</span> <span class="n">TEMPLATE_PATH</span><span class="p">,</span> <span class="n">template</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span><span class="p">,</span> <span class="n">ImageFont</span>
+<span class="kn">from</span> <span class="nn">sphinx.application</span> <span class="kn">import</span> <span class="n">Sphinx</span>
+<span class="kn">from</span> <span class="nn">sphinx.environment</span> <span class="kn">import</span> <span class="n">BuildEnvironment</span>
+<span class="kn">from</span> <span class="nn">sphinx.util</span> <span class="kn">import</span> <span class="n">logging</span>
 
 <span class="n">LOG</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="buildcss"><a class="viewcode-back" href="../source.html#__init__.buildcss">[docs]</a><span class="k">def</span> <span class="nf">buildcss</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">):</span>
+<div class="viewcode-block" id="buildcss"><a class="viewcode-back" href="../source.html#__init__.buildcss">[docs]</a><span class="k">def</span> <span class="nf">buildcss</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">Sphinx</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Create CSS file.&quot;&quot;&quot;</span>
     <span class="c1"># set default values</span>
-    <span class="n">div</span> <span class="o">=</span> <span class="s1">&#39;body&#39;</span>
-    <span class="n">repeat</span> <span class="o">=</span> <span class="s1">&#39;repeat-y&#39;</span>
-    <span class="n">position</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span>
-    <span class="n">attachment</span> <span class="o">=</span> <span class="s1">&#39;scroll&#39;</span>
+    <span class="n">div</span> <span class="o">=</span> <span class="s2">&quot;body&quot;</span>
+    <span class="n">repeat</span> <span class="o">=</span> <span class="s2">&quot;repeat-y&quot;</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span>
+    <span class="n">attachment</span> <span class="o">=</span> <span class="s2">&quot;scroll&quot;</span>
 
-    <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_div</span> <span class="o">!=</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_div</span> <span class="o">!=</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
         <span class="n">div</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_div</span>
 
     <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_repeat</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
-        <span class="n">repeat</span> <span class="o">=</span> <span class="s1">&#39;no-repeat&#39;</span>
+        <span class="n">repeat</span> <span class="o">=</span> <span class="s2">&quot;no-repeat&quot;</span>
 
     <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_fixed</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">attachment</span> <span class="o">=</span> <span class="s1">&#39;fixed&#39;</span>
+        <span class="n">attachment</span> <span class="o">=</span> <span class="s2">&quot;fixed&quot;</span>
 
     <span class="n">border</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_border</span>
-    <span class="k">if</span> <span class="n">border</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span> <span class="ow">or</span> <span class="n">border</span> <span class="o">==</span> <span class="s1">&#39;right&#39;</span><span class="p">:</span>
-        <span class="n">css</span> <span class="o">=</span> <span class="n">template</span><span class="p">(</span><span class="s1">&#39;border&#39;</span><span class="p">,</span> <span class="n">div</span><span class="o">=</span><span class="n">div</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">imagefile</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="n">border</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">border</span> <span class="o">==</span> <span class="s2">&quot;left&quot;</span> <span class="ow">or</span> <span class="n">border</span> <span class="o">==</span> <span class="s2">&quot;right&quot;</span><span class="p">:</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="n">template</span><span class="p">(</span><span class="s2">&quot;border&quot;</span><span class="p">,</span> <span class="n">div</span><span class="o">=</span><span class="n">div</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">imagefile</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="n">border</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">css</span> <span class="o">=</span> <span class="n">template</span><span class="p">(</span><span class="s1">&#39;watermark&#39;</span><span class="p">,</span> <span class="n">div</span><span class="o">=</span><span class="n">div</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">imagefile</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">repeat</span><span class="p">,</span>
-                       <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">,</span> <span class="n">attachment</span><span class="o">=</span><span class="n">attachment</span><span class="p">)</span>
-    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;[sphinxmark] Template: &#39;</span> <span class="o">+</span> <span class="n">css</span><span class="p">)</span>
-    <span class="n">cssname</span> <span class="o">=</span> <span class="s1">&#39;sphinxmark.css&#39;</span>
-    <span class="n">cssfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">buildpath</span><span class="p">,</span> <span class="n">cssname</span><span class="p">)</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="n">template</span><span class="p">(</span>
+            <span class="s2">&quot;watermark&quot;</span><span class="p">,</span>
+            <span class="n">div</span><span class="o">=</span><span class="n">div</span><span class="p">,</span>
+            <span class="n">image</span><span class="o">=</span><span class="n">imagefile</span><span class="p">,</span>
+            <span class="n">repeat</span><span class="o">=</span><span class="n">repeat</span><span class="p">,</span>
+            <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">,</span>
+            <span class="n">attachment</span><span class="o">=</span><span class="n">attachment</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[sphinxmark] Template: </span><span class="si">{</span><span class="n">css</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">cssname</span> <span class="o">=</span> <span class="s2">&quot;sphinxmark.css&quot;</span>
+    <span class="n">cssfile</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">buildpath</span><span class="p">,</span> <span class="n">cssname</span><span class="p">)</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cssfile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cssfile</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">css</span><span class="p">)</span>
 
-    <span class="k">return</span><span class="p">(</span><span class="n">cssname</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">cssname</span></div>
 
 
-<div class="viewcode-block" id="createimage"><a class="viewcode-back" href="../source.html#__init__.createimage">[docs]</a><span class="k">def</span> <span class="nf">createimage</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">srcdir</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">):</span>
+<div class="viewcode-block" id="createimage"><a class="viewcode-back" href="../source.html#__init__.createimage">[docs]</a><span class="k">def</span> <span class="nf">createimage</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">Sphinx</span><span class="p">,</span> <span class="n">srcdir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Create PNG image from string.&quot;&quot;&quot;</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_text</span>
 
     <span class="c1"># draw transparent background</span>
     <span class="n">width</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_text_width</span>
     <span class="n">height</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_text_spacing</span>
-    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;RGBA&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;RGBA&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 
     <span class="c1"># set font</span>
-    <span class="n">fontfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">srcdir</span><span class="p">,</span> <span class="s1">&#39;arial.ttf&#39;</span><span class="p">)</span>
+    <span class="n">fontfile</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">srcdir</span><span class="p">,</span> <span class="s2">&quot;arial.ttf&quot;</span><span class="p">))</span>
     <span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="n">fontfile</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_text_size</span><span class="p">)</span>
 
     <span class="c1"># set x y location for text</span>
     <span class="n">xsize</span><span class="p">,</span> <span class="n">ysize</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">textsize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">font</span><span class="p">)</span>
-    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;[sphinxmark] x = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">xsize</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">y = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ysize</span><span class="p">))</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;[sphinxmark] x = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">xsize</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">y = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ysize</span><span class="p">))</span>
     <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">xsize</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">ysize</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
 
@@ -248,101 +262,103 @@
     <span class="n">d</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">text</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
 
     <span class="c1"># set opacity</span>
-    <span class="n">img</span><span class="o">.</span><span class="n">putalpha</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_text_opacity</span><span class="p">)</span>
+    <span class="n">img2</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">img2</span><span class="o">.</span><span class="n">putalpha</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_text_opacity</span><span class="p">)</span>
+    <span class="n">img</span><span class="o">.</span><span class="n">paste</span><span class="p">(</span><span class="n">img2</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
 
     <span class="c1"># rotate image</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_text_rotation</span><span class="p">)</span>
 
     <span class="c1"># save image</span>
-    <span class="n">imagefile</span> <span class="o">=</span> <span class="s1">&#39;textmark_&#39;</span> <span class="o">+</span> <span class="n">text</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span>
-    <span class="n">imagepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span>
-    <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">imagepath</span><span class="p">,</span> <span class="s1">&#39;PNG&#39;</span><span class="p">)</span>
-    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;[sphinxmark] Image saved to: &#39;</span> <span class="o">+</span> <span class="n">imagepath</span><span class="p">)</span>
+    <span class="n">imagefile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;textmark_</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">.png&quot;</span>
+    <span class="n">imagepath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span>
+    <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">imagepath</span><span class="p">,</span> <span class="s2">&quot;PNG&quot;</span><span class="p">)</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[sphinxmark] Image saved to: </span><span class="si">{</span><span class="n">imagepath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">return</span><span class="p">(</span><span class="n">imagefile</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">imagefile</span></div>
 
 
-<div class="viewcode-block" id="getimage"><a class="viewcode-back" href="../source.html#__init__.getimage">[docs]</a><span class="k">def</span> <span class="nf">getimage</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+<div class="viewcode-block" id="getimage"><a class="viewcode-back" href="../source.html#__init__.getimage">[docs]</a><span class="k">def</span> <span class="nf">getimage</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">Sphinx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Get image file.&quot;&quot;&quot;</span>
     <span class="c1"># append source directory to TEMPLATE_PATH so template is found</span>
-    <span class="n">srcdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+    <span class="n">srcdir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
     <span class="n">TEMPLATE_PATH</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">srcdir</span><span class="p">)</span>
-    <span class="n">staticbase</span> <span class="o">=</span> <span class="s1">&#39;_static&#39;</span>
-    <span class="n">buildpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">outdir</span><span class="p">,</span> <span class="n">staticbase</span><span class="p">)</span>
+    <span class="n">staticbase</span> <span class="o">=</span> <span class="s2">&quot;_static&quot;</span>
+    <span class="n">buildpath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">outdir</span><span class="p">,</span> <span class="n">staticbase</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">buildpath</span><span class="p">)</span>
+        <span class="n">buildpath</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
     <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">buildpath</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">buildpath</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
             <span class="k">raise</span>
 
-    <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_image</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
-        <span class="n">imagefile</span> <span class="o">=</span> <span class="s1">&#39;watermark-draft.png&#39;</span>
-        <span class="n">imagepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">srcdir</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_image</span> <span class="o">==</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
+        <span class="n">imagefile</span> <span class="o">=</span> <span class="s2">&quot;watermark-draft.png&quot;</span>
+        <span class="n">imagepath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">srcdir</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span>
         <span class="n">copy</span><span class="p">(</span><span class="n">imagepath</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">)</span>
-        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;[sphinxmark] Using default image: &#39;</span> <span class="o">+</span> <span class="n">imagefile</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_image</span> <span class="o">==</span> <span class="s1">&#39;text&#39;</span><span class="p">:</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[sphinxmark] Using default image: </span><span class="si">{</span><span class="n">imagefile</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_image</span> <span class="o">==</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span>
         <span class="n">imagefile</span> <span class="o">=</span> <span class="n">createimage</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">srcdir</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">)</span>
-        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;[sphinxmark] Image: &#39;</span> <span class="o">+</span> <span class="n">imagefile</span><span class="p">)</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[sphinxmark] Image: </span><span class="si">{</span><span class="n">imagefile</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">imagefile</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_image</span>
 
         <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">html_static_path</span><span class="p">:</span>
             <span class="n">staticpath</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">html_static_path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">staticpath</span> <span class="o">=</span> <span class="s1">&#39;_static&#39;</span>
+            <span class="n">staticpath</span> <span class="o">=</span> <span class="s2">&quot;_static&quot;</span>
 
-        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;[sphinxmark] static path: &#39;</span> <span class="o">+</span> <span class="n">staticpath</span><span class="p">)</span>
-        <span class="n">imagepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">confdir</span><span class="p">,</span> <span class="n">staticpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span>
-        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;[sphinxmark] Imagepath: &#39;</span> <span class="o">+</span> <span class="n">imagepath</span><span class="p">)</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[sphinxmark] static path: </span><span class="si">{</span><span class="n">staticpath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">confdir</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">confdir</span><span class="p">)</span>
+        <span class="n">imagepath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">confdir</span><span class="p">,</span> <span class="n">staticpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[sphinxmark] Imagepath: </span><span class="si">{</span><span class="n">imagepath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">copy</span><span class="p">(</span><span class="n">imagepath</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Cannot find &#39;</span><span class="si">%s</span><span class="s2">&#39;. Put watermark images in the &quot;</span>
-                       <span class="s2">&quot;&#39;_static&#39; directory or specify the location using &quot;</span>
-                       <span class="s2">&quot;&#39;html_static_path&#39;.&quot;</span> <span class="o">%</span> <span class="n">imagefile</span><span class="p">)</span>
-            <span class="n">LOG</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-            <span class="n">LOG</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Failed to add watermark.&#39;</span><span class="p">)</span>
-            <span class="k">return</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot; fail&quot;</span><span class="p">)</span>
+            <span class="k">raise</span>
 
-    <span class="k">return</span><span class="p">(</span><span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="watermark"><a class="viewcode-back" href="../source.html#__init__.watermark">[docs]</a><span class="k">def</span> <span class="nf">watermark</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
+<div class="viewcode-block" id="watermark"><a class="viewcode-back" href="../source.html#__init__.watermark">[docs]</a><span class="k">def</span> <span class="nf">watermark</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">Sphinx</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="n">BuildEnvironment</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Add watermark.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sphinxmark_enable</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;adding watermark...&#39;</span><span class="p">,</span> <span class="n">nonl</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span> <span class="o">=</span> <span class="n">getimage</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-        <span class="n">cssname</span> <span class="o">=</span> <span class="n">buildcss</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span>
-        <span class="n">app</span><span class="o">.</span><span class="n">add_css_file</span><span class="p">(</span><span class="n">cssname</span><span class="p">)</span>
-        <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39; done&#39;</span><span class="p">)</span></div>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;adding watermark...&quot;</span><span class="p">,</span> <span class="n">nonl</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span> <span class="o">=</span> <span class="n">getimage</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+            <span class="n">cssname</span> <span class="o">=</span> <span class="n">buildcss</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">buildpath</span><span class="p">,</span> <span class="n">imagefile</span><span class="p">)</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">add_css_file</span><span class="p">(</span><span class="n">cssname</span><span class="p">)</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot; done&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to add watermark: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span></div>
 
 
-<div class="viewcode-block" id="setup"><a class="viewcode-back" href="../source.html#__init__.setup">[docs]</a><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Configure setup for Sphinx extension.</span>
+<div class="viewcode-block" id="setup"><a class="viewcode-back" href="../source.html#__init__.setup">[docs]</a><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">Sphinx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Configure setup for Sphinx extension.</span>
 
 <span class="sd">    :param app: Sphinx application context.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_enable&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_div&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_border&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_repeat&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_fixed&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_image&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_text&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_text_color&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_text_size&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_text_width&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_text_opacity&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_text_spacing&#39;</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s1">&#39;sphinxmark_text_rotation&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;env-updated&#39;</span><span class="p">,</span> <span class="n">watermark</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_enable&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_div&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_border&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_repeat&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_fixed&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_image&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_text&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_text_color&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_text_size&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_text_width&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_text_opacity&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_text_spacing&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;sphinxmark_text_rotation&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;env-updated&quot;</span><span class="p">,</span> <span class="n">watermark</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;0.1.18&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;parallel_read_safe&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s1">&#39;parallel_write_safe&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.2.1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;parallel_read_safe&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;parallel_write_safe&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">}</span></div>
 </pre></div>
 
@@ -350,20 +366,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Brian Moss
+        &#169; Copyright 2019, Brian Moss.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -371,7 +392,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
