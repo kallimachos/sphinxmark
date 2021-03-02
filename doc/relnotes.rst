@@ -5,10 +5,12 @@ Release Notes
 Release 0.2.1
 ~~~~~~~~~~~~~
 
+-  `#38 <https://github.com/kallimachos/sphinxmark/issues/38>`_: use pathlib in place of os.path.
+-  `#37 <https://github.com/kallimachos/sphinxmark/issues/37>`_: add type annotations.
 -  `#36 <https://github.com/kallimachos/sphinxmark/pull/36>`_: update option documentation to
-   include ``sphinx_book_theme``. Thanks `@rscohn2 <https://github.com/rscohn2>`_.
+   include ``sphinx_book_theme``. Thanks `rscohn2 <https://github.com/rscohn2>`_.
 -  `#35 <https://github.com/kallimachos/sphinxmark/issues/35>`_: fix text watermark opacity issue.
-   Thanks `@chad-iris <https://github.com/chad-iris>`_.
+   Thanks `chad-iris <https://github.com/chad-iris>`_.
 
 Release 0.2.0
 ~~~~~~~~~~~~~
