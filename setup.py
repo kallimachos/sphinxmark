@@ -16,7 +16,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='sphinxmark',
-    version='0.2.0',
+    version='0.2.1',
     description='A Sphinx extension that enables watermarks for HTML output.',
     long_description=long_description,
     url='https://github.com/kallimachos/sphinxmark',
@@ -30,7 +30,7 @@ setup(
         'Framework :: Sphinx :: Extension',
         'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.9',
     ],
 
     keywords='sphinx documentation watermark',

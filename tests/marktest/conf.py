@@ -7,7 +7,7 @@ templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
 project = 'testmark'
-copyright = '2019, Brian'
+copyright = '2021, Brian'
 author = 'Brian'
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 pygments_style = 'sphinx'
@@ -18,6 +18,7 @@ html_theme = 'alabaster'
 # html_theme = 'openstackdocs'
 # html_theme_path = [openstackdocstheme.get_html_theme_path()]
 htmlhelp_basename = 'testmarkdoc'
+# html_static_path = ["alt_static"]
 
 # -- Options for sphinxmark -----------------------------------------------
 sphinxmark_enable = True

@@ -5,7 +5,7 @@ A Sphinx extension that enables watermarks for HTML output.
 
 https://github.com/kallimachos/sphinxmark
 
-Copyright 2019 Brian Moss
+Copyright 2021 Brian Moss
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,9 +24,8 @@ import os
 from shutil import copy
 
 from bottle import TEMPLATE_PATH, template
-from sphinx.util import logging
-
 from PIL import Image, ImageDraw, ImageFont
+from sphinx.util import logging
 
 LOG = logging.getLogger(__name__)
 
@@ -89,7 +88,9 @@ def createimage(app, srcdir, buildpath):
     d.text((x, y), text, font=font, fill=color)
 
     # set opacity
-    img.putalpha(app.config.sphinxmark_text_opacity)
+    img2 = img.copy()
+    img2.putalpha(app.config.sphinxmark_text_opacity)
+    img.paste(img2, img)
 
     # rotate image
     img = img.rotate(app.config.sphinxmark_text_rotation)
@@ -138,13 +139,9 @@ def getimage(app):
 
         try:
             copy(imagepath, buildpath)
-        except Exception:
-            message = ("Cannot find '%s'. Put watermark images in the "
-                       "'_static' directory or specify the location using "
-                       "'html_static_path'." % imagefile)
-            LOG.warning(message)
-            LOG.warning('Failed to add watermark.')
-            return
+        except FileNotFoundError:
+            LOG.info(' fail')
+            raise
 
     return(buildpath, imagefile)
 
@@ -153,10 +150,14 @@ def watermark(app, env):
     """Add watermark."""
     if app.config.sphinxmark_enable is True:
         LOG.info('adding watermark...', nonl=True)
-        buildpath, imagefile = getimage(app)
-        cssname = buildcss(app, buildpath, imagefile)
-        app.add_css_file(cssname)
-        LOG.info(' done')
+        try:
+            buildpath, imagefile = getimage(app)
+            cssname = buildcss(app, buildpath, imagefile)
+            app.add_css_file(cssname)
+            LOG.info(' done')
+        except Exception as e:
+            LOG.warning(f'Failed to add watermark: {e}')
+    return
 
 
 def setup(app):
@@ -181,7 +182,7 @@ def setup(app):
     app.connect('env-updated', watermark)
 
     return {
-        'version': '0.1.18',
+        'version': '0.2.1',
         'parallel_read_safe': True,
         'parallel_write_safe': True,
     }

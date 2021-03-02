@@ -23,7 +23,7 @@ sphinxmark_div (string)
      sphinx_rtd_theme -> ``sphinxmark_div = 'document'``
 
      openstackdocstheme -> ``sphinxmark_div = 'docs-body'``
-     
+
      sphinx_book_theme -> ``sphinxmark_div = 'row#main-content'``
 
 sphinxmark_border (string)

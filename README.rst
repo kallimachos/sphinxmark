@@ -11,7 +11,7 @@ sphinxmark
 .. image:: https://img.shields.io/pypi/v/sphinxmark.svg?style=flat
    :target: https://pypi.python.org/pypi/sphinxmark
 
-.. image:: https://img.shields.io/badge/Python-3.7-brightgreen.svg?style=flat
+.. image:: https://img.shields.io/badge/Python-3.9-brightgreen.svg?style=flat
    :target: http://python.org
 
 .. image:: http://img.shields.io/badge/license-apache-blue.svg?style=flat

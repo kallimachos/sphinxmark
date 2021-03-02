@@ -1,5 +1,13 @@
+black
 doc8
+flake8-broken-line
+flake8-bugbear
+flake8-comprehensions
+flake8-debugger
 flake8-docstrings
+flake8-isort
+flake8-quotes
+mypy
 pyenchant
 pytest
 pytest-cov
