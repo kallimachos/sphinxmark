@@ -2,6 +2,12 @@
 Release Notes
 =============
 
+Release 1.0.0
+-------------
+-  Move to 1.0.0 stable release.
+-  `#39 <https://github.com/kallimachos/sphinxmark/pull/39>`_: Replace Travis-CI with GitHub
+   Actions.
+
 Release 0.2.1
 ~~~~~~~~~~~~~
 
